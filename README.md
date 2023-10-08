@@ -42,8 +42,7 @@ This includes the use of stimulating music, animations, and an appealing design.
 
 ## Authors
 
-  - Raffael Koller (wi21b096@technikum-wien.at)
-  - Lena Willisits (wi21b115@technikum-wien.at)
-  - Altin Kelmendi (wi21b054@technikum-wien.at)
   - Julian Hoffman (wi21b050@technikum-wien.at)
-
+  - Altin Kelmendi (wi21b054@technikum-wien.at)
+  - Raphael Koller (wi21b096@technikum-wien.at)
+  - Lena Willisits (wi21b115@technikum-wien.at)
