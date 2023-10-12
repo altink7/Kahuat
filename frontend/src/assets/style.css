@@ -105,15 +105,8 @@ nav a:hover {
 
 /* Questions & Answers */
 
-.question-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-}
-
 .question {
-    width: 350px;
-    height: 200px;
+    margin-top: 40px;
     background-color: #42b883;
     border: 3px solid white;
     color: white;

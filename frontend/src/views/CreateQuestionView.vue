@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <h1>Create Question & Answers</h1>
+        <h1>Create Questions & Answers</h1>
     </div>
     <div>
         <div v-for="index in questionComponentsCount" :key="index">
