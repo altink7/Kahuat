@@ -4,19 +4,24 @@
   </div>
   <div>
     <div class="container">
-      <div class="text-center mt-2">
-          <h2 v-if="timer > 0">Time left: {{ timer }} seconds</h2>
-          <p v-else>Time's up!</p>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" :style="{ width: timer * 6.6666666667 + '%' }" aria-valuenow="25"
+          aria-valuemin="0" aria-valuemax="100">
+          {{ timer }}
         </div>
+      </div>
       <div v-if="quizData !== null">
+        <!-- Quiz availability -->
+        <div class="quiz-availability">
+          <b>{{ remainingAvailability }}</b>
+        </div>
+
         <div :key="currentQuestion.id">
-          <QuestionComponent
-            :question="currentQuestion.question"
+          <QuestionComponent :question="currentQuestion.question"
             :answerA="currentQuestion.answerOptions[0] == null ? '' : currentQuestion.answerOptions[0].answer.answer"
             :answerB="currentQuestion.answerOptions[1] == null ? '' : currentQuestion.answerOptions[1].answer.answer"
             :answerC="currentQuestion.answerOptions[2] == null ? '' : currentQuestion.answerOptions[2].answer.answer"
-            :answerD="currentQuestion.answerOptions[3] == null ? '' : currentQuestion.answerOptions[3].answer.answer"
-          />
+            :answerD="currentQuestion.answerOptions[3] == null ? '' : currentQuestion.answerOptions[3].answer.answer" />
         </div>
         <br>
         <button class="btn btn-primary" @click="nextQuestion">Next</button>
@@ -45,6 +50,23 @@ export default {
   computed: {
     currentQuestion() {
       return this.quizData.questions[this.currentQuestionIndex];
+    }, remainingAvailability() {
+      if (this.quizData && this.quizData.startDate) {
+        // Calculate the end date based on start date + 1 week (604800000 milliseconds) dateformat: date: 2023-10-12
+        console.log(this.quizData.startDate)
+        const endDate = new Date(this.quizData.startDate);
+        endDate.setTime(endDate.getTime() + 604800000);
+        const remainingTime = endDate.getTime() - Date.now();
+        console.log(remainingTime);
+        if (remainingTime > 0) {
+          const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          return `Quiz available for: ${days} days and ${hours} hours`;
+        } else {
+          return "Quiz expired";
+        }
+      }
+      return "Unknown";
     },
   },
   methods: {

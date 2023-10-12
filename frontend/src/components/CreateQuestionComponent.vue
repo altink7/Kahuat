@@ -6,7 +6,7 @@
                 <form id="question-form" class="question-form" action="#" method="POST">
                     <div class="row">
                         <div class="form-group">
-                            <textarea class="form-control" id="question" name="question" required></textarea>
+                            <textarea class="form-control-question" id="question" name="question" required></textarea>
                         </div>
                         <div>
                             <p> Mark the correct aswers</p>

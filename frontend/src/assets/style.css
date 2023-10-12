@@ -115,7 +115,7 @@ nav a:hover {
     border-radius: 30px;
 }
 
-.form-control {
+.form-control-question {
     background-color: transparent;
     border: 1px solid white;
     border-radius: 5px;
@@ -125,7 +125,7 @@ nav a:hover {
     text-align: center;
 }
 
-.form-control:focus {
+.form-control-question:focus {
     background-color: transparent;
     border: 1px solid white;
     border-radius: 5px;
