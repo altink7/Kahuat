@@ -223,6 +223,12 @@ nav a:hover {
     transform: scale(1.2);
 }
 
+/*Progress Bar*/
+
+.progress-bar {
+    background-color: #42b883;
+}
+
 
 /* Login */
 

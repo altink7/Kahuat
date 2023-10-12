@@ -1,10 +1,13 @@
 <template>
-    <div class="question-container">
-        <div class="question">
-            <h1>Question</h1><br>
-            <h3>{{question}}</h3>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card question">
+            <div class="card-body">
+                <h1 class="card-title text-center">Question</h1>
+                <h3>{{ question }}</h3>
+            </div>
         </div>
-    </div><br>
+    </div>
+
     <div class="button-container justify-content-center">
         <button class="answer-button answerA"> {{ answerA }}</button>
         <button class="answer-button answerB">{{ answerB }}</button>

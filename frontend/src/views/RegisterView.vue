@@ -125,7 +125,7 @@ export default {
           country: this.user.country,
           role: 'USER',
         };
-        const response = await axios.post('http://localhost:5000/api/users/create', formData);
+        const response = await axios.post('http://localhost:8081/api/users/create', formData);
 
         if (response.status === 201) {
           document.getElementById('success-message').classList.remove('d-none');

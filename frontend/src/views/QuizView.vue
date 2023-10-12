@@ -72,7 +72,7 @@ export default {
   methods: {
     searchQuiz(quizId) {
       axios
-        .get(`http://localhost:5000/api/quizzes/${quizId}`)
+        .get(`http://localhost:8081/api/quizzes/${quizId}`)
         .then((response) => {
           this.quizData = response.data;
           this.startTimer();
