@@ -1,11 +1,21 @@
 <template>
-    <div class="question-container">
-        <div class="question">
-            <h1>Question</h1><br>
-            <input type="text" id="question" name="question" placeholder="Question"><br>
-            <p> Mark the correct aswers</p>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card question">
+            <div class="card-body">
+                <h1 class="card-title text-center">Question</h1>
+                <form id="question-form" class="question-form" action="#" method="POST">
+                    <div class="row">
+                        <div class="form-group">
+                            <textarea class="form-control-question" id="question" name="question" required></textarea>
+                        </div>
+                        <div>
+                            <p> Mark the correct aswers</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div><br>
+    </div>
 
     <div class="button-container justify-content-center">
         <div class="answer-option answerA">

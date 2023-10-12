@@ -74,7 +74,7 @@ nav a:hover {
     color: white;
     font-weight: bold;
     font-size: 30px;
-    border-radius: 10%;
+    border-radius: 30px;
     cursor: pointer;
     transition: transform 0.2s;
 }
@@ -94,7 +94,7 @@ nav a:hover {
     color: white;
     font-weight: bold;
     font-size: 20px;
-    border-radius: 10%;
+    border-radius: 30px;
     cursor: pointer;
     transition: transform 0.2s;
 }
@@ -105,30 +105,31 @@ nav a:hover {
 
 /* Questions & Answers */
 
-.question-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-}
-
 .question {
-    width: 350px;
-    height: 200px;
+    width: 550px;
+    margin: 40px;
     background-color: #42b883;
     border: 3px solid white;
     color: white;
     font-weight: bold;
-    border-radius: 10%;
+    border-radius: 30px;
 }
 
-.question input[type="text"] {
-    width: 80%;
-    padding: 8px;
-    margin: 8px;
+.form-control-question {
+    background-color: transparent;
     border: 1px solid white;
     border-radius: 5px;
     font-size: 18px;
-    background-color: #ffffff00;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-control-question:focus {
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 18px;
     color: white;
     font-weight: bold;
     text-align: center;
@@ -143,7 +144,7 @@ nav a:hover {
     color: white;
     font-weight: bold;
     font-size: 20px;
-    border-radius: 10%;
+    border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s;
 }
@@ -174,10 +175,14 @@ nav a:hover {
     border: 1px solid white;
     border-radius: 5px;
     font-size: 18px;
-    background-color: #ffffff00;
+    background-color: transparent;
     color: white;
     font-weight: bold;
     text-align: center;
+}
+
+.answer-option input[type="text"]::placeholder {
+    color: white;
 }
 
 .answerA {
@@ -186,17 +191,17 @@ nav a:hover {
 }
 
 .answerB {
-    background-color: #2faa62;
+    background-color: #60dd6a;
     border: 3px solid white;
 }
 
 .answerC {
-    background-color: #2D58BC;
+    background-color: #4972d1;
     border: 3px solid white;
 }
 
 .answerD {
-    background-color: #e50808;
+    background-color: #d84747;
     border: 3px solid white;
 }
 
@@ -205,11 +210,11 @@ nav a:hover {
     width: 80px;
     height: 80px;
     border: none;
-    background-color: #ffffff00;
+    background-color: transparent;
     color: white;
     font-weight: bold;
     font-size: 50px;
-    border-radius: 10%;
+    border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s;
 }
@@ -263,6 +268,22 @@ nav a:hover {
     font-size: 16px;
 }
 
+/*FAQ*/
+
+.faq {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/*Privacy Policy*/
+
+.privacy {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: left;
+
+}
 
 /* Footer */
 
