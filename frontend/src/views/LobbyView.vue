@@ -10,6 +10,8 @@
               :style="getButtonStyle(quizStartDates[quizId])"
               :disabled="isQuizExpired(quizId) || quizStartDates[quizId] === 'Loading...'">
             {{ quizId }}
+            <br>
+            {{ getFormatedStartDate(quizStartDates[quizId]) }}
           </button>
         </div>
       </div>
@@ -71,13 +73,36 @@ export default {
 
       // ohne Transparenz ist besser, sonst ist schwierig zu lesen
       const greenColor = '#42b883';
-      const lightGrayColor = 'lightgray';
+      const redColor = '#ff4d4d';
+      const lightGrayColor = 'rgba(0,0,0,0)';
 
-      return {
-        background: `linear-gradient(to right, ${greenColor} ${progress}%, ${lightGrayColor} ${progress}%)`,
-      };
+      if(progress < 20){
+        return {
+          background: `linear-gradient(to right, ${redColor} ${progress}%, ${lightGrayColor} ${progress}%)`,
+        };
+      }else {
+        return {
+          background: `linear-gradient(to right, ${greenColor} ${progress}%, ${lightGrayColor} ${progress}%)`,
+        };
+      }
     },
+    getFormatedStartDate(startDate) {
+      if (!startDate) {
+        return '';
+      }
 
+      if(startDate === "Loading..." || startDate === "Quiz expired") {
+        return startDate;
+      }
+
+      const [days, hours] = startDate.split('/');
+
+      if(days === '0') {
+        return `${hours} hours`;
+      } else {
+        return `${days} days ${hours} hours`;
+      }
+    },
   },
 };
 </script>

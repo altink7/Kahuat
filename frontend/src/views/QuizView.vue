@@ -30,7 +30,7 @@
 
 <script>
 import QuestionComponent from "@/components/QuestionComponent.vue";
-import axios from "axios";
+import EndpointService from "@/services/EndpointService";
 
 export default {
   name: "QuizView",
@@ -49,8 +49,7 @@ export default {
   },
   methods: {
     searchQuiz(quizId) {
-      axios
-        .get(`http://localhost:8081/api/quizzes/${quizId}`)
+      EndpointService.get(`quizzes/${quizId}`)
         .then((response) => {
           this.quizData = response.data;
           this.startTimer();
