@@ -2,6 +2,9 @@
   <div class="home">
     <h1>Let's Play!</h1>
   </div>
+  <div class="points">
+    <h2>Points: {{ points }}</h2>
+  </div>
   <div>
     <div class="container">
       <div class="progress">
@@ -13,10 +16,11 @@
       <div v-if="quizData !== null">
         <div :key="currentQuestion.id">
           <QuestionComponent :question="currentQuestion.question"
-            :answerA="currentQuestion.answerOptions[0] == null ? '' : currentQuestion.answerOptions[0].answer.answer"
-            :answerB="currentQuestion.answerOptions[1] == null ? '' : currentQuestion.answerOptions[1].answer.answer"
-            :answerC="currentQuestion.answerOptions[2] == null ? '' : currentQuestion.answerOptions[2].answer.answer"
-            :answerD="currentQuestion.answerOptions[3] == null ? '' : currentQuestion.answerOptions[3].answer.answer" />
+            :answerA="currentQuestion.answerOptions[0] == null ? {} : currentQuestion.answerOptions[0]"
+            :answerB="currentQuestion.answerOptions[1] == null ? {} : currentQuestion.answerOptions[1]"
+            :answerC="currentQuestion.answerOptions[2] == null ? {} : currentQuestion.answerOptions[2]"
+            :answerD="currentQuestion.answerOptions[3] == null ? {} : currentQuestion.answerOptions[3]"
+            @answer-clicked="handleAnswerClicked"/>
         </div>
         <br>
         <button class="btn btn-primary" @click="nextQuestion">Next</button>
@@ -39,6 +43,7 @@ export default {
       quizData: null,
       currentQuestionIndex: 0,
       timer: 15,
+      points: 0,
       timerInterval: null,
     };
   },
@@ -60,14 +65,19 @@ export default {
         });
     },
     nextQuestion() {
+      this.points = this.points + this.timer * 10;
       if (this.currentQuestionIndex < this.quizData.questions.length - 1) {
         this.currentQuestionIndex++;
         this.resetTimer();
-      } else {
-        // TODO wenn alle Fragen durch sind sollten wir ein POST request an den Server schicken
-        // mit der quizId, userId und der Anzahl der richtigen Antworten, inklusive berechnete Zeit
-        // als response sollten wir dann die Statistik bekommen inkl punkte und das zeigen wir dann an
-        console.log("End of quiz reached.");
+      } else if (this.points > 0){
+        this.$router.push({
+          name: "rankings",
+          query: { requestId: this.requestId, points: this.points },
+        });
+        console.log("End of quiz reached. Redirecting to rankings. (points: " + this.points + ")"+ " (requestId: " + this.requestId + "))");
+
+        //reset points
+        this.points = 0;
       }
     },
     startTimer() {
@@ -84,6 +94,17 @@ export default {
       clearInterval(this.timerInterval);
       this.timer = 15;
       this.startTimer();
+    },
+    handleAnswerClicked(answerInfo) {
+      console.log(answerInfo);
+      if (answerInfo.isCorrect) {
+        console.log("Correct answer!");
+        this.points = this.points + 150;
+        this.nextQuestion();
+      } else {
+        console.log("Wrong answer!");
+        this.nextQuestion();
+      }
     },
   },
   props: {
