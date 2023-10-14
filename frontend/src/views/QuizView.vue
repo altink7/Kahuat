@@ -11,11 +11,6 @@
         </div>
       </div>
       <div v-if="quizData !== null">
-        <!-- Quiz availability -->
-        <div class="quiz-availability">
-          <b>{{ remainingAvailability }}</b>
-        </div>
-
         <div :key="currentQuestion.id">
           <QuestionComponent :question="currentQuestion.question"
             :answerA="currentQuestion.answerOptions[0] == null ? '' : currentQuestion.answerOptions[0].answer.answer"
@@ -50,23 +45,6 @@ export default {
   computed: {
     currentQuestion() {
       return this.quizData.questions[this.currentQuestionIndex];
-    }, remainingAvailability() {
-      if (this.quizData && this.quizData.startDate) {
-        // Calculate the end date based on start date + 1 week (604800000 milliseconds) dateformat: date: 2023-10-12
-        console.log(this.quizData.startDate)
-        const endDate = new Date(this.quizData.startDate);
-        endDate.setTime(endDate.getTime() + 604800000);
-        const remainingTime = endDate.getTime() - Date.now();
-        console.log(remainingTime);
-        if (remainingTime > 0) {
-          const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          return `Quiz available for: ${days} days and ${hours} hours`;
-        } else {
-          return "Quiz expired";
-        }
-      }
-      return "Unknown";
     },
   },
   methods: {
