@@ -327,3 +327,25 @@ footer ul li a:hover {
     color: white;
     text-decoration: underline 2px;
 }
+
+/* Quiz Button */
+.quiz-button {
+    margin-top: 40px;
+    width: 350px;
+    height: 250px;
+    background-color: #42b883;
+    border: 3px solid white;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+/* expired Quiz */
+.expired {
+    background-color: #706969;
+    cursor: not-allowed;
+    pointer-events: none;
+}
