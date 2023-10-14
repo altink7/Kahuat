@@ -1,3 +1,8 @@
+/**
+ * Berechnet die verbleibende Zeit bis zum Ablauf des Quizzes
+ * @param startDate - Startdatum des Quizzes
+ * @returns {string} - Verbleibende Zeit bis zum Ablauf des Quizzes in Tagen/Stunden
+ */
 export const calculateQuizAvailability = (startDate) => {
     if (startDate) {
         const endDate = new Date(startDate);

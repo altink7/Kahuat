@@ -22,8 +22,8 @@
 
 <script>
 import CategoryComponent from "@/components/CategoryComponent.vue";
-import axios from "axios";
-import { handleError } from "@/services/MessageHandlerService"; // Import the error handling function
+import { handleError } from "@/services/MessageHandlerService";
+import EndpointService from "@/services/EndpointService"; // Import the error handling function
 
 export default {
   name: "SearchQuizView",
@@ -35,8 +35,7 @@ export default {
   },
   methods: {
     searchQuiz() {
-      axios
-          .get(`http://localhost:8081/api/quizzes/${this.searchQuery}`)
+      EndpointService.get(`quizzes/${this.searchQuery}`)
           .then((response) => {
             if (response.status === 200) {
               this.quiz = response.data;
@@ -56,11 +55,10 @@ export default {
           });
     },
     handleCategoryClicked(category) {
-      axios
-          .get(`http://localhost:8081/api/quizzes/categories/${category.toUpperCase()}`)
+      EndpointService.get(`quizzes/categories/${category.toUpperCase()}`)
           .then((response) => {
             if (response.data.length === 0) {
-              // das ist der Fall, wenn keine Quizze fuer die Kategorie gefunden wurden
+              // This is the case when no quizzes were found for the category
               handleError("No quizzes found for this category.");
             } else {
               const quizIds = response.data.map((quiz) => quiz.id).join(",");

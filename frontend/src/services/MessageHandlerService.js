@@ -1,3 +1,7 @@
+/**
+ * Funktion um eine Fehlermeldung anzuzeigen.
+ * @param errorMessage - Fehlermeldung, die angezeigt werden soll.
+ */
 export function handleError(errorMessage) {
     const errorMessageElement = document.getElementById('error-message');
     if (errorMessageElement) {
@@ -9,6 +13,10 @@ export function handleError(errorMessage) {
     }
 }
 
+/**
+ * Funktion um eine Erfolgsmeldung anzuzeigen.
+ * @param successMessage - Erfolgsmeldung, die angezeigt werden soll.
+ */
 export function handleSuccess(successMessage) {
     const successMessageElement = document.getElementById('success-message');
     if (successMessageElement) {

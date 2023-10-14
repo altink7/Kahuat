@@ -88,8 +88,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 import {handleError, handleSuccess} from "@/services/MessageHandlerService";
+import EndpointService from "@/services/EndpointService";
 
 export default {
   data() {
@@ -122,7 +123,8 @@ export default {
           country: this.user.country,
           role: 'USER',
         };
-        const response = await axios.post('http://localhost:8081/api/users/create', formData);
+
+        const response = await EndpointService.post("users/create", formData);
 
         if (response.status === 201) {
           handleError("User has been created successfully");
