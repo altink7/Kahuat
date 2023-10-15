@@ -5,7 +5,6 @@
   <div class="points">
     <h2>Points: {{ points }}</h2>
   </div>
-  <div>
     <div class="container">
       <div class="progress">
         <div class="progress-bar" role="progressbar" :style="{ width: timer * 6.6666666667 + '%' }" aria-valuenow="25"
@@ -26,10 +25,9 @@
         <button class="btn btn-primary" @click="nextQuestion">Next</button>
       </div>
       <div v-else>
-        <p>Quiz data is loading...</p>
+        <p>Quiz is loading...</p>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

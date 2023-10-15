@@ -229,6 +229,10 @@ nav a:hover {
     background-color: #42b883;
 }
 
+.progress {
+    margin-bottom: 10px;
+}
+
 
 /* Login */
 
@@ -328,28 +332,9 @@ footer ul li a:hover {
     text-decoration: underline 2px;
 }
 
-/* Quiz Button */
-.quiz-button {
-    margin-top: 40px;
-    width: 350px;
-    height: 250px;
-    background-color: #42b883;
-    border: 3px solid white;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
 /* expired Quiz */
 .expired {
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
     cursor: not-allowed;
     pointer-events: none;
-}
-
-.progress {
-    margin-bottom: 2%;
 }
