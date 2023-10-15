@@ -7,6 +7,11 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="SEPJ23Quizzes1" />
+      <option name="name" value="SEPJ23Quizzes1" />
+      <option name="url" value="https://pkgs.dev.azure.com/SEPJ23Quizzes1/_packaging/SEPJ23Quizzes1/maven/v1" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
