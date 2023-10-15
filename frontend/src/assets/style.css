@@ -349,3 +349,7 @@ footer ul li a:hover {
     cursor: not-allowed;
     pointer-events: none;
 }
+
+.progress {
+    margin-bottom: 2%;
+}

@@ -24,7 +24,7 @@
 
 <script>
 import { calculateQuizAvailability } from "@/services/QuizAvailabilityService";
-import axios from "axios";
+import EndpointService from "@/services/EndpointService";
 
 export default {
   name: "LobbyView",
@@ -45,7 +45,7 @@ export default {
     async loadQuizStartDates() {
       for (const quizId of this.quizIdsArray) {
         try {
-          const response = await axios.get(`http://localhost:8081/api/quizzes/${quizId}`);
+          const response = await EndpointService.get(`quizzes/${quizId}`);
           this.quizStartDates[quizId] = calculateQuizAvailability(response.data.startDate);
         } catch (error) {
           this.quizStartDates[quizId] = "Availability could not be loaded.";
