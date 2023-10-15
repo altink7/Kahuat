@@ -5,8 +5,8 @@ services:
     container_name: backend_db
     image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: quiz23
-      MYSQL_DATABASE: quizapplication
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
