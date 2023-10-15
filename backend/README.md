@@ -21,6 +21,12 @@ This is the template project for the BWENG course.
   * /api (API json)
   * /swagger.html (Swagger API UI)
 
+## Build
+Build .war from source. The package is already included in docker-compose.yml
+```shell
+mvn clean package
+```
+
 ## Setup
 Start Docker container with MariaDB and phpMyAdmin. Change directory to folder where docker-compose.yml is located.
 ```shell
