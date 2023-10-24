@@ -13,50 +13,6 @@ Content-Type: application/json
   "category": "SPORTS",
   "questions": [
     {
-      "question": "What is the capital of France?",
-      "category": "SPORTS",
-      "answerOptions": [
-        {
-          "answer": "Paris",
-          "correct": true
-        },
-        {
-          "answer": "London",
-          "correct": false
-        },
-        {
-          "answer": "Berlin",
-          "correct": false
-        },
-        {
-          "answer": "Madrid",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "question": "What is the largest planet in our solar system?",
-      "category": "SPORTS",
-      "answerOptions": [
-        {
-          "answer": "Jupiter",
-          "correct": true
-        },
-        {
-          "answer": "Mars",
-          "correct": false
-        },
-        {
-          "answer": "Venus",
-          "correct": false
-        },
-        {
-          "answer": "Saturn",
-          "correct": false
-        }
-      ]
-    },
-    {
       "question": "Who won the FIFA World Cup in 2018?",
       "category": "SPORTS",
       "answerOptions": [
@@ -79,8 +35,74 @@ Content-Type: application/json
       ]
     },
     {
-      "question": "Which country is known as the Land of the Rising Sun?",
+      "question": "Who is the all-time leading scorer in NBA history?",
       "category": "SPORTS",
+      "answerOptions": [
+        {
+          "answer": "Kareem Abdul-Jabbar",
+          "correct": true
+        },
+        {
+          "answer": "LeBron James",
+          "correct": false
+        },
+        {
+          "answer": "Michael Jordan",
+          "correct": false
+        },
+        {
+          "answer": "Kobe Bryant",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "In which sport would you perform the Fosbury Flop?",
+      "category": "SPORTS",
+      "answerOptions": [
+        {
+          "answer": "High Jump",
+          "correct": true
+        },
+        {
+          "answer": "Long Jump",
+          "correct": false
+        },
+        {
+          "answer": "Pole Vault",
+          "correct": false
+        },
+        {
+          "answer": "Triple Jump",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "What is the capital of France?",
+      "category": "GEOGRAPHY",
+      "answerOptions": [
+        {
+          "answer": "Paris",
+          "correct": true
+        },
+        {
+          "answer": "London",
+          "correct": false
+        },
+        {
+          "answer": "Berlin",
+          "correct": false
+        },
+        {
+          "answer": "Madrid",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Which country is known as the Land of the Rising Sun?",
+      "category": "GEOGRAPHY",
       "answerOptions": [
         {
           "answer": "Japan",
@@ -101,23 +123,243 @@ Content-Type: application/json
       ]
     },
     {
-      "question": "Who is the all-time leading scorer in NBA history?",
-      "category": "SPORTS",
+      "question": "What is the largest planet in our solar system?",
+      "category": "SCIENCE",
       "answerOptions": [
         {
-          "answer": "Kareem Abdul-Jabbar",
+          "answer": "Jupiter",
           "correct": true
         },
         {
-          "answer": "LeBron James",
+          "answer": "Mars",
           "correct": false
         },
         {
-          "answer": "Michael Jordan",
+          "answer": "Venus",
           "correct": false
         },
         {
-          "answer": "Kobe Bryant",
+          "answer": "Saturn",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Which element is represented by the symbol 'Au'?",
+      "category": "SCIENCE",
+      "answerOptions": [
+        {
+          "answer": "Gold",
+          "correct": true
+        },
+        {
+          "answer": "Silver",
+          "correct": false
+        },
+        {
+          "answer": "Aluminum",
+          "correct": false
+        },
+        {
+          "answer": "Astatine",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Which historical event took place on July 20, 1969?",
+      "category": "HISTORY",
+      "answerOptions": [
+        {
+          "answer": "Man landed on the Moon",
+          "correct": true
+        },
+        {
+          "answer": "End of World War II",
+          "correct": false
+        },
+        {
+          "answer": "Start of the French Revolution",
+          "correct": false
+        },
+        {
+          "answer": "Discovery of America",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "What is the primary language spoken in Brazil?",
+      "category": "CULTURE",
+      "answerOptions": [
+        {
+          "answer": "Portuguese",
+          "correct": true
+        },
+        {
+          "answer": "Spanish",
+          "correct": false
+        },
+        {
+          "answer": "French",
+          "correct": false
+        },
+        {
+          "answer": "English",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Which animal is known as the king of the jungle?",
+      "category": "NATURE",
+      "answerOptions": [
+        {
+          "answer": "Lion",
+          "correct": true
+        },
+        {
+          "answer": "Elephant",
+          "correct": false
+        },
+        {
+          "answer": "Tiger",
+          "correct": false
+        },
+        {
+          "answer": "Giraffe",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Which tennis player has won the most Grand Slam titles?",
+      "category": "SPORTS",
+      "answerOptions": [
+        {
+          "answer": "Roger Federer",
+          "correct": false
+        },
+        {
+          "answer": "Serena Williams",
+          "correct": false
+        },
+        {
+          "answer": "Rafael Nadal",
+          "correct": false
+        },
+        {
+          "answer": "Margaret Court",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Which river is the longest in the world?",
+      "category": "GEOGRAPHY",
+      "answerOptions": [
+        {
+          "answer": "Amazon River",
+          "correct": false
+        },
+        {
+          "answer": "Nile River",
+          "correct": true
+        },
+        {
+          "answer": "Yangtze River",
+          "correct": false
+        },
+        {
+          "answer": "Mississippi River",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Who was the first emperor of Rome?",
+      "category": "HISTORY",
+      "answerOptions": [
+        {
+          "answer": "Julius Caesar",
+          "correct": false
+        },
+        {
+          "answer": "Nero",
+          "correct": false
+        },
+        {
+          "answer": "Augustus",
+          "correct": true
+        },
+        {
+          "answer": "Trajan",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Which artist painted the Mona Lisa?",
+      "category": "CULTURE",
+      "answerOptions": [
+        {
+          "answer": "Vincent van Gogh",
+          "correct": false
+        },
+        {
+          "answer": "Leonardo da Vinci",
+          "correct": true
+        },
+        {
+          "answer": "Michelangelo",
+          "correct": false
+        },
+        {
+          "answer": "Raphael",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "What is the smallest bone in the human body?",
+      "category": "SCIENCE",
+      "answerOptions": [
+        {
+          "answer": "Femur",
+          "correct": false
+        },
+        {
+          "answer": "Stapes",
+          "correct": true
+        },
+        {
+          "answer": "Radius",
+          "correct": false
+        },
+        {
+          "answer": "Ulna",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Which bird is known for its elaborate courtship dance?",
+      "category": "NATURE",
+      "answerOptions": [
+        {
+          "answer": "Peacock",
+          "correct": true
+        },
+        {
+          "answer": "Sparrow",
+          "correct": false
+        },
+        {
+          "answer": "Ostrich",
+          "correct": false
+        },
+        {
+          "answer": "Eagle",
           "correct": false
         }
       ]
