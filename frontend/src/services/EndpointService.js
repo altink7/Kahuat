@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8081/api";
+const BASE_URL = process.env.VUE_APP_BACKEND_WEB_URL;
 
 /**
  * Service for making API calls
