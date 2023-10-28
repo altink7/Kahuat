@@ -3,15 +3,8 @@
     <h1>Let's Play!</h1>
   </div>
   <div class="points">
-    <h2>Points: {{ points }}</h2>
+    <p class="badge rounded-pill">{{points}} Points</p>
   </div>
-    <div class="container">
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" :style="{ width: timer * 6.6666666667 + '%' }" aria-valuenow="25"
-          aria-valuemin="0" aria-valuemax="100">
-          {{ timer }}
-        </div>
-      </div>
       <div v-if="quizData !== null">
         <div :key="currentQuestion.id">
           <QuestionComponent :question="currentQuestion.question"
@@ -27,7 +20,7 @@
       <div v-else>
         <p>Quiz is loading...</p>
       </div>
-    </div>
+
 </template>
 
 <script>
@@ -43,6 +36,7 @@ export default {
       timer: 15,
       points: 0,
       timerInterval: null,
+      quizStartTime: null,
     };
   },
   computed: {
@@ -52,6 +46,7 @@ export default {
   },
   methods: {
     searchQuiz(quizId) {
+      this.quizStartTime = Date.now();
       EndpointService.get(`quizzes/${quizId}`)
         .then((response) => {
           this.quizData = response.data;
@@ -68,14 +63,19 @@ export default {
         this.currentQuestionIndex++;
         this.resetTimer();
       } else if (this.points > 0){
+
+        const quizEndTime = Date.now();
+        const quizDuration = (quizEndTime - this.quizStartTime) / 1000;
+
         this.$router.push({
           name: "rankings",
-          query: { requestId: this.requestId, points: this.points },
+          query: { requestId: this.requestId, points: this.points, duration: quizDuration },
         });
         console.log("End of quiz reached. Redirecting to rankings. (points: " + this.points + ")"+ " (requestId: " + this.requestId + "))");
 
         //reset points
         this.points = 0;
+        this.quizStartTime = null;
       }
     },
     startTimer() {

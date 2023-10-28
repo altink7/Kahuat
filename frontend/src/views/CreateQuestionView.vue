@@ -6,7 +6,8 @@
         <div v-for="index in questionComponentsCount" :key="index">
             <CreateQuestionComponent />
         </div>
-        <button class="new-question-button" @click="addQuestion">+</button>
+      <button class="new-question-button" @click="addQuestion">Add Question</button>
+      <button class="new-question-button" @click="submit">Submit Quiz</button>
         <div class="container">
             <router-view></router-view>
         </div>
