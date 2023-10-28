@@ -33,6 +33,7 @@ at\technikum\springrestbackend\model\Category.class
 at\technikum\springrestbackend\model\UserStatistic.class
 at\technikum\springrestbackend\exceptions\QuestionNotFoundException.class
 at\technikum\springrestbackend\controller\UserStatisticController.class
+at\technikum\springrestbackend\config\mapper\CorsConfig.class
 at\technikum\springrestbackend\exceptions\UserStatisticNotFoundException.class
 at\technikum\springrestbackend\controller\QuestionController.class
 at\technikum\springrestbackend\dto\QuizDTO.class
@@ -41,6 +42,7 @@ at\technikum\springrestbackend\controller\QuizController.class
 at\technikum\springrestbackend\model\User.class
 at\technikum\springrestbackend\model\Question.class
 at\technikum\springrestbackend\repository\UserDao.class
+at\technikum\springrestbackend\config\mapper\CorsConfig$1.class
 at\technikum\springrestbackend\service\QuizService.class
 at\technikum\springrestbackend\validator\annotation\ValidateWith.class
 at\technikum\springrestbackend\repository\QuizDao.class

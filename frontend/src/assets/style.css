@@ -229,6 +229,10 @@ nav a:hover {
     background-color: #42b883;
 }
 
+.progress {
+    margin-bottom: 10px;
+}
+
 
 /* Login */
 
@@ -326,4 +330,11 @@ footer ul li a {
 footer ul li a:hover {
     color: white;
     text-decoration: underline 2px;
+}
+
+/* expired Quiz */
+.expired {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%);
+    cursor: not-allowed;
+    pointer-events: none;
 }

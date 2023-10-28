@@ -88,7 +88,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+
+import {handleError, handleSuccess} from "@/services/MessageHandlerService";
+import EndpointService from "@/services/EndpointService";
 
 export default {
   data() {
@@ -107,11 +109,7 @@ export default {
   methods: {
     async handleSubmit() {
       if (this.user.password !== this.confirmPassword) {
-        document.getElementById('error-message').classList.remove('d-none');
-        setTimeout(() => {
-          document.getElementById('error-message').classList.add('d-none');
-        }, 3000);
-
+        handleError("Passwords do not match", 'error-message');
         return;
       }
 
@@ -125,10 +123,11 @@ export default {
           country: this.user.country,
           role: 'USER',
         };
-        const response = await axios.post('http://localhost:8081/api/users/create', formData);
+
+        const response = await EndpointService.post("users/create", formData);
 
         if (response.status === 201) {
-          document.getElementById('success-message').classList.remove('d-none');
+          handleError("User has been created successfully");
           this.user = {
             salutation: 'MALE',
             firstName: '',
@@ -140,22 +139,16 @@ export default {
           this.confirmPassword = '';
 
           setTimeout(() => {
-            document.getElementById('success-message').classList.add('d-none');
+            handleSuccess("User has been created successfully");
             this.goToLogin();
           }, 2000);
         } else {
-          document.getElementById('error-message').classList.remove('d-none');
-          setTimeout(() => {
-            document.getElementById('error-message').classList.add('d-none');
-          }, 2000);
+          handleError("User registration failed. Please try again later.");
         }
 
       } catch (error) {
         console.error('Error:', error);
-        document.getElementById('error-message').classList.remove('d-none');
-        setTimeout(() => {
-          document.getElementById('error-message').classList.add('d-none');
-        }, 2000);
+        handleError("An error occurred. Please try again later.");
       }
     },
     goToLogin() {

@@ -7,8 +7,6 @@ services:
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    ports:
-      - "3306:3306"
     volumes:
       - ./backend/db-data:/var/lib/mysql
       - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -42,6 +40,8 @@ services:
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DATABASE_URL: ${DATABASE_URL}
+      FRONTEND_WEB_URL: ${FRONTEND_WEB_URL}
     networks:
       - backend
 
@@ -51,16 +51,22 @@ services:
       - backend_db
       - backend_web
     image: node:latest
+    environment:
+      VUE_APP_BACKEND_WEB_URL: ${VUE_APP_BACKEND_WEB_URL}
     working_dir: /app
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     command:
       - /bin/sh
       - -c
       - |
+        npm install
         npm run serve
     ports:
       - '8080:8080'
+    networks:
+      - backend
 
 networks:
   backend:

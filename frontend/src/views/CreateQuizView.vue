@@ -2,7 +2,7 @@
     <div class="home">
         <h1>Create Quiz!</h1>
     </div>
-    <CategoryComponent pathTo="/create-question"/>
+    <CategoryComponent @categoryClicked="handleCategoryClicked"/>
 </template>
 
 <script>
@@ -12,7 +12,14 @@ export default {
     components: {
         CategoryComponent
     },
+  methods: {
+    handleCategoryClicked(category) {
+      this.$router.push({
+        name: "create-question",
+        params: { category: category },
+      });
+    }
+  }
 };
 </script>
-  
-  
+
