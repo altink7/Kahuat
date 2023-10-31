@@ -9,6 +9,7 @@ import at.technikum.springrestbackend.model.Quiz;
 import at.technikum.springrestbackend.repository.*;
 import at.technikum.springrestbackend.service.QuizService;
 import jakarta.transaction.Transactional;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Implementation of the QuizService interface
  */
-
+@Log4j2
 @Service
 public class QuizServiceImpl implements QuizService {
     private final QuizDao quizDao;
@@ -43,12 +44,13 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<Quiz> getQuizzesByCategory(Category category) {
-        return quizDao.findByCategory(category).orElseThrow(QuizNotFoundException::new);
+        return quizDao.findByKategorie(category).orElseThrow(QuizNotFoundException::new);
     }
 
     @Override
     @Transactional
     public Quiz createQuiz(Quiz quiz) {
+        log.info("Creating quiz: " + quiz);
         Quiz persistedQuiz = quizDao.save(quiz);
         //frontend sends us only the Id of creator, te keep the requests cleaner
         persistedQuiz.setCreator(userDao.findById(quiz.getCreator().getId()).orElse(null));

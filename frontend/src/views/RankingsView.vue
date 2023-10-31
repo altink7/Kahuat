@@ -1,19 +1,15 @@
 <template>
-  <div class="Home">
-    <h1>Your Score</h1>
-    <p>Request ID: {{ requestId }}</p>
-    <p> <b>Points: {{ points }}</b></p>
+  <div>
+    <rankings-molecule></rankings-molecule>
   </div>
 </template>
 
 <script>
+import RankingsMolecule from "@/components/molecules/RankingsMolecule.vue";
+
 export default {
-  name: "RankingsView",
-  props: {
-    requestId: String,
-    points: String,
+  components: {
+    RankingsMolecule,
   },
 };
 </script>
-
-  

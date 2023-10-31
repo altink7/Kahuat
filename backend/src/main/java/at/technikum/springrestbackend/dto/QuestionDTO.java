@@ -2,23 +2,24 @@ package at.technikum.springrestbackend.dto;
 
 import at.technikum.springrestbackend.model.AnswerOption;
 import at.technikum.springrestbackend.model.Category;
-import at.technikum.springrestbackend.model.Quiz;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.File;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @JsonIgnoreProperties({"quiz"})
 public class QuestionDTO {
+
     private Long id;
+
+    @NotNull(message = "Question cannot be null!")
     private String question;
+
+    @NotNull(message = "AnswerOption cannot be null!")
     private List<AnswerOption> answerOptions;
+
     private File file;
-    private Quiz quiz;
-    private Category category;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }

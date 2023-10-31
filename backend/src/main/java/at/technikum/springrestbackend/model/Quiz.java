@@ -34,8 +34,8 @@ public class Quiz extends AbstractEntity implements Serializable {
     @ToString.Exclude
     private List<User> participants;
 
-    @Column(name = "category", nullable = false)
-    private Category category;
+    @Column(name = "kategorie")
+    private Category kategorie;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.REMOVE)
     @ToString.Exclude

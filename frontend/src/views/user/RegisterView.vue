@@ -2,20 +2,13 @@
   <div class="d-flex justify-content-center">
     <div class="card registerForm login-card">
       <div class="card-body">
-        <div id="success-message" class="alert alert-success text-center d-none">
-          <h1>Success</h1>
-          <p>User has been created successfully</p>
-        </div>
-        <div id="error-message" class="alert alert-danger text-center d-none">
-          <h1>Error</h1>
-          <p>User registration failed. Please try again later.</p>
-        </div>
         <h2 class="card-title text-center">Register</h2>
         <form @submit.prevent="handleSubmit">
           <div class="row mb-2">
             <div class="col-md-2">
               <label for="salutation">Salutation</label>
               <select v-model="user.salutation" class="form-control" id="salutation" name="salutation">
+                <option value="none">-</option>
                 <option value="MALE">Male</option>
                 <option value="FEMALE">Female</option>
                 <option value="OTHER">Other</option>
@@ -23,16 +16,17 @@
             </div>
             <div class="col-md-5">
               <label for="firstName">First Name</label>
-              <input v-model="user.firstName" type="text" class="form-control" id="firstName" placeholder="Max">
+              <input v-model="user.firstName" type="text" class="form-control" id="firstName" placeholder="Max" required>
             </div>
             <div class="col-md-5">
               <label for="lastName">Last Name</label>
-              <input v-model="user.lastName" type="text" class="form-control" id="lastName" placeholder="Mustermann">
+              <input v-model="user.lastName" type="text" class="form-control" id="lastName" placeholder="Mustermann" required>
             </div>
           </div>
           <div class="mb-2">
             <label for="email">E-Mail-Adress</label>
-            <input v-model="user.email" type="email" class="form-control" id="email" placeholder="max.muster@gmail.com">
+            <input v-model="user.email" type="email" class="form-control" id="email" placeholder="max.muster@gmail.com"
+              required>
           </div>
           <div>
             <label for="country">Country</label>
@@ -70,12 +64,12 @@
           <div class="mb-2">
             <label for="password">Password</label>
             <input v-model="user.password" type="password" class="form-control" id="password" placeholder="********"
-              minlength="8">
+              minlength="8" required>
           </div>
           <div class="mb-2">
             <label for="confirm-password">Confirm Password</label>
             <input v-model="confirmPassword" type="password" class="form-control" id="confirm-password"
-              placeholder="********" minlength="8">
+              placeholder="********" minlength="8" required>
           </div>
           <br>
           <div class="mb-2">
@@ -88,15 +82,13 @@
 </template>
 
 <script>
-
-import {handleError, handleSuccess} from "@/services/MessageHandlerService";
-import EndpointService from "@/services/EndpointService";
+import { registerUser } from "@/services/user/UserRegisterService";
 
 export default {
   data() {
     return {
       user: {
-        salutation: 'MALE',
+        salutation: 'none',
         firstName: '',
         lastName: '',
         email: '',
@@ -108,51 +100,18 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      if (this.user.password !== this.confirmPassword) {
-        handleError("Passwords do not match", 'error-message');
-        return;
-      }
-
-      try {
-        const formData = {
-          salutation: this.user.salutation,
-          firstName: this.user.firstName,
-          lastName: this.user.lastName,
-          email: this.user.email,
-          password: this.user.password,
-          country: this.user.country,
-          role: 'USER',
-        };
-
-        const response = await EndpointService.post("users/create", formData);
-
-        if (response.status === 201) {
-          handleError("User has been created successfully");
-          this.user = {
-            salutation: 'MALE',
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            country: 'none',
-          };
-          this.confirmPassword = '';
-
-          setTimeout(() => {
-            handleSuccess("User has been created successfully");
-            this.goToLogin();
-          }, 2000);
-        } else {
-          handleError("User registration failed. Please try again later.");
+      await registerUser(this.user, this.confirmPassword, this.$router).then((result) => {
+        if (result) {
+          this.goToLogin();
         }
-
-      } catch (error) {
-        console.error('Error:', error);
-        handleError("An error occurred. Please try again later.");
-      }
+      });
     },
     goToLogin() {
-      this.$router.push('/login');
+      setTimeout(() => {
+        this.$router.push({
+          name: "login",
+        });
+      }, 3000);
     },
   },
 };
