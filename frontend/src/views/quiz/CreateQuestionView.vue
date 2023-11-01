@@ -55,7 +55,7 @@ export default {
 
       const formQuiz = {
         creatorId: 1,
-        category: this.getCategory,
+        kategorie: this.getCategory,
         startDate: new Date().toLocaleDateString('en-CA'),
         duration: 30,
         questions: this.quizQuestions,

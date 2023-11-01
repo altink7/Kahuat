@@ -74,9 +74,26 @@ export default {
         store.setRequestId(this.requestId);
         store.setSelectedCategory(this.quizData.kategorie);
 
-        this.$router.push({
-          name: "rankings",
-        });
+        const participant = {
+          nickname: store.getNickname(),
+          points: store.getPoints(),
+          participantQuizDuration: store.getQuizDuration(),
+        };
+
+        EndpointService.post(`quizzes/${this.requestId}/addParticipant`, participant)
+            .then((response) => {
+              console.log(store.getNickname() + " has finished the quiz. (points: " + this.points + ")" + " (requestId: " + this.requestId + ")");
+              console.log(response);
+
+              this.$router.push({
+                name: "rankings",
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+
         console.log("End of quiz reached. Redirecting to rankings. (points: " + this.points + ")" + " (requestId: " + this.requestId + "))");
 
         //reset points

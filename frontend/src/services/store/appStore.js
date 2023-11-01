@@ -6,6 +6,7 @@ export const useAppStore = defineStore('appStore', {
         requestId: Number,
         points: Number,
         quizDuration: Number,
+        nickname: String,
     }),
 
     actions: {
@@ -33,5 +34,11 @@ export const useAppStore = defineStore('appStore', {
         getQuizDuration() {
             return this.quizDuration;
         },
+        setNickname(nickname) {
+            this.nickname = nickname;
+        },
+        getNickname() {
+            return this.nickname;
+        }
     },
 });

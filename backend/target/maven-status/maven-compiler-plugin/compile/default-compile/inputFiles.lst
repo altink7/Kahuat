@@ -32,6 +32,7 @@ C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\techn
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\AnswerOptionDao.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\UserDTO.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\QuestionController.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\ParticipantDTO.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuizException.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\QuestionDTO.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\annotation\ValidationAspect.java
@@ -41,11 +42,13 @@ C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\techn
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\UserStatisticService.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Role.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\UserStatisticServiceImpl.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Participant.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\QuestionService.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\Validator.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\UserStatisticNotFoundException.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Category.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\QuestionServiceImpl.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\UserService.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\ParticipantDao.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\QuizDao.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\QuizService.java

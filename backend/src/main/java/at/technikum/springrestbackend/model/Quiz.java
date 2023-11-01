@@ -25,14 +25,9 @@ public class Quiz extends AbstractEntity implements Serializable {
     @JoinColumn(name = "creator_id")
     private User creator;
 
-    @ManyToMany
-    @JoinTable(
-            name = "quiz_participants",
-            joinColumns = @JoinColumn(name = "quiz_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    @ToString.Exclude
-    private List<User> participants;
+    @OneToMany(mappedBy = "quiz")
+    private List<Participant> participants;
+
 
     @Column(name = "kategorie")
     private Category kategorie;

@@ -18,6 +18,7 @@ at\technikum\springrestbackend\service\QuestionService.class
 at\technikum\springrestbackend\dto\QuestionDTO.class
 at\technikum\springrestbackend\exceptions\QuizException.class
 at\technikum\springrestbackend\config\mapper\InternalModelMapper.class
+at\technikum\springrestbackend\model\Participant.class
 at\technikum\springrestbackend\dto\UserDTO.class
 at\technikum\springrestbackend\service\UserStatisticService.class
 at\technikum\springrestbackend\repository\QuestionDao.class
@@ -25,9 +26,11 @@ at\technikum\springrestbackend\exceptions\QuizNotFoundException.class
 at\technikum\springrestbackend\SpringRestBackendApplication.class
 at\technikum\springrestbackend\config\mapper\ModelMapperConfig.class
 at\technikum\springrestbackend\serviceimpl\UserServiceImpl.class
+at\technikum\springrestbackend\repository\ParticipantDao.class
 at\technikum\springrestbackend\repository\AnswerDao.class
 at\technikum\springrestbackend\dto\UserStatisticDTO.class
 at\technikum\springrestbackend\model\AbstractEntity.class
+at\technikum\springrestbackend\dto\ParticipantDTO.class
 at\technikum\springrestbackend\controller\UserController.class
 at\technikum\springrestbackend\validator\Validator.class
 at\technikum\springrestbackend\model\Category.class

@@ -6,7 +6,7 @@ import RegisterView from '../views/user/RegisterView.vue'
 import CategoryView from '../views/CategoryView.vue'
 import QuizView from '../views/quiz/QuizView.vue'
 import CreateQuizView from '../views/quiz/CreateQuizView.vue'
-import RankingsView from '../views/RankingsView.vue'
+import RankingsView from '../views/ranking/QuizRankingsView.vue'
 import CreateQuestionView from '../views/quiz/CreateQuestionView.vue'
 import SearchQuizView from '../views/quiz/SearchQuizView.vue'
 import LobbyView from "../views/quiz/LobbyView.vue";

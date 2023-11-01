@@ -359,3 +359,9 @@ footer ul li a:hover {
     cursor: not-allowed;
     pointer-events: none;
 }
+
+/*Quiz Entry*/
+.quiz-entry {
+    text-align: center;
+    padding: 20px;
+}
