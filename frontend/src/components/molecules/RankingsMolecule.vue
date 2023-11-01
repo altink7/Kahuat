@@ -16,7 +16,7 @@
 <script>
 import QuizInfoAtom from "@/components/atoms/QuizInfoAtom.vue";
 import ScoreAtom from "@/components/atoms/ScoreAtom.vue";
-import EndpointService from "@/services/server/EndpointService"; // Import Axios for making HTTP requests
+import EndpointService from "@/services/server/EndpointService";
 
 export default {
   name: "RankingsMolecule",
@@ -38,7 +38,6 @@ export default {
   methods: {
     async fetchParticipants() {
       try {
-        //reload for a couple of times and then get the data
         console.log("Fetching participants..."+"/quizzes/"+this.quizId+"/participants");
         const response = await EndpointService.get(`quizzes/${this.quizId}/participants`);
         this.participants = response.data;

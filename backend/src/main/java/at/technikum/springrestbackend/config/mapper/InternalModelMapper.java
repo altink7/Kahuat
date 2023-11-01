@@ -1,7 +1,5 @@
 package at.technikum.springrestbackend.config.mapper;
 
-import at.technikum.springrestbackend.dto.ParticipantDTO;
-import at.technikum.springrestbackend.model.Participant;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

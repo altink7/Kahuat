@@ -17,9 +17,6 @@
         </div>
     </nav>
 </template>
-
-<!-- Navbar.vue -->
-
   
 <script>
 export default {
@@ -35,8 +32,4 @@ export default {
     },
 };
 </script>
-  
-<style scoped>
-/* Add custom CSS styles here */
-</style>
   
