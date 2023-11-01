@@ -2,24 +2,25 @@ package at.technikum.springrestbackend.serviceimpl;
 
 import at.technikum.springrestbackend.exceptions.QuestionNotFoundException;
 import at.technikum.springrestbackend.exceptions.QuizNotFoundException;
-import at.technikum.springrestbackend.model.Answer;
-import at.technikum.springrestbackend.model.Category;
-import at.technikum.springrestbackend.model.Question;
-import at.technikum.springrestbackend.model.Quiz;
+import at.technikum.springrestbackend.model.*;
 import at.technikum.springrestbackend.repository.*;
 import at.technikum.springrestbackend.service.QuizService;
 import jakarta.transaction.Transactional;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Implementation of the QuizService interface
  */
-
+@Log4j2
 @Service
 public class QuizServiceImpl implements QuizService {
+    private final UserStatisticDao userStatisticDao;
+    private final ParticipantDao participantDao;
     private final QuizDao quizDao;
     private final QuestionDao questionDao;
     private final AnswerOptionDao answerOptionDao;
@@ -27,12 +28,16 @@ public class QuizServiceImpl implements QuizService {
     private final UserDao userDao;
 
     @Autowired
-    public QuizServiceImpl(QuizDao quizDao, QuestionDao questionDao, AnswerOptionDao answerOptionDao, AnswerDao answerDao, UserDao userDao) {
+    public QuizServiceImpl(QuizDao quizDao, QuestionDao questionDao, AnswerOptionDao answerOptionDao, AnswerDao answerDao, UserDao userDao,
+                           ParticipantDao participantDao,
+                           UserStatisticDao userStatisticDao) {
         this.quizDao = quizDao;
         this.questionDao = questionDao;
         this.answerOptionDao = answerOptionDao;
         this.answerDao = answerDao;
         this.userDao = userDao;
+        this.participantDao = participantDao;
+        this.userStatisticDao = userStatisticDao;
     }
 
 
@@ -43,12 +48,13 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<Quiz> getQuizzesByCategory(Category category) {
-        return quizDao.findByCategory(category).orElseThrow(QuizNotFoundException::new);
+        return quizDao.findByKategorie(category).orElseThrow(QuizNotFoundException::new);
     }
 
     @Override
     @Transactional
     public Quiz createQuiz(Quiz quiz) {
+        log.info("Creating quiz: " + quiz);
         Quiz persistedQuiz = quizDao.save(quiz);
         //frontend sends us only the Id of creator, te keep the requests cleaner
         persistedQuiz.setCreator(userDao.findById(quiz.getCreator().getId()).orElse(null));
@@ -77,6 +83,31 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public List<Question> getAllQuestionsByQuizId(Long id) {
         return quizDao.findById(id).orElseThrow(QuizNotFoundException::new).getQuestions();
+    }
+
+    @Override
+    public Quiz addParticipantToQuiz(Long id, Participant participant) {
+        Quiz quiz = quizDao.findById(id).orElseThrow(QuizNotFoundException::new);
+
+        //Wenn Participant registriert ist, dann wird er in die Statistik aufgenommen
+        if(participant.getUserId() !=  null) {
+            User user = userDao.findById(participant.getUserId()).orElseThrow();
+            UserStatistic userStatistic = new UserStatistic();
+            userStatistic.setUserId(user.getId());
+            userStatistic.getQuizList().add(quiz);
+            userStatistic.setPoints(participant.getPoints());
+
+            userStatisticDao.save(userStatistic);
+        }
+
+        if(quiz.getParticipants().contains(participant)){
+            return quiz;
+        }
+
+        participant.setQuiz(quiz);
+        participantDao.save(participant);
+        quiz.getParticipants().add(participant);
+        return quizDao.save(quiz);
     }
 
     @Override

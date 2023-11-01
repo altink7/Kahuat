@@ -2,16 +2,16 @@
     <div class="home">
         <h1>Choose a category</h1>
     </div>
-    <CategoryComponent pathTo = "/quiz"/>
+    <CategoryMolecule pathTo = "/quiz"/>
 </template>
 
 <script>
-import CategoryComponent from "@/components/CategoryComponent.vue";
+import CategoryMolecule from "@/components/molecules/CategoryMolecule.vue";
 
 
 export default {
     components: {
-        CategoryComponent,
+        CategoryMolecule,
     },
 };
 </script>

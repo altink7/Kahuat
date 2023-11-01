@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Component
 @RequestMapping("/api/questions")
+@Validated
 public class QuestionController extends Controller {
     private final QuestionService questionService;
     private final InternalModelMapper mapper;
@@ -60,8 +60,21 @@ public class QuestionController extends Controller {
         }
     }
 
-    //TODO: POST für Admins um Questions zu erstellen?
-    //TODO: PUT für Admins um Questions zu ändern?
-    //TODO: DELETE für Admins um Questions zu löschen?
-    // () -> wird an frontend angepasst & erweitert im laufenden dann
+    @PostMapping("/createQuestion")
+    public ResponseEntity<QuestionDTO> createQuestion(@RequestBody QuestionDTO question) {
+        //TODO
+        return null;
+    }
+
+    @PutMapping("/{questionId}")
+    public ResponseEntity<QuestionDTO> updateQuestionById(@PathVariable Long questionId) {
+        //TODO
+        return null;
+    }
+
+    @DeleteMapping("/{questionId}")
+    public ResponseEntity<Void> deleteQuestionById(@PathVariable Long questionId) {
+        //TODO
+        return null;
+    }
 }
