@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -202,7 +201,7 @@ INSERT INTO `answer_option` (`correct`, `answer_id`, `created_at`, `id`, `questi
 --
 
 CREATE TABLE IF NOT EXISTS `question` (
-    `category` tinyint(4) NOT NULL CHECK (`category` between 0 and 6),
+    `kategorie` tinyint(4) NOT NULL CHECK (`kategorie` between 0 and 6),
     `created_at` datetime(6) DEFAULT NULL,
     `id` bigint(20) NOT NULL AUTO_INCREMENT,
     `quiz_id` bigint(20) NOT NULL,
@@ -217,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `question` (
 -- Dumping data for table `question`
 --
 
-INSERT INTO `question` (`category`, `created_at`, `id`, `quiz_id`, `updated_at`, `question`, `file`) VALUES
+INSERT INTO `question` (`kategorie`, `created_at`, `id`, `quiz_id`, `updated_at`, `question`, `file`) VALUES
                                                                                                          (0, '2023-10-23 09:02:36.554410', 1, 1, '2023-10-23 09:02:36.554418', 'Who won the FIFA World Cup in 2018?', NULL),
                                                                                                          (0, '2023-10-23 09:02:36.567590', 2, 1, '2023-10-23 09:02:36.567596', 'Who is the all-time leading scorer in NBA history?', NULL),
                                                                                                          (0, '2023-10-23 09:02:36.570860', 3, 1, '2023-10-23 09:02:36.570865', 'In which sport would you perform the Fosbury Flop?', NULL),
@@ -242,7 +241,7 @@ INSERT INTO `question` (`category`, `created_at`, `id`, `quiz_id`, `updated_at`,
 --
 
 CREATE TABLE IF NOT EXISTS `quiz` (
-    `category` tinyint(4) NOT NULL CHECK (`category` between 0 and 6),
+    `kategorie` tinyint(4) NOT NULL CHECK (`kategorie` between 0 and 6),
     `duration` int(11) DEFAULT NULL,
     `start_date` date DEFAULT NULL,
     `created_at` datetime(6) DEFAULT NULL,
@@ -259,9 +258,9 @@ CREATE TABLE IF NOT EXISTS `quiz` (
 -- Dumping data for table `quiz`
 --
 
-INSERT INTO `quiz` (`category`, `duration`, `start_date`, `created_at`, `creator_id`, `id`, `updated_at`, `user_statistic_id`) VALUES
-    (0, 9999999999, NOW(), NOW(), 1, 1, NOW(), NULL),
-    (0, 9999999999, '2023-10-01 00:00:00.000000', '2023-10-01 00:00:00.000000', 1, 2, '2023-10-01 00:00:00.000000', NULL);
+INSERT INTO `quiz` (`kategorie`, `duration`, `start_date`, `creator_id`, `id`, `user_statistic_id`) VALUES
+    ('SPORTS', 60, '2023-31-10', 1, 1, NULL),
+    ('SPORTS', 60, '2023-31-10', 1, 2, NULL);
 
 -- --------------------------------------------------------
 

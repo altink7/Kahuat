@@ -1,6 +1,7 @@
 package at.technikum.springrestbackend.service;
 
 import at.technikum.springrestbackend.model.Category;
+import at.technikum.springrestbackend.model.Participant;
 import at.technikum.springrestbackend.model.Question;
 import at.technikum.springrestbackend.model.Quiz;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,11 @@ public interface QuizService {
      * @return the list of questions
      */
     List<Question> getAllQuestionsByQuizId(Long id);
+
+    /**
+     * Update the quiz by id and add Participant to the quiz
+     */
+    Quiz addParticipantToQuiz(Long id, Participant participant);
 
     /**
      * Delete a quiz by id

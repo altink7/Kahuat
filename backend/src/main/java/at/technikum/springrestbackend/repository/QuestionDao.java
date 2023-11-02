@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface QuestionDao extends JpaRepository<Question, Long> {
-    Optional<Question> findByCategory(Category category);
+    Optional<Question> findByKategorie(Category category);
 }

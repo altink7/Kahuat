@@ -35,8 +35,8 @@ public class Question extends AbstractEntity implements Serializable {
     @JoinColumn(name = "quiz_id", nullable = false)
     private Quiz quiz;
 
-    @Column(name = "category", nullable = false)
-    private Category category;
+    @Column(name = "kategorie")
+    private Category kategorie;
 
     @Override
     public final boolean equals(Object o) {

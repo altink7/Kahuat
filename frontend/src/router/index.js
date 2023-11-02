@@ -1,19 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
-import LoginView from '../views/LoginView.vue'
-import RegisterView from '../views/RegisterView.vue'
+import AboutView from '../views/info/AboutView.vue'
+import LoginView from '../views/user/LoginView.vue'
+import RegisterView from '../views/user/RegisterView.vue'
 import CategoryView from '../views/CategoryView.vue'
-import QuizView from '../views/QuizView.vue'
-import CreateQuizView from '../views/CreateQuizView.vue'
-import RankingsView from '../views/RankingsView.vue'
-import CreateQuestionView from '../views/CreateQuestionView.vue'
-import SearchQuizView from '../views/SearchQuizView.vue'
-import PrivacyView from '../views/PrivacyView.vue'
-import FaqView from '../views/FaqView.vue'
-import ImprintView from '../views/ImprintView.vue'
-import ContactView from '../views/ContactView.vue'
-import LobbyView from "../views/LobbyView.vue";
+import QuizView from '../views/quiz/QuizView.vue'
+import CreateQuizView from '../views/quiz/CreateQuizView.vue'
+import RankingsView from '../views/ranking/QuizRankingsView.vue'
+import CreateQuestionView from '../views/quiz/CreateQuestionView.vue'
+import SearchQuizView from '../views/quiz/SearchQuizView.vue'
+import LobbyView from "../views/quiz/LobbyView.vue";
+import PrivacyView from '../views/info/PrivacyView.vue'
+import FaqView from '../views/info/FaqView.vue'
+import ImprintView from '../views/info/ImprintView.vue'
+import ContactView from '../views/info/ContactView.vue'
+
 
 const routes = [
   {
@@ -69,6 +70,12 @@ const routes = [
   component: SearchQuizView
   },
   {
+    path: '/lobby/:quizIds',
+    name: 'lobby',
+    component: LobbyView,
+    props: true,
+  },
+  {
     path: '/privacy',
     name: 'privacy',
     component: PrivacyView
@@ -87,13 +94,7 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component: ContactView
-  },
-  {
-    path: '/lobby/:quizIds',
-    name: 'lobby',
-    component: LobbyView,
-    props: true,
-  },
+  }
 ]
 
 const router = createRouter({
