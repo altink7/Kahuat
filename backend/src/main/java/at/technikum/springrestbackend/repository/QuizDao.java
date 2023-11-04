@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface QuizDao extends JpaRepository<Quiz, Long> {
-    Optional<List<Quiz>> findByCategory(Category category);
+    Optional<List<Quiz>> findByKategorie(Category category);
 }

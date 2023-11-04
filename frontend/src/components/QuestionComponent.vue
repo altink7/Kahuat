@@ -9,12 +9,16 @@
   </div>
 
   <div class="button-container justify-content-center">
-    <button class="answer-button answerA" @click="checkAnswer(answerA)">{{ Object.keys(answerA).length === 0 ? '' : answerA.answer.answer }}</button>
-    <button class="answer-button answerB" @click="checkAnswer(answerB)">{{ Object.keys(answerB).length === 0 ? '' : answerB.answer.answer }}</button>
+    <button class="answer-button answerA" @click="checkAnswer(answerA)">{{ Object.keys(answerA).length === 0 ? '' :
+      answerA.answer.answer }}</button>
+    <button class="answer-button answerB" @click="checkAnswer(answerB)">{{ Object.keys(answerB).length === 0 ? '' :
+      answerB.answer.answer }}</button>
   </div>
   <div class="button-container justify-content-center">
-    <button class="answer-button answerC" @click="checkAnswer(answerC)">{{ Object.keys(answerC).length === 0 ? '' : answerC.answer.answer }}</button>
-    <button class="answer-button answerD" @click="checkAnswer(answerD)">{{ Object.keys(answerD).length === 0 ? '' : answerD.answer.answer }}</button>
+    <button class="answer-button answerC" @click="checkAnswer(answerC)">{{ Object.keys(answerC).length === 0 ? '' :
+      answerC.answer.answer }}</button>
+    <button class="answer-button answerD" @click="checkAnswer(answerD)">{{ Object.keys(answerD).length === 0 ? '' :
+      answerD.answer.answer }}</button>
   </div>
 </template>
 
