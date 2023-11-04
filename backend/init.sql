@@ -259,8 +259,8 @@ CREATE TABLE IF NOT EXISTS `quiz` (
 --
 
 INSERT INTO `quiz` (`kategorie`, `duration`, `start_date`, `creator_id`, `id`, `user_statistic_id`) VALUES
-                                                                                                        (0, 9999999999, NOW(), 1, 1, NULL),
-                                                                                                        (0, 9999999999, '2023-10-01 00:00:00.000000', 1, 2, NULL);
+                                                                                                        (0, 1000, NOW(), 1, 1, NULL),
+                                                                                                        (0, 1000, '2023-10-01 00:00:00.000000', 1, 2, NULL);
 
 -- --------------------------------------------------------
 
