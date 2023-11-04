@@ -9,7 +9,7 @@
     <div class="button-container justify-content-evenly">
         <div v-for="quizId in quizIdsArray" :key="quizId">
           <button class="action-button" @click="showQuizEntryView(quizId)" :class="{ 'expired': isQuizExpired(quizId) }"
-            :style="getButtonStyle(quizStartDates[quizId])"
+            :style="getButtonStyle(quizStartDates[quizId], quizDurations[quizId])"
             :disabled="isQuizExpired(quizId) || quizStartDates[quizId] === 'Loading...'">
             {{ quizId }}
             <br>
@@ -24,7 +24,14 @@
 </template>
 
 <script>
-import { loadQuizStartDates, isQuizExpired, startQuiz, getButtonStyle, getFormattedStartDate } from "@/services/quiz/QuizLobbyService";
+import {
+  getButtonStyle,
+  getFormattedStartDate,
+  isQuizExpired,
+  loadQuizDurations,
+  loadQuizStartDates,
+  startQuiz
+} from "@/services/quiz/QuizLobbyService";
 import QuizEntryMolecule from "@/components/molecules/QuizEntryMolecule.vue";
 import {useAppStore} from "@/services/store/appStore";
 
@@ -38,6 +45,7 @@ export default {
     return {
       quizIdsArray: [],
       quizStartDates: {},
+      quizDurations: {},
       showQuizEntry: false,
       selectedQuizId: null,
     };
@@ -46,12 +54,21 @@ export default {
     if (this.quizIds) {
       this.quizIdsArray = this.quizIds.split(",");
       this.loadQuizStartDates();
+      this.loadQuizDurations();
     }
   },
   methods: {
     async loadQuizStartDates() {
       this.quizStartDates = loadQuizStartDates(this.quizIdsArray).then((result) => {
         this.quizStartDates = result;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    async loadQuizDurations() {
+      this.quizDurations = loadQuizDurations(this.quizIdsArray).then((result) => {
+        this.quizDurations = result;
+        console.log("Quiz durations: " + this.quizDurations);
       }).catch((error) => {
         console.log(error);
       });
@@ -71,8 +88,8 @@ export default {
       startQuiz(this.$router, this.isQuizExpired, this.selectedQuizId );
     },
 
-    getButtonStyle(startDate) {
-      return getButtonStyle(startDate);
+    getButtonStyle(startDate, duration) {
+      return getButtonStyle(startDate, duration);
     },
 
     getFormattedStartDate(startDate) {

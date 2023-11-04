@@ -23,6 +23,22 @@ export async function loadQuizStartDates(quizIdsArray) {
     return quizStartDates;
 }
 
+
+export async function loadQuizDurations(quizIdsArray) {
+    const quizDurations = {};
+
+    for (const quizId of quizIdsArray) {
+        try {
+            const response = await EndpointService.get(`quizzes/${quizId}`);
+            console.log("Response: ", response.data);
+            quizDurations[quizId] = response.data.duration;
+        } catch (error) {
+            quizDurations[quizId] = "Duration could not be loaded.";
+        }
+    }
+
+    return quizDurations;
+}
 /**
  * Check if a quiz is expired based on its start date.
  *
@@ -54,15 +70,19 @@ export function startQuiz(router, isQuizExpired, quizId) {
  * Get the CSS style for a button based on the progress of the quiz start date.
  *
  * @param {string} startDate - The formatted start date of the quiz.
+ * @param duration - The duration of the quiz.
  * @returns {Object} An object representing the CSS style.
  */
-export function getButtonStyle(startDate) {
+export function getButtonStyle(startDate, duration) {
     if (!startDate || startDate === "Loading...") {
         return {};
     }
+
     const [days, hours] = startDate.split('/');
     const totalHours = parseInt(days) * 24 + parseInt(hours);
-    const progress = Math.round((totalHours / 168) * 100);
+    const progress = Math.round((totalHours / (24 * duration)) * 100);
+
+    console.log("Progress: ", progress);
 
     const greenColor = '#42b883';
     const redColor = '#ff4d4d';

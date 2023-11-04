@@ -96,10 +96,12 @@ export default {
 
         console.log("End of quiz reached. Redirecting to rankings. (points: " + this.points + ")" + " (requestId: " + this.requestId + "))");
 
-        //reset points
-        this.points = 0;
         this.quizStartTime = null;
         this.playing = false;
+
+        setTimeout(() => {
+          this.points = 0;
+        }, 1000);
       }
     },
     startTimer() {
