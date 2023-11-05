@@ -57,7 +57,7 @@ const routes = [
     path: '/rankings',
     name: 'rankings',
     component: RankingsView,
-    props: (route) => ({ requestId: route.query.requestId, points: route.query.points }),
+    props: (route) => ({ requestId: route.query.requestId, points: route.query.points, route: route.query.duration }),
   },
   {
     path: '/create-question',
