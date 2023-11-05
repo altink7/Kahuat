@@ -7,7 +7,7 @@ module.exports = defineConfig({
 
     // Set the WebSocket URL dynamically based on the VUE_APP_DOMAIN
     client: {
-      webSocketURL: process.env.VUE_APP_DOMAIN ? `ws://${process.env.VUE_APP_DOMAIN}/ws` : 'ws://localhost:8080/ws',
+      webSocketURL: process.env.VUE_APP_DOMAIN ? `wss://${process.env.VUE_APP_DOMAIN}/ws` : 'ws://localhost:8080/ws',
     },
   },
 
