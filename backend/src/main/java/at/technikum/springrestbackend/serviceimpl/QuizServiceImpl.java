@@ -1,5 +1,9 @@
 package at.technikum.springrestbackend.serviceimpl;
 
+import at.technikum.springrestbackend.dto.AnswerOptionDTO;
+import at.technikum.springrestbackend.dto.ParticipantDTO;
+import at.technikum.springrestbackend.dto.QuestionDTO;
+import at.technikum.springrestbackend.dto.QuizDTO;
 import at.technikum.springrestbackend.exceptions.QuestionNotFoundException;
 import at.technikum.springrestbackend.exceptions.QuizNotFoundException;
 import at.technikum.springrestbackend.model.*;
@@ -10,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -113,6 +117,40 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public boolean deleteQuiz(Long id) {
         return quizDao.findById(id).map(this::deleteQuiz).orElse(false);
+    }
+
+    @Override
+    public List<ParticipantDTO> sortParticipantsByScoreAndTime(List<ParticipantDTO> participants) {
+        participants.sort((o1, o2) -> {
+            if (o1.getPoints() == o2.getPoints()) {
+                return Double.compare(o1.getParticipantQuizDuration(), o2.getParticipantQuizDuration());
+            } else {
+                return Integer.compare(o2.getPoints(), o1.getPoints());
+            }
+        });
+
+        return participants;
+    }
+
+    @Override
+    public QuizDTO randomizeQuiz(QuizDTO quizDTO) {
+        List<QuestionDTO> questions = quizDTO.getQuestions();
+
+        if(questions == null || questions.isEmpty()) {
+            return quizDTO;
+        }
+
+        Collections.shuffle(questions);
+
+        questions.forEach(question -> {
+            List<AnswerOptionDTO> answerOptions = question.getAnswerOptions();
+            Collections.shuffle(answerOptions);
+            question.setAnswerOptions(answerOptions);
+        });
+
+        quizDTO.setQuestions(questions);
+
+        return quizDTO;
     }
 
     /**
