@@ -49,7 +49,10 @@ public class QuizController extends Controller {
      */
     @GetMapping("/{id}")
     public ResponseEntity<QuizDTO> getQuizById(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long id) {
-        return ResponseEntity.ok(mapper.mapToDTO(quizService.getQuizById(id), QuizDTO.class));
+        QuizDTO quizDTO = mapper.mapToDTO(quizService.getQuizById(id), QuizDTO.class);
+        QuizDTO randomizeQuiz = quizService.randomizeQuiz(quizDTO);
+
+        return ResponseEntity.ok(randomizeQuiz);
     }
 
     /**
@@ -135,18 +138,7 @@ public class QuizController extends Controller {
     public ResponseEntity<List<ParticipantDTO>> getAllParticipantsByQuizId(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long id) {
         List<Participant> participants = quizService.getQuizById(id).getParticipants();
         List<ParticipantDTO> dtoList = new java.util.ArrayList<>(participants.stream().map(participant -> mapper.mapToDTO(participant, ParticipantDTO.class)).toList());
-        sortParticipantDTO(dtoList);
 
-        return ResponseEntity.ok(dtoList);
-    }
-
-    private static void sortParticipantDTO(List<ParticipantDTO> dtoList) {
-        dtoList.sort((o1, o2) -> {
-            if (o1.getPoints() == o2.getPoints()) {
-                return Double.compare(o1.getParticipantQuizDuration(), o2.getParticipantQuizDuration());
-            } else {
-                return Integer.compare(o2.getPoints(), o1.getPoints());
-            }
-        });
+        return ResponseEntity.ok(quizService.sortParticipantsByScoreAndTime(dtoList));
     }
 }
