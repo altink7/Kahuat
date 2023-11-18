@@ -1,13 +1,31 @@
 const { defineConfig } = require('@vue/cli-service');
 
+// Function to get WebSocket URL
+function getWebSocketURL(domain) {
+  if (domain === 'localhost') {
+    return 'ws://localhost:8080/ws';
+  } else {
+    return `wss://${domain}/ws`;
+  }
+}
+
+// Function to get allowed hosts
+function getAllowedHosts(domain) {
+  if (domain) {
+    return domain.split(',');
+  } else {
+    return ['localhost'];
+  }
+}
+
 module.exports = defineConfig({
   devServer: {
-    // Convert VUE_APP_DOMAIN to an array for allowedHosts
-    allowedHosts: process.env.VUE_APP_DOMAIN ? process.env.VUE_APP_DOMAIN.split(',') : [],
+    // Set allowedHosts dynamically based on the VUE_APP_DOMAIN
+    allowedHosts: getAllowedHosts(process.env.VUE_APP_DOMAIN),
 
     // Set the WebSocket URL dynamically based on the VUE_APP_DOMAIN
     client: {
-      webSocketURL: process.env.VUE_APP_DOMAIN ? `wss://${process.env.VUE_APP_DOMAIN}/ws` : 'ws://localhost:8080/ws',
+      webSocketURL: getWebSocketURL(process.env.VUE_APP_DOMAIN),
     },
   },
 
