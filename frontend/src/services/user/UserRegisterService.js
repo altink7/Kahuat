@@ -25,7 +25,7 @@ export async function registerUser(user, confirmPassword) {
         const response = await EndpointService.post("users/createUser", formData);
 
         if (response.status === 201) {
-            user.salutation = 'MALE';
+            user.salutation = 'none';
             user.firstName = '';
             user.lastName = '';
             user.email = '';
