@@ -126,7 +126,7 @@ export default {
         this.nextQuestion();
       } else {
         console.log("Wrong answer!");
-        this.points = this.points - (this.timer * 5) < 0 ? 0 : this.points - (this.timer * 5);
+        this.points += 0;
         this.nextQuestion();
       }
     },
