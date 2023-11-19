@@ -1,4 +1,4 @@
-package at.technikum.springrestbackend.config.mapper;
+package at.technikum.springrestbackend.config.cors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
