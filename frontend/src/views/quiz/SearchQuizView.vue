@@ -1,19 +1,18 @@
 <template>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="input-group mb-3">
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="card searchForm">
+      <div class="card-body">
+        <div class="input-group">
           <input type="text" class="form-control" placeholder="Search for a quiz" v-model="searchQuery" />
         </div>
-        <div class="input-group-append">
-          <button class="btn btn-primary" @click="searchQuiz">Search</button>
+        <div class="button-container justify-content-evenly">
+          <button class="btn btn-primary card-button" @click="searchQuiz">Search</button>
         </div>
       </div>
     </div>
-
-    <CategoryMolecule @categoryClicked="handleCategoryClicked" />
-
   </div>
+
+  <CategoryMolecule @categoryClicked="handleCategoryClicked" />
 </template>
 
 <script>

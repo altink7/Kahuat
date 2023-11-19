@@ -19,22 +19,22 @@
 
   <div class="button-container justify-content-center">
     <div class="answer-option answerA">
-      <input type="text" v-model="answers.A.text" placeholder="Answer a">
-      <input type="checkbox" v-model="answers.A.isCorrect">
+      <textarea class="form-control-answer" v-model="answers.A.text" placeholder="Answer a)" required></textarea>
+      <input class="checkbox" type="checkbox" v-model="answers.A.isCorrect">
     </div>
     <div class="answer-option answerB">
-      <input type="text" v-model="answers.B.text" placeholder="Answer b">
-      <input type="checkbox" v-model="answers.B.isCorrect">
+      <textarea class="form-control-answer" v-model="answers.B.text" placeholder="Answer b)" required></textarea>
+      <input class="checkbox" type="checkbox" v-model="answers.B.isCorrect">
     </div>
   </div>
   <div class="button-container justify-content-center">
     <div class="answer-option answerC">
-      <input type="text" v-model="answers.C.text" placeholder="Answer c">
-      <input type="checkbox" v-model="answers.C.isCorrect">
+      <textarea class="form-control-answer" v-model="answers.C.text" placeholder="Answer c)" required></textarea>
+      <input class="checkbox" type="checkbox" v-model="answers.C.isCorrect">
     </div>
     <div class="answer-option answerD">
-      <input type="text" v-model="answers.D.text" placeholder="Answer d">
-      <input type="checkbox" v-model="answers.D.isCorrect">
+      <textarea class="form-control-answer" v-model="answers.D.text" placeholder="Answer d)" required></textarea>
+      <input class="checkbox" type="checkbox" v-model="answers.D.isCorrect">
     </div>
   </div>
 </template>

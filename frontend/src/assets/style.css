@@ -85,6 +85,15 @@ nav a:hover {
 
 /* Category Cards */
 
+.searchForm {
+    margin-top: 40px;
+    width: 350px;
+}
+
+.searchForm input[type="text"]::placeholder {
+    text-align: center;
+}
+
 .category-button {
     margin-top: 40px;
     width: 350px;
@@ -140,17 +149,49 @@ nav a:hover {
     margin-left: 20px;
     margin-right: 20px;
     width: 250px;
-    height: 150px;
+    min-height: 150px;
+    height: auto;
     color: white;
     font-weight: bold;
     font-size: 20px;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s;
+    word-wrap: break-word;
 }
 
 .answer-button:hover {
     transform: scale(1.2);
+}
+
+.form-control-answer {
+    margin: 10px 0 10px 10px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-control-answer::placeholder {
+    color: white;
+    text-align: center;
+}
+
+.form-control-answer:focus {
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.checkbox {
+    margin: 5px;
 }
 
 .answer-option {
@@ -159,7 +200,8 @@ nav a:hover {
     align-items: center;
     margin: 20px;
     width: 250px;
-    height: 150px;
+    min-height: 150px;
+    height: auto;
     border: none;
     color: white;
     font-weight: bold;
@@ -168,22 +210,6 @@ nav a:hover {
     text-align: center;
 }
 
-.answer-option input[type="text"] {
-    width: 80%;
-    padding: 8px;
-    margin: 8px;
-    border: 1px solid white;
-    border-radius: 5px;
-    font-size: 18px;
-    background-color: transparent;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-}
-
-.answer-option input[type="text"]::placeholder {
-    color: white;
-}
 
 .answerA {
     background-color: #dfe210;
@@ -220,10 +246,6 @@ nav a:hover {
     color: white;
     background-color: #42b883;
     border-color: #42b883;
-}
-
-.new-question-button:hover {
-    transform: scale(1.2);
 }
 
 /* Timer Bar*/
@@ -298,6 +320,10 @@ nav a:hover {
 }
 
 /* Rankings */
+
+.rankings-container {
+    min-height: 40vh;
+}
 
 .rankings {
     margin-top: 50px;
