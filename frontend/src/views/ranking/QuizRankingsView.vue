@@ -3,10 +3,10 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search for a quiz" v-model="searchQuery" />
-        </div>
-        <div class="input-group-append">
-          <button class="btn btn-primary" @click="searchQuizOnInputChange">Search</button>
+          <input type="text" class="form-control form-control-game-pin" placeholder="Game PIN" v-model="searchQuery" />
+          <div class="input-group-append">
+            <button class="btn btn-primary" @click="searchQuizOnInputChange">Search</button>
+          </div>
         </div>
       </div>
     </div>

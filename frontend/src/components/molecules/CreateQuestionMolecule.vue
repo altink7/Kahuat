@@ -6,7 +6,7 @@
         <form id="question-form" class="question-form" action="" method="POST">
           <div class="row">
             <div class="form-group">
-              <textarea class="form-control-question" v-model="question" required></textarea>
+              <textarea class="form-control-question" @input="adjustTextareaHeight" v-model="question" required></textarea>
             </div>
             <div>
               <p>Mark the correct answers</p>
@@ -18,23 +18,39 @@
   </div>
 
   <div class="button-container justify-content-center">
-    <div class="answer-option answerA">
-      <textarea class="form-control-answer" v-model="answers.A.text" placeholder="Answer a)" required></textarea>
-      <input class="checkbox" type="checkbox" v-model="answers.A.isCorrect">
+    <div class="answer-option answerA" :class="{ 'correct-answer': answers.A.isCorrect }" @click="toggleCorrect('A')">
+      <textarea class="form-control-answer"
+                @input="adjustTextareaHeight"
+                @click.stop="noop"
+                v-model="answers.A.text"
+                placeholder="Answer a">
+      </textarea>
     </div>
-    <div class="answer-option answerB">
-      <textarea class="form-control-answer" v-model="answers.B.text" placeholder="Answer b)" required></textarea>
-      <input class="checkbox" type="checkbox" v-model="answers.B.isCorrect">
+    <div class="answer-option answerB" :class="{ 'correct-answer': answers.B.isCorrect }" @click="toggleCorrect('B')">
+      <textarea class="form-control-answer"
+                @input="adjustTextareaHeight"
+                @click.stop="noop"
+                v-model="answers.B.text"
+                placeholder="Answer b">
+      </textarea>
     </div>
   </div>
   <div class="button-container justify-content-center">
-    <div class="answer-option answerC">
-      <textarea class="form-control-answer" v-model="answers.C.text" placeholder="Answer c)" required></textarea>
-      <input class="checkbox" type="checkbox" v-model="answers.C.isCorrect">
+    <div class="answer-option answerC" :class="{ 'correct-answer': answers.C.isCorrect }" @click="toggleCorrect('C')">
+      <textarea class="form-control-answer"
+                @input="adjustTextareaHeight"
+                @click.stop="noop"
+                v-model="answers.C.text"
+                placeholder="Answer c">
+      </textarea>
     </div>
-    <div class="answer-option answerD">
-      <textarea class="form-control-answer" v-model="answers.D.text" placeholder="Answer d)" required></textarea>
-      <input class="checkbox" type="checkbox" v-model="answers.D.isCorrect">
+    <div class="answer-option answerD" :class="{ 'correct-answer': answers.D.isCorrect }" @click="toggleCorrect('D')">
+      <textarea class="form-control-answer"
+                @input="adjustTextareaHeight"
+                @click.stop="noop"
+                v-model="answers.D.text"
+                placeholder="Answer d">
+      </textarea>
     </div>
   </div>
 </template>
@@ -66,6 +82,16 @@ export default {
         })),
         category: store.getSelectedCategory()?.toUpperCase() || "",
       };
+    },
+
+    adjustTextareaHeight(event) {
+      const textarea = event.target;
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    },
+
+    toggleCorrect(answerKey) {
+      this.answers[answerKey].isCorrect = !this.answers[answerKey].isCorrect;
     },
   },
 };

@@ -1,4 +1,4 @@
-# quizapplication
+# Kahuat - Energize Your Education - Frontend
 
 ## Project setup
 ```

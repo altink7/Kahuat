@@ -53,6 +53,7 @@ services:
     image: node:latest
     environment:
       VUE_APP_BACKEND_WEB_URL: ${VUE_APP_BACKEND_WEB_URL}
+      VUE_APP_DOMAIN: ${VUE_APP_DOMAIN}
     working_dir: /app
     volumes:
       - ./frontend:/app
