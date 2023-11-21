@@ -7,6 +7,7 @@ export const useAppStore = defineStore('appStore', {
         points: Number,
         quizDuration: Number,
         nickname: String,
+        user: null,
     }),
 
     actions: {
@@ -39,6 +40,15 @@ export const useAppStore = defineStore('appStore', {
         },
         getNickname() {
             return this.nickname;
-        }
+        },
+        getUser() {
+            return this.user;
+        },
+        setUser(user) {
+            this.user = user;
+        },
+        clearUser() {
+            this.user = null;
+        },
     },
 });
