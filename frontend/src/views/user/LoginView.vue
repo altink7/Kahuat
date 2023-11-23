@@ -13,7 +13,7 @@
         </div>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">Login</button>
-          <router-link to="/register" class="btn btn-secondary">Register</router-link>
+          <button onclick="location.href='/register'" class="btn btn-secondary" type="button">Register</button>
         </div>
         <hr>
         <GoogleLoginComponent :callback="handleGoogleLogin" />
