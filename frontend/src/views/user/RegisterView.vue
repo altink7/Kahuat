@@ -1,12 +1,11 @@
 <template>
-  <div class="d-flex justify-content-center">
-    <div class="card registerForm login-card">
-      <div class="card-body">
-        <h2 class="card-title text-center">Register</h2>
-        <form @submit.prevent="handleSubmit">
+  <div class="auth-container">
+    <div class="auth-card">
+      <h1 class="auth-title">Register</h1>
+        <form @submit.prevent="handleSubmit" class="auth-form">
           <div class="row mb-2">
-            <div class="col-md-2">
-              <label for="salutation">Salutation</label>
+            <div class="from-group col-md-2">
+              <label class="form-label" for="salutation">Salutation</label>
               <select v-model="user.salutation" class="form-control" id="salutation" name="salutation">
                 <option value="none">-</option>
                 <option value="MALE">Male</option>
@@ -15,21 +14,21 @@
               </select>
             </div>
             <div class="col-md-5">
-              <label for="firstName">First Name</label>
+              <label class="form-label" for="firstName">First Name</label>
               <input v-model="user.firstName" type="text" class="form-control" id="firstName" placeholder="Max" required>
             </div>
             <div class="col-md-5">
-              <label for="lastName">Last Name</label>
+              <label class="form-label" for="lastName">Last Name</label>
               <input v-model="user.lastName" type="text" class="form-control" id="lastName" placeholder="Mustermann" required>
             </div>
           </div>
           <div class="mb-2">
-            <label for="email">E-Mail-Adress</label>
+            <label class="form-label" for="email">E-Mail-Adress</label>
             <input v-model="user.email" type="email" class="form-control" id="email" placeholder="max.muster@gmail.com"
               required>
           </div>
           <div>
-            <label for="country">Country</label>
+            <label class="form-label" for="country">Country</label>
             <select v-model="user.country" class="form-control" id="country" name="country">
               <option value="none">-</option>
               <option value="AT">Austria</option>
@@ -62,21 +61,20 @@
             </select>
           </div>
           <div class="mb-2">
-            <label for="password">Password</label>
+            <label class="form-label" for="password">Password</label>
             <input v-model="user.password" type="password" class="form-control" id="password" placeholder="********"
               minlength="8" required>
           </div>
           <div class="mb-2">
-            <label for="confirm-password">Confirm Password</label>
+            <label class="form-label" for="confirm-password">Confirm Password</label>
             <input v-model="confirmPassword" type="password" class="form-control" id="confirm-password"
               placeholder="********" minlength="8" required>
           </div>
           <br>
-          <div class="mb-2">
-            <button type="submit" class="form-control btn btn-primary card-button">Register</button>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Register</button>
           </div>
-        </form>
-      </div>
+      </form>
     </div>
   </div>
 </template>

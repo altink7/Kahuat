@@ -1,16 +1,12 @@
 <template>
-  <div class="home">
-    <h1>Choose a category</h1>
+  <div class="category mt-2">
+    <h3>Choose a category</h3>
   </div>
   <div class="button-container justify-content-evenly">
     <CategoryButtonAtom @categoryClicked="handleCategoryClick" category="Sports" />
     <CategoryButtonAtom @categoryClicked="handleCategoryClick" category="Geography" />
-  </div>
-  <div class="button-container justify-content-evenly">
     <CategoryButtonAtom @categoryClicked="handleCategoryClick" category="History" />
     <CategoryButtonAtom @categoryClicked="handleCategoryClick" category="Culture" />
-  </div>
-  <div class="button-container justify-content-evenly">
     <CategoryButtonAtom @categoryClicked="handleCategoryClick" category="Science" />
     <CategoryButtonAtom @categoryClicked="handleCategoryClick" category="Nature" />
   </div>

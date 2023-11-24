@@ -1,31 +1,23 @@
 <template>
-  <div>
-    <div class="container d-flex justify-content-center align-items-center">
-      <div class="card loginForm login-card">
-        <div class="card-body">
-          <h2 class="card-title text-center">Login</h2>
-          <form>
-            <div class="form-group">
-              <label for="username">User Name/E-Mail</label>
-              <input type="text" class="form-control" id="username" placeholder="Max/max.muster@gmail.com">
-            </div>
-            <div class="form-group">
-              <label for="password">Passwort</label>
-              <input type="password" class="form-control" id="password" placeholder="********" minlength="8">
-            </div>
-            <div class="button-container justify-content-evenly">
-              <button type="submit" class="btn btn-primary card-button">Login</button>
-              <router-link to="/register" v-slot="{ navigate }">
-                <button @click="navigate" class="btn btn-primary card-button">Register</button>
-              </router-link>
-            </div>
-            <hr>
-
-            <GoogleLoginComponent :callback="handleGoogleLogin" />
-
-          </form>
+  <div class="auth-container">
+    <div class="auth-card">
+      <h1 class="auth-title">Login</h1>
+      <form class="auth-form">
+        <div class="form-group">
+          <label class="form-label" for="username">User Name/E-Mail</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter your username or email">
         </div>
-      </div>
+        <div class="form-group mt-3">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Enter your password" minlength="8">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Login</button>
+          <button onclick="location.href='/register'" class="btn btn-secondary" type="button">Register</button>
+        </div>
+        <hr>
+        <GoogleLoginComponent :callback="handleGoogleLogin" />
+      </form>
     </div>
   </div>
 </template>
