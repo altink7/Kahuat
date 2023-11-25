@@ -10,15 +10,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class QuizIdGenerator implements IdentifierGenerator {
+    public static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String randomString;
 
         SecureRandom random = new SecureRandom();
         randomString = IntStream.range(0, 8)
-                .mapToObj(i -> String.valueOf(characters.charAt(random.nextInt(characters.length()))))
+                .mapToObj(i -> String.valueOf(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))))
                 .collect(Collectors.joining());
 
         return randomString;
