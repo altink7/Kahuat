@@ -14,7 +14,7 @@ import java.util.List;
 @JsonIgnoreProperties({"userStatistic"})
 public class QuizDTO {
 
-    private Long id;
+    private String id;
 
     private Long creatorId;
 

@@ -46,7 +46,7 @@ public class QuizServiceImpl implements QuizService {
 
 
     @Override
-    public Quiz getQuizById(Long id) {
+    public Quiz getQuizById(String id) {
         return quizDao.findById(id).orElseThrow(QuestionNotFoundException::new);
     }
 
@@ -85,12 +85,12 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public List<Question> getAllQuestionsByQuizId(Long id) {
+    public List<Question> getAllQuestionsByQuizId(String id) {
         return quizDao.findById(id).orElseThrow(QuizNotFoundException::new).getQuestions();
     }
 
     @Override
-    public Quiz addParticipantToQuiz(Long id, Participant participant) {
+    public Quiz addParticipantToQuiz(String id, Participant participant) {
         Quiz quiz = quizDao.findById(id).orElseThrow(QuizNotFoundException::new);
 
         //Wenn Participant registriert ist, dann wird er in die Statistik aufgenommen
@@ -115,7 +115,7 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public boolean deleteQuiz(Long id) {
+    public boolean deleteQuiz(String id) {
         return quizDao.findById(id).map(this::deleteQuiz).orElse(false);
     }
 

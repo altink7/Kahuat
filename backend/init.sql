@@ -175,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `participant` (
     `quiz_duration` double DEFAULT NULL,
     `points` int(11) DEFAULT NULL,
     `user_id` bigint(20) DEFAULT NULL,
-    `quiz_id` bigint(20) DEFAULT NULL
+    `quiz_id` VARCHAR(8) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -183,11 +183,11 @@ CREATE TABLE IF NOT EXISTS `participant` (
 --
 
 INSERT INTO `participant` (`id`, `created_at`, `updated_at`, `nickname`, `quiz_duration`, `points`, `user_id`, `quiz_id`) VALUES
-    (1, '2023-11-04 17:28:14.532933', '2023-11-04 17:28:14.532962', 'player_1', 2.763, 375, NULL, 1),
-    (2, '2023-11-04 17:28:28.450505', '2023-11-04 17:28:28.450530', 'player2', 2.328, 1500, NULL, 1),
-    (3, '2023-11-04 17:58:41.694097', '2023-11-04 17:58:41.694132', 'player3', 5.309, 355, NULL, 1),
-    (4, '2023-11-04 18:08:34.907190', '2023-11-04 18:08:34.907242', 'player4', 5.274, 1470, NULL, 1),
-    (5, '2023-11-04 18:13:08.857226', '2023-11-04 18:13:08.857258', 'player6', 4.262, 1490, NULL, 1);
+    (1, '2023-11-04 17:28:14.532933', '2023-11-04 17:28:14.532962', 'player_1', 2.763, 375, NULL, 'ABCDEFG1'),
+    (2, '2023-11-04 17:28:28.450505', '2023-11-04 17:28:28.450530', 'player2', 2.328, 1500, NULL, 'ABCDEFG1'),
+    (3, '2023-11-04 17:58:41.694097', '2023-11-04 17:58:41.694132', 'player3', 5.309, 355, NULL, 'ABCDEFG1'),
+    (4, '2023-11-04 18:08:34.907190', '2023-11-04 18:08:34.907242', 'player4', 5.274, 1470, NULL, 'ABCDEFG1'),
+    (5, '2023-11-04 18:13:08.857226', '2023-11-04 18:13:08.857258', 'player6', 4.262, 1490, NULL, 'ABCDEFG1');
 
 -- --------------------------------------------------------
 
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `question` (
     `file` varbinary(255) DEFAULT NULL,
     `kategorie` tinyint(4) DEFAULT NULL CHECK (`kategorie` between 0 and 6),
     `question` varchar(255) NOT NULL,
-    `quiz_id` bigint(20) NOT NULL
+    `quiz_id` varchar(8) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -210,18 +210,18 @@ CREATE TABLE IF NOT EXISTS `question` (
 --
 
 INSERT INTO `question` (`id`, `created_at`, `updated_at`, `file`, `kategorie`, `question`, `quiz_id`) VALUES
-    (1, '2023-11-04 17:27:43.164992', '2023-11-04 17:27:43.165031', NULL, NULL, 'What is the capital of France?', 1),
-    (2, '2023-11-04 17:27:43.188807', '2023-11-04 17:27:43.188840', NULL, NULL, 'What is the largest planet in our solar system?', 1),
-    (3, '2023-11-04 17:27:43.206994', '2023-11-04 17:27:43.207018', NULL, NULL, 'Who won the FIFA World Cup in 2018?', 1),
-    (4, '2023-11-04 17:27:43.219713', '2023-11-04 17:27:43.219740', NULL, NULL, 'Which country is known as the Land of the Rising Sun?', 1),
-    (5, '2023-11-04 17:27:43.230608', '2023-11-04 17:27:43.230635', NULL, NULL, 'Who is the all-time leading scorer in NBA history?', 1),
-    (6, '2023-11-04 17:32:29.240813', '2023-11-04 17:32:29.240861', NULL, NULL, 'asasa', 2),
-    (7, '2023-11-04 17:55:51.139769', '2023-11-04 17:55:51.139800', NULL, NULL, 'What is the capital of France?', 3),
-    (8, '2023-11-04 17:55:51.155947', '2023-11-04 17:55:51.155980', NULL, NULL, 'What is the largest planet in our solar system?', 3),
-    (9, '2023-11-04 17:55:51.168124', '2023-11-04 17:55:51.168139', NULL, NULL, 'Who won the FIFA World Cup in 2018?', 3),
-    (10, '2023-11-04 17:55:51.177002', '2023-11-04 17:55:51.177014', NULL, NULL, 'Which country is known as the Land of the Rising Sun?', 3),
-    (11, '2023-11-04 17:55:51.183526', '2023-11-04 17:55:51.183537', NULL, NULL, 'Who is the all-time leading scorer in NBA history?', 3),
-    (12, '2023-11-04 18:13:40.408585', '2023-11-04 18:13:40.408609', NULL, NULL, 'culture question', 4);
+    (1, '2023-11-04 17:27:43.164992', '2023-11-04 17:27:43.165031', NULL, NULL, 'What is the capital of France?', 'ABCDEFG1'),
+    (2, '2023-11-04 17:27:43.188807', '2023-11-04 17:27:43.188840', NULL, NULL, 'What is the largest planet in our solar system?', 'ABCDEFG1'),
+    (3, '2023-11-04 17:27:43.206994', '2023-11-04 17:27:43.207018', NULL, NULL, 'Who won the FIFA World Cup in 2018?', 'ABCDEFG1'),
+    (4, '2023-11-04 17:27:43.219713', '2023-11-04 17:27:43.219740', NULL, NULL, 'Which country is known as the Land of the Rising Sun?', 'ABCDEFG1'),
+    (5, '2023-11-04 17:27:43.230608', '2023-11-04 17:27:43.230635', NULL, NULL, 'Who is the all-time leading scorer in NBA history?', 'ABCDEFG1'),
+    (6, '2023-11-04 17:32:29.240813', '2023-11-04 17:32:29.240861', NULL, NULL, 'asasa', 'ABCDEFG2'),
+    (7, '2023-11-04 17:55:51.139769', '2023-11-04 17:55:51.139800', NULL, NULL, 'What is the capital of France?', 'ABCDEFG3'),
+    (8, '2023-11-04 17:55:51.155947', '2023-11-04 17:55:51.155980', NULL, NULL, 'What is the largest planet in our solar system?', 'ABCDEFG3'),
+    (9, '2023-11-04 17:55:51.168124', '2023-11-04 17:55:51.168139', NULL, NULL, 'Who won the FIFA World Cup in 2018?', 'ABCDEFG3'),
+    (10, '2023-11-04 17:55:51.177002', '2023-11-04 17:55:51.177014', NULL, NULL, 'Which country is known as the Land of the Rising Sun?', 'ABCDEFG3'),
+    (11, '2023-11-04 17:55:51.183526', '2023-11-04 17:55:51.183537', NULL, NULL, 'Who is the all-time leading scorer in NBA history?', 'ABCDEFG3'),
+    (12, '2023-11-04 18:13:40.408585', '2023-11-04 18:13:40.408609', NULL, NULL, 'culture question', 'ABCDEFG4');
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,7 @@ INSERT INTO `question` (`id`, `created_at`, `updated_at`, `file`, `kategorie`, `
 --
 
 CREATE TABLE IF NOT EXISTS `quiz` (
-    `id` bigint(20) NOT NULL,
+    `id` varchar(8) NOT NULL,
     `created_at` datetime(6) DEFAULT NULL,
     `updated_at` datetime(6) DEFAULT NULL,
     `duration` int(11) DEFAULT NULL,
@@ -245,10 +245,10 @@ CREATE TABLE IF NOT EXISTS `quiz` (
 --
 
 INSERT INTO `quiz` (`id`, `created_at`, `updated_at`, `duration`, `kategorie`, `start_date`, `creator_id`, `user_statistic_id`) VALUES
-    (1, '2023-11-04 17:27:43.115870', '2023-11-04 17:27:43.115906', 30, 0, '2023-10-18', 1, NULL),
-    (2, '2023-11-04 17:32:29.222694', '2023-11-04 17:32:29.222771', 30, 0, '2023-11-04', 1, NULL),
-    (3, '2023-11-04 17:55:51.119556', '2023-11-04 17:55:51.119654', 30, 0, '2023-09-18', 1, NULL),
-    (4, '2023-11-04 18:13:40.405646', '2023-11-04 18:13:40.405677', 30, 3, '2023-11-04', 1, NULL);
+    ('ABCDEFG1', '2023-11-04 17:27:43.115870', '2023-11-04 17:27:43.115906', 30, 0, '2023-10-18', 1, NULL),
+    ('ABCDEFG2', '2023-11-04 17:32:29.222694', '2023-11-04 17:32:29.222771', 30, 0, '2023-11-04', 1, NULL),
+    ('ABCDEFG3', '2023-11-04 17:55:51.119556', '2023-11-04 17:55:51.119654', 30, 0, '2023-09-18', 1, NULL),
+    ('ABCDEFG4', '2023-11-04 18:13:40.405646', '2023-11-04 18:13:40.405677', 30, 3, '2023-11-04', 1, NULL);
 
 -- --------------------------------------------------------
 
