@@ -19,7 +19,7 @@ public interface QuizService {
      * @param id the quiz id
      * @return the quiz
      */
-    Quiz getQuizById(Long id);
+    Quiz getQuizById(String id);
 
     /**
      * Get all quizzes matching the category
@@ -50,12 +50,12 @@ public interface QuizService {
      * @param id the quiz id
      * @return the list of questions
      */
-    List<Question> getAllQuestionsByQuizId(Long id);
+    List<Question> getAllQuestionsByQuizId(String id);
 
     /**
      * Update the quiz by id and add Participant to the quiz
      */
-    Quiz addParticipantToQuiz(Long id, Participant participant);
+    Quiz addParticipantToQuiz(String id, Participant participant);
 
     /**
      * Delete a quiz by id
@@ -63,7 +63,7 @@ public interface QuizService {
      * @param id the quiz id
      * @return true if the quiz was deleted, false otherwise
      */
-    boolean deleteQuiz(Long id);
+    boolean deleteQuiz(String id);
 
     /**
      * Sort the participants by their score and time
