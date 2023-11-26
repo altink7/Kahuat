@@ -15,6 +15,7 @@ public class Participant extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")
+    @ToString.Exclude
     private Quiz quiz;
 
     @Column(name = "user_id")

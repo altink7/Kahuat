@@ -7,6 +7,7 @@ import at.technikum.springrestbackend.dto.QuizDTO;
 import at.technikum.springrestbackend.exceptions.QuestionNotFoundException;
 import at.technikum.springrestbackend.exceptions.QuizNotFoundException;
 import at.technikum.springrestbackend.model.*;
+import at.technikum.springrestbackend.model.user.User;
 import at.technikum.springrestbackend.repository.*;
 import at.technikum.springrestbackend.service.QuizService;
 import jakarta.transaction.Transactional;
@@ -29,19 +30,21 @@ public class QuizServiceImpl implements QuizService {
     private final QuestionDao questionDao;
     private final AnswerOptionDao answerOptionDao;
     private final AnswerDao answerDao;
+    private final AppUserDao appUserDao;
     private final UserDao userDao;
 
     @Autowired
-    public QuizServiceImpl(QuizDao quizDao, QuestionDao questionDao, AnswerOptionDao answerOptionDao, AnswerDao answerDao, UserDao userDao,
+    public QuizServiceImpl(QuizDao quizDao, QuestionDao questionDao, AnswerOptionDao answerOptionDao, AnswerDao answerDao, AppUserDao appUserDao,
                            ParticipantDao participantDao,
-                           UserStatisticDao userStatisticDao) {
+                           UserStatisticDao userStatisticDao, UserDao userDao) {
         this.quizDao = quizDao;
         this.questionDao = questionDao;
         this.answerOptionDao = answerOptionDao;
         this.answerDao = answerDao;
-        this.userDao = userDao;
+        this.appUserDao = appUserDao;
         this.participantDao = participantDao;
         this.userStatisticDao = userStatisticDao;
+        this.userDao = userDao;
     }
 
 
@@ -59,15 +62,20 @@ public class QuizServiceImpl implements QuizService {
     @Transactional
     public Quiz createQuiz(Quiz quiz) {
         log.info("Creating quiz: " + quiz);
+        String creatorEmail = quiz.getCreator().getEmail();
+
+        User creator = userDao.findByEmail(creatorEmail).orElseGet(() -> {
+            User newUser = new User();
+            newUser.setEmail(creatorEmail);
+            return userDao.save(newUser);
+        });
+
         Quiz persistedQuiz = quizDao.save(quiz);
-        //frontend sends us only the Id of creator, te keep the requests cleaner
-        persistedQuiz.setCreator(userDao.findById(quiz.getCreator().getId()).orElse(null));
 
+        persistedQuiz.setCreator(creator);
         quiz.getQuestions().forEach(question -> {
-
             question.setQuiz(quiz);
             questionDao.save(question);
-
 
             question.getAnswerOptions().forEach(answerOption -> {
                 Answer answer = answerOption.getAnswer();
@@ -92,14 +100,19 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public Quiz addParticipantToQuiz(String id, Participant participant) {
         Quiz quiz = quizDao.findById(id).orElseThrow(QuizNotFoundException::new);
-
         //Wenn Participant registriert ist, dann wird er in die Statistik aufgenommen
         if(participant.getUserId() !=  null) {
             User user = userDao.findById(participant.getUserId()).orElseThrow();
-            UserStatistic userStatistic = new UserStatistic();
-            userStatistic.setUserId(user.getId());
+            UserStatistic userStatistic;
+            if(userStatisticDao.findByUserId(user.getUserId()).isEmpty()){
+                userStatistic = new UserStatistic();
+            } else {
+                userStatistic = userStatisticDao.findByUserId(user.getUserId()).orElseThrow();
+            }
+            userStatistic.setUserId(user.getUserId());
             userStatistic.getQuizList().add(quiz);
-            userStatistic.setPoints(participant.getPoints());
+
+            userStatistic.setPoints(userStatistic.getPoints() + participant.getPoints());
 
             userStatisticDao.save(userStatistic);
         }

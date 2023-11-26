@@ -73,8 +73,23 @@ export default {
         store.setPoints(this.points);
         store.setRequestId(this.requestId);
         store.setSelectedCategory(this.quizData.kategorie);
+        //get user id from local storage
+        const userData = store.getUser();
+
+        if(userData != null) {
+          EndpointService.get(`users/emails/${userData.email}`)
+              .then((response) => {
+                console.log("ReSPONSe:" + response);
+                store.setUser(response.data);
+                store.setUserId(response.data.id);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+        }
 
         const participant = {
+          userId: store.getUserId(),
           nickname: store.getNickname(),
           points: store.getPoints(),
           participantQuizDuration: store.getQuizDuration(),

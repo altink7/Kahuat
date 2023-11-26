@@ -42,12 +42,9 @@ export default {
           });
     },
     searchQuizOnInputChange() {
-      if (this.isValidNumber(this.searchQuery)) {
+      if (this.searchQuery) {
         this.searchQuiz();
       }
-    },
-    isValidNumber(value) {
-      return !isNaN(value);
     },
   },
   data() {

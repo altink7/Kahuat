@@ -16,9 +16,9 @@
 
 <script>
 import CreateQuestionMolecule from "@/components/molecules/CreateQuestionMolecule.vue";
-import { useAppStore } from "@/services/store/appStore";
 import EndpointService from "@/services/server/EndpointService";
 import {handleError, handleSuccess} from "@/services/MessageHandlerService";
+import {useAppStore} from "@/services/store/appStore";
 
 export default {
   components: {
@@ -52,9 +52,18 @@ export default {
     submit() {
       const questionComponents = this.$refs.questionComponents;
       this.quizQuestions = questionComponents.map((component) => component.getQuestionFromForm());
+      const email = useAppStore().getUser().email;
+      EndpointService.get(`users/googleUsers/${email}`)
+        .then((response) => {
+          useAppStore().setUser(response.data)
+          useAppStore().setUserId(response.data.id);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
       const formQuiz = {
-        creatorId: 1,
+        creatorId: useAppStore().getUser(),
         kategorie: this.getCategory,
         startDate: new Date().toLocaleDateString('en-CA'),
         duration: 30,
@@ -101,10 +110,9 @@ export default {
   },
   computed: {
     getCategory() {
-      const store = useAppStore();
-      console.log(store.getSelectedCategory());
+      console.log(useAppStore().getSelectedCategory());
 
-      return store.getSelectedCategory()?.toUpperCase() || "";
+      return useAppStore().getSelectedCategory()?.toUpperCase() || "";
     },
   },
 };

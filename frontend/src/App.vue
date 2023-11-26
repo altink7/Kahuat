@@ -24,18 +24,3 @@ export default {
   }
 };
 </script>
-
-<script setup>
-import {useAppStore} from "@/services/store/appStore";
-import {watchEffect} from "vue";
-import router from "@/router";
-
-const appStore = useAppStore();
-const user = appStore.getUser();
-
-watchEffect(() => {
-  if (user) {
-    router.push({name: 'home'});
-  }
-});
-</script>
