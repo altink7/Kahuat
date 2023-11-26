@@ -6,6 +6,7 @@
   <div v-else>
     <div class="home">
       <h1>Energize Your Education!</h1>
+    </div>
       <div v-if="statistic">
         <div v-for="(value, key) in statistic" :key="key">
           <strong>{{ key }}:</strong> {{ value }}
@@ -14,7 +15,6 @@
       <div v-else>
         <p>Loading statistics...</p>
       </div>
-    </div>
   </div>
 </template>
 
