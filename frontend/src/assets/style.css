@@ -678,6 +678,75 @@ footer a:focus {
     100% { opacity: 1; }
 }
 
+/* User Profile & Admin */
+
+.admin-search-bar {
+    margin-top: 50px;
+    width: 500px;
+}
+
+.admin-filter {
+    margin-bottom: 10px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    margin-right: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-container {
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+
+}
+
+.search-bar {
+    margin-top: 50px;
+}
+
+.quiz-card {
+    margin-top: 40px;
+    width: 350px;
+    height: 150px;
+    background-color: #42b883ef;
+    border: 3px solid white;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.quiz-button {
+    margin-right: 5px;
+    margin-left: 5px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: white;
+}
+
+.quiz-button:hover {
+    color: black;
+    background-color: white;
+    border-color: #42b883;
+}
+
 /* FAQ & About Styles */
 .faq-container, .about-container {
     display: flex;

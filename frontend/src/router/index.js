@@ -13,6 +13,8 @@ import LobbyView from "../views/quiz/LobbyView.vue";
 import FaqView from '../views/info/FaqView.vue'
 import ContactView from '../views/info/ContactView.vue'
 import UserStatisticView from "@/views/statistic/UserStatisticView.vue";
+import UserView from "@/views/user/UserView.vue";
+import AdminView from "@/views/user/AdminView.vue";
 
 
 const routes = [
@@ -89,6 +91,16 @@ const routes = [
     name: 'user-statistics',
     component: UserStatisticView
   },
+    {
+        path: '/user',
+        name: 'user',
+        component: UserView
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        component: AdminView
+    }
 ]
 
 const router = createRouter({
