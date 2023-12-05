@@ -106,10 +106,11 @@ public class QuizServiceImpl implements QuizService {
             UserStatistic userStatistic;
             if(userStatisticDao.findByUserId(user.getUserId()).isEmpty()){
                 userStatistic = new UserStatistic();
+                userStatistic.setUserId(user.getUserId());
             } else {
                 userStatistic = userStatisticDao.findByUserId(user.getUserId()).orElseThrow();
             }
-            userStatistic.setUserId(user.getUserId());
+
             userStatistic.getQuizList().add(quiz);
 
             userStatistic.setPoints(userStatistic.getPoints() + participant.getPoints());

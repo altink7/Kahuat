@@ -77,7 +77,7 @@ export const useAppStore = defineStore('appStore', {
         },
 
         saveToLocalStorage() {
-            const stateData = this.$state; // Access the entire state
+            const stateData = this.$state;
             localStorage.setItem('appStore', JSON.stringify(stateData));
         },
 

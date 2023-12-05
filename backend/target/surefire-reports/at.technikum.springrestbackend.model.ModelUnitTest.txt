@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: at.technikum.springrestbackend.model.ModelUnitTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.273 s - in at.technikum.springrestbackend.model.ModelUnitTest

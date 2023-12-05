@@ -8,8 +8,28 @@
       <h1>Energize Your Education!</h1>
     </div>
       <div v-if="statistic">
-        <div v-for="(value, key) in statistic" :key="key">
-          <strong>{{ key }}:</strong> {{ value }}
+        <p>Number of quizzes played: {{ statistic.playedQuizzes }}</p>
+        <p>Number of average Points per Quiz: {{ statistic.averagePointsPerQuiz }}</p>
+        <p>Number of average Points per Question: {{ statistic.averagePointsPerQuestion }}</p>
+        <p>Favorite Category: {{ statistic.favoriteCategory }}</p>
+        <p>Most played Category: {{ statistic.mostPlayedCategory }}</p>
+        <hr>
+        <div>
+          <p>Points Per Category:</p>
+          <ul>
+            <li v-for="(points, category) in statistic.pointsPerCategory" :key="category">
+              {{ category }}: {{ points }}
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p>Average Points Per Category:</p>
+          <ul>
+            <li v-for="(averagePoints, category) in statistic.averagePointsPerCategory" :key="category">
+              {{ category }}: {{ averagePoints }}
+            </li>
+          </ul>
         </div>
       </div>
       <div v-else>
