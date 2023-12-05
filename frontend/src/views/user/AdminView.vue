@@ -86,19 +86,25 @@
                 <option value="CY">Cyprus</option>
               </select>
             </div>
-            <div class="mb-2">
-              <label class="form-label" for="password">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="********" minlength="8"
-                     required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label" for="confirm-password">Confirm Password</label>
-              <input type="password" class="form-control" id="confirm-password" placeholder="********"
-                     minlength="8" required>
+            <div>
+              <label class="form-label password-toggle" :class="{ open: showPasswordFields }" @click="togglePasswordDropdown">
+                Change Password
+              </label>
+              <div v-if="showPasswordFields">
+                <div class="mb-2">
+                  <label class="form-label" for="password">New Password</label>
+                  <input type="password"  class="form-control" id="password" placeholder="********" minlength="8" required>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label" for="confirm-password">Confirm New Password</label>
+                  <input type="password" class="form-control" id="confirm-password" placeholder="********" minlength="8" required>
+                </div>
+              </div>
             </div>
 
             <div class="form-actions">
-              <button type="submit" class="btn card-button">Update Profile</button>
+              <button type="submit" class="btn update-button">Update Profile</button>
+              <button type="button" class="btn delete-button">Delete Account</button>
             </div>
           </form>
         </div>
@@ -127,10 +133,14 @@ export default {
       searchFor: 'none', // none, user, or quiz
       searchQuery: '', // The search query
       searchResults: [], // The search results
+      showPasswordFields: false,
     };
-  },
+},
   methods: {
-    search() {
+    togglePasswordDropdown() {
+      this.showPasswordFields = !this.showPasswordFields;
+    },
+    search(){
       // Perform the search based on the type and query.
       // You would typically make an API call here.
       // Below is just a placeholder for demonstration.

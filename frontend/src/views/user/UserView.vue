@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- ToDo: Should be a molecule -->
+  <div class="container">
     <div class="row">
       <div class="col-8">
         <div class="user-container">
@@ -9,34 +8,38 @@
               <img src="../../assets/default-profile-pic.webp" alt="Profile Picture" class="profile-pic" />
               <h1 class="auth-title">Profile</h1>
             </div>
-            <form class="auth-form">
+            <form class="auth-form" @submit.prevent="updateUserProfile">
+
               <div class="row mb-2">
-                <div class="from-group col-md-3">
+                <div class="form-group col-md-3">
                   <label class="form-label" for="salutation">Gender</label>
-                  <select class="form-control" id="salutation" name="salutation">
+                  <select  class="form-control" id="salutation">
                     <option value="none">-</option>
                     <option value="MALE">Male</option>
                     <option value="FEMALE">Female</option>
                     <option value="OTHER">Other</option>
                   </select>
                 </div>
+
                 <div class="col-md-4">
                   <label class="form-label" for="firstName">First Name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Max" required>
+                  <input type="text"  class="form-control" id="firstName" placeholder="Max" required>
                 </div>
+
                 <div class="col-md-5">
                   <label class="form-label" for="lastName">Last Name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Mustermann" required>
+                  <input type="text"  class="form-control" id="lastName" placeholder="Mustermann" required>
                 </div>
               </div>
+
               <div class="mb-2">
-                <label class="form-label" for="email">E-Mail-Adress</label>
-                <input type="email" class="form-control" id="email" placeholder="max.muster@gmail.com"
-                       required>
+                <label class="form-label" for="email">E-Mail Address</label>
+                <input type="email"  class="form-control" id="email" placeholder="max.mustermann@gmail.com" required>
               </div>
+
               <div>
                 <label class="form-label" for="country">Country</label>
-                <select class="form-control" id="country" name="country">
+                <select class="form-control" id="country">
                   <option value="none">-</option>
                   <option value="AT">Austria</option>
                   <option value="BE">Belgium</option>
@@ -67,26 +70,32 @@
                   <option value="CY">Cyprus</option>
                 </select>
               </div>
-              <div class="mb-2">
-                <label class="form-label" for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="********"
-                       minlength="8" required>
-              </div>
-              <div class="mb-2">
-                <label class="form-label" for="confirm-password">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm-password" placeholder="********"
-                       minlength="8" required>
+
+              <div>
+                <label class="form-label password-toggle" :class="{ open: showPasswordFields }" @click="togglePasswordDropdown">
+                  Change Password
+                </label>
+                <div v-if="showPasswordFields">
+                  <div class="mb-2">
+                    <label class="form-label" for="password">New Password</label>
+                    <input type="password"  class="form-control" id="password" placeholder="********" minlength="8" required>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label" for="confirm-password">Confirm New Password</label>
+                    <input type="password" class="form-control" id="confirm-password" placeholder="********" minlength="8" required>
+                  </div>
+                </div>
               </div>
 
               <div class="form-actions">
-                <button type="submit" class="btn card-button">Update Profile</button>
+                <button type="submit" class="btn update-button">Update Profile</button>
+                <button type="button" class="btn delete-button">Delete Account</button>
               </div>
             </form>
           </div>
         </div>
       </div>
 
-      <!-- Search Bar - Right Side (col-4) -->
       <div class="col-4 search-bar">
         <div class="card">
           <div class="card-body">
@@ -112,10 +121,10 @@
   </div>
 </template>
 
-
 <script>
 import { handleError } from "@/services/MessageHandlerService";
 import EndpointService from "@/services/server/EndpointService";
+
 
 export default {
   name: "UserView",
@@ -123,9 +132,13 @@ export default {
     return {
       searchQuery: "",
       quiz: "",
+      showPasswordFields: false,
     };
   },
   methods: {
+    togglePasswordDropdown() {
+      this.showPasswordFields = !this.showPasswordFields;
+    },
     searchQuiz() {
       EndpointService.get(`quizzes/${this.searchQuery}`)
           .then((response) => {
