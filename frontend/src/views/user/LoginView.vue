@@ -45,7 +45,3 @@ const handleGoogleLogin = (response) => {
   }
 };
 </script>
-
-<script>
-
-</script>
