@@ -21,12 +21,13 @@ public class UserStatisticsCalculator {
             userStatistic.setAveragePointsPerCategory(calculateAveragePointsPerCategory(userStatistic));
             userStatistic.setFavoriteCategory(calculateFavoriteCategory(userStatistic, Quiz::getKategorie));
             userStatistic.setMostPlayedCategory(calculateMostPlayedCategory(userStatistic, Quiz::getKategorie));
-            userStatistic.setBestRatedQuiz(calculateExtremum(userStatistic.getQuizList(), Comparator.comparingDouble(quiz -> calculatePointsPerQuestion(quiz, userStatistic))));
+            userStatistic.setBestRatedQuiz(calculateExtremum(userStatistic.getQuizList(),
+                    Comparator.comparingDouble(quiz -> calculatePointsPerQuestion(quiz, userStatistic))));
         }
     }
 
     private static int calculatePlayedQuizzes(UserStatistic userStatistic) {
-        return Optional.ofNullable(userStatistic.getQuizList()).map(List::size).orElse(0);
+        return Optional.ofNullable(userStatistic.getQuizList()).map(Set::size).orElse(0);
     }
 
     private static double calculateAveragePoints(UserStatistic userStatistic) {
@@ -49,7 +50,7 @@ public class UserStatisticsCalculator {
 
     private static Map<Category, Integer> calculatePointsPerCategory(UserStatistic userStatistic) {
         return Optional.ofNullable(userStatistic.getQuizList())
-                .orElse(Collections.emptyList())
+                .orElse(Collections.emptySet())
                 .stream()
                 .flatMap(quiz -> quiz.getParticipants().stream()
                         .filter(participant -> userStatistic.getUserId().equals(participant.getUserId()))
@@ -62,6 +63,14 @@ public class UserStatisticsCalculator {
         return pointsPerCategory.entrySet()
                 .stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> (double) entry.getValue() / userStatistic.getPlayedQuizzes()));
+    }
+
+    private static <T> T calculateExtremum(Set<T> list, Comparator<T> comparator) {
+        return Optional.ofNullable(list)
+                .orElse(Collections.emptySet())
+                .stream()
+                .max(comparator)
+                .orElse(null);
     }
 
     private static <T> T calculateExtremum(List<T> list, Comparator<T> comparator) {
@@ -82,7 +91,7 @@ public class UserStatisticsCalculator {
 
     private static List<Category> getCategories(UserStatistic userStatistic, Function<Quiz, Category> classifier) {
         return Optional.ofNullable(userStatistic.getQuizList())
-                .orElse(Collections.emptyList())
+                .orElse(Collections.emptySet())
                 .stream()
                 .map(classifier)
                 .collect(Collectors.toList());

@@ -21,7 +21,6 @@ class ModelUnitTest {
                 Question.class,
                 Quiz.class,
                 AppUser.class,
-                UserStatistic.class,
                 Participant.class
         );
     }

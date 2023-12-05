@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Implementation of the QuizService interface
@@ -100,6 +101,59 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public Quiz addParticipantToQuiz(String id, Participant participant) {
         Quiz quiz = quizDao.findById(id).orElseThrow(QuizNotFoundException::new);
+        checkIfUserLoggedIn(participant, quiz);
+
+        Quiz quizForNewUser = checkIfUserExists(participant, quiz);
+        if (quizForNewUser != null){
+            return quizForNewUser;
+        }
+
+        Quiz quizUserAlreadyHasPlayed = checkIfUserAlreadyPlayed(participant, quiz);
+        return Objects.requireNonNullElseGet(quizUserAlreadyHasPlayed, () -> saveSimpleQuiz(participant, quiz));
+    }
+
+    private Quiz saveSimpleQuiz(Participant participant, Quiz quiz) {
+        participant.setQuiz(quiz);
+        participantDao.save(participant);
+        quiz.getParticipants().add(participant);
+        return quizDao.save(quiz);
+    }
+
+    private Quiz checkIfUserAlreadyPlayed(Participant participant, Quiz quiz) {
+        if(quiz.getParticipants().stream()
+                        .filter(p -> p.getUserId() != null)
+                        .anyMatch(p -> p.getUserId().equals(participant.getUserId()))){
+            participant.setQuiz(quiz);
+            participantDao.save(participant);
+
+            if(participant.getUserId() != null){
+                UserStatistic userStatistic = userStatisticDao.findByUserId(participant.getUserId()).orElseThrow();
+                userStatistic.getQuizList().add(quiz);
+                userStatisticDao.save(userStatistic);
+            }
+            return quiz;
+        }
+        return null;
+    }
+
+    private Quiz checkIfUserExists(Participant participant, Quiz quiz) {
+        if (!isParticipantExists(participant, quiz)) {
+            Participant newParticipant = new Participant(participant);
+            newParticipant.setQuiz(quiz);
+            participantDao.save(newParticipant);
+            quiz.getParticipants().add(newParticipant);
+
+            if(newParticipant.getUserId() != null){
+                UserStatistic userStatistic = userStatisticDao.findByUserId(newParticipant.getUserId()).orElseThrow();
+                userStatistic.getQuizList().add(quiz);
+                userStatisticDao.save(userStatistic);
+            }
+            return quizDao.save(quiz);
+        }
+        return null;
+    }
+
+    private void checkIfUserLoggedIn(Participant participant, Quiz quiz) {
         //Wenn Participant registriert ist, dann wird er in die Statistik aufgenommen
         if(participant.getUserId() !=  null) {
             User user = userDao.findById(participant.getUserId()).orElseThrow();
@@ -107,25 +161,17 @@ public class QuizServiceImpl implements QuizService {
             if(userStatisticDao.findByUserId(user.getUserId()).isEmpty()){
                 userStatistic = new UserStatistic();
                 userStatistic.setUserId(user.getUserId());
+                userStatistic.getQuizList().add(quiz);
             } else {
                 userStatistic = userStatisticDao.findByUserId(user.getUserId()).orElseThrow();
             }
-
-            userStatistic.getQuizList().add(quiz);
-
-            userStatistic.setPoints(userStatistic.getPoints() + participant.getPoints());
-
             userStatisticDao.save(userStatistic);
         }
+    }
 
-        if(quiz.getParticipants().contains(participant)){
-            return quiz;
-        }
-
-        participant.setQuiz(quiz);
-        participantDao.save(participant);
-        quiz.getParticipants().add(participant);
-        return quizDao.save(quiz);
+    private static boolean isParticipantExists(Participant participant, Quiz quiz) {
+        return quiz.getParticipants().stream()
+                .anyMatch(p -> p.getUserId() != null && p.getUserId().equals(participant.getUserId()));
     }
 
     @Override

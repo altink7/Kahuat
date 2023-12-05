@@ -29,4 +29,15 @@ public class Participant extends AbstractEntity {
 
     @Column(name = "quizDuration")
     private double participantQuizDuration;
+
+    public Participant() {
+    }
+
+    public Participant(Participant participant) {
+        this.quiz = participant.quiz;
+        this.userId = participant.userId;
+        this.nickname = participant.nickname;
+        this.points = participant.points;
+        this.participantQuizDuration = participant.participantQuizDuration;
+    }
 }

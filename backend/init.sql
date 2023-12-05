@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS`user` (
     `email` varchar(255) DEFAULT NULL,
     `first_name` varchar(255) DEFAULT NULL,
     `last_name` varchar(255) DEFAULT NULL,
-    `password` varchar(255) NOT NULL,
+    `password` varchar(255),
     `role` tinyint(4) DEFAULT NULL CHECK (`role` between 0 and 1),
     `salutation` tinyint(4) DEFAULT NULL CHECK (`salutation` between 0 and 2)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

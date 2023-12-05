@@ -10,10 +10,7 @@ import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -28,11 +25,7 @@ public class UserStatistic extends AbstractEntity implements Serializable {
 
     @ManyToMany
     @ToString.Exclude
-    private List<Quiz> quizList;
-
-
-    @Column(name = "points")
-    private int points;
+    private Set<Quiz> quizList;
 
     @Transient
     private int playedQuizzes;
@@ -62,9 +55,9 @@ public class UserStatistic extends AbstractEntity implements Serializable {
         UserStatisticsCalculator.calculate(this);
     }
 
-    public List<Quiz> getQuizList() {
+    public Set<Quiz> getQuizList() {
         if (quizList == null) {
-            return new ArrayList<>();
+            return new HashSet<>();
         }
         return quizList;
     }
@@ -83,5 +76,13 @@ public class UserStatistic extends AbstractEntity implements Serializable {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    public Double getPoints() {
+        return getQuizList().stream().mapToDouble(quiz -> quiz.getParticipants().stream()
+                .filter(participant -> participant.getUserId() != null)
+                .filter(participant -> participant.getUserId().equals(userId))
+                .mapToDouble(Participant::getPoints)
+                .sum()).sum();
     }
 }
