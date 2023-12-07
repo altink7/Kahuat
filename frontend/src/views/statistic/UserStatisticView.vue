@@ -1,12 +1,11 @@
 <template>
+  <div class="auth-container" style="text-align: left;">
+    <div class="auth-card">
+      <h1 class="auth-title">Statistics</h1>
   <div v-if="user == null">
-    <h1>Statistics</h1>
     <p>You need to be logged in to see the Statistics.</p>
   </div>
   <div v-else>
-    <div class="home">
-      <h1>Energize Your Education!</h1>
-    </div>
       <div v-if="statistic">
         <p>Number of quizzes played: {{ statistic.playedQuizzes }}</p>
         <p>Number of average Points per Quiz: {{ statistic.averagePointsPerQuiz }}</p>
@@ -35,6 +34,8 @@
       <div v-else>
         <p>Loading statistics...</p>
       </div>
+  </div>
+    </div>
   </div>
 </template>
 
