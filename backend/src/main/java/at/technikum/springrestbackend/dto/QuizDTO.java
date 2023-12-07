@@ -16,7 +16,7 @@ public class QuizDTO {
 
     private String id;
 
-    private Long creatorId;
+    private UserDTO creatorId;
 
     private Category kategorie;
 

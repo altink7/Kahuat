@@ -1,23 +1,23 @@
-package at.technikum.springrestbackend.model;
+package at.technikum.springrestbackend.model.user;
 
+import at.technikum.springrestbackend.model.Gender;
+import at.technikum.springrestbackend.model.Role;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
-@Entity(name = "user")
-@EntityListeners(AuditingEntityListener.class)
-public class User extends AbstractEntity implements Serializable {
+@Entity
+@DiscriminatorValue("APP_USER")
+public class AppUser extends User {
 
     @Column(name = "salutation")
     private Gender salutation;
@@ -28,10 +28,8 @@ public class User extends AbstractEntity implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email", unique = true)
-    private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "country")
@@ -47,8 +45,8 @@ public class User extends AbstractEntity implements Serializable {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        User user = (User) o;
-        return getId() != null && Objects.equals(getId(), user.getId());
+        AppUser appUser = (AppUser) o;
+        return getId() != null && Objects.equals(getId(), appUser.getId());
     }
 
     @Override

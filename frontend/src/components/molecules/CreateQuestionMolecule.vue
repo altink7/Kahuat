@@ -56,6 +56,7 @@
 </template>
 
 <script>
+
 import {useAppStore} from "@/services/store/appStore";
 
 export default {
@@ -73,14 +74,13 @@ export default {
 
   methods: {
     getQuestionFromForm() {
-      let store = useAppStore();
       return {
         question: this.question,
         answerOptions: Object.values(this.answers).map((answer) => ({
           answer: answer.text,
           correct: answer.isCorrect,
         })),
-        category: store.getSelectedCategory()?.toUpperCase() || "",
+        category: useAppStore().getSelectedCategory()?.toUpperCase() || "",
       };
     },
 

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Utility class to test getters and setters of a class.
@@ -152,6 +153,10 @@ public class GetterSetterTester extends AbstractClassTester implements Tester {
             }
         } else if (type == LocalDate.class) {
             return LocalDate.now();
+        } else if (type == Map.class) {
+            return Map.of();
+        } else if (type == Object.class) {
+            return new Object();
         } else if (!type.isPrimitive()) {
             try {
                 Constructor<?> noArgConstructor = type.getDeclaredConstructor();

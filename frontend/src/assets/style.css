@@ -678,6 +678,88 @@ footer a:focus {
     100% { opacity: 1; }
 }
 
+/* User Profile & Admin */
+
+.admin-search-bar {
+    margin-top: 50px;
+    width: 500px;
+}
+
+.admin-filter {
+    margin-bottom: 10px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    margin-right: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-container {
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-card {
+    background-color: var(--light-purple);
+    padding: 40px;
+    border-radius: 10px;
+
+}
+
+.search-bar {
+    margin-top: 50px;
+}
+
+.search-button {
+    width: 30%;
+    color: #000;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: #000;
+}
+
+.search-button:hover {
+    color: white;
+    background-color: var(--strong-purple);
+    border-color: var(--strong-purple);
+}
+
+.quiz-card {
+    margin-top: 40px;
+    width: 350px;
+    height: 150px;
+    background-color: var(--strong-purple);
+    border: 3px solid white;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.quiz-button {
+    margin-right: 5px;
+    margin-left: 5px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: white;
+}
+
+.quiz-button:hover {
+    color: black;
+    background-color: white;
+    border-color: var(--strong-purple);
+}
+
 /* FAQ & About Styles */
 .faq-container, .about-container {
     display: flex;
@@ -800,4 +882,55 @@ p {
     .form-control-game-pin {
         font-size: var(--mobile-size);
     }
+}
+
+/* Password Arrow Toggle */
+.password-toggle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.password-toggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+    transform: translateY(-50%);
+}
+
+.password-toggle.open::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Profile Buttons */
+.update-button {
+    margin-top: 10px;
+    color: white;
+    background-color: var(--strong-purple);
+    border-color: var(--strong-purple);
+
+}
+
+.delete-button {
+    margin-top: 10px;
+    color: black;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: black;
+
+}
+.update-button:hover {
+    color: black;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: black;
+}
+
+.delete-button:hover {
+    color: white;
+    background-color: #d84747;
+    border-color: #d84747;
 }

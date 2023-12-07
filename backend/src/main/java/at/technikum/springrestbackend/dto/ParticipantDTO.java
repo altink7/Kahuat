@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @JsonIgnoreProperties({"quiz"})
 public class ParticipantDTO implements Serializable {
+    private QuizDTO quiz;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Long userId;

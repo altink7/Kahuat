@@ -2,14 +2,16 @@ package at.technikum.springrestbackend.controller;
 
 import at.technikum.springrestbackend.config.mapper.InternalModelMapper;
 import at.technikum.springrestbackend.dto.UserDTO;
-import at.technikum.springrestbackend.exceptions.QuizException;
-import at.technikum.springrestbackend.model.User;
+import at.technikum.springrestbackend.model.user.AppUser;
+import at.technikum.springrestbackend.model.user.GoogleUser;
+import at.technikum.springrestbackend.model.user.UserAware;
 import at.technikum.springrestbackend.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -22,7 +24,7 @@ import java.util.List;
 /**
  * REST Controller for managing users.
  */
-
+@Log4j2
 @Component
 @RequestMapping("/api/users")
 @Validated
@@ -53,8 +55,8 @@ public class UserController extends Controller{
      * @param email The email address of the user.
      * @return A ResponseEntity containing the user's DTO if found, or a "not found" response.
      */
-    @GetMapping("/emails")
-    public ResponseEntity<UserDTO> getUserByEmail(@RequestParam @NotNull(message = "Email cannot be null!")
+    @GetMapping("/emails/{email}")
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable @NotNull(message = "Email cannot be null!")
                                                   @Email(message = "Not a valid email!") String email) {
         return ResponseEntity.ok(mapper.mapToDTO(userService.getUserByEmail(email), UserDTO.class));
     }
@@ -85,9 +87,21 @@ public class UserController extends Controller{
      */
     @PostMapping("/createUser")
     public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
-        User createdUser = userService.createUser(mapper.mapToEntity(userDTO, User.class));
-        UserDTO createdUserDTO = mapper.mapToDTO(createdUser, UserDTO.class);
+        AppUser createdAppUser = userService.createUser(mapper.mapToEntity(userDTO, AppUser.class));
+        UserDTO createdUserDTO = mapper.mapToDTO(createdAppUser, UserDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUserDTO);
+    }
+
+    @PostMapping("/createGoogleUser")
+    public ResponseEntity<UserAware> createUser(@RequestBody GoogleUser user) {
+        log.info("Creating google user: {}", user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createGoogleUser(user));
+    }
+
+    @GetMapping("/googleUsers/{email}")
+    public ResponseEntity<UserAware> getGoogleUserByEmail(@PathVariable String email) {
+        log.info("Getting google user by email: {}", email);
+        return ResponseEntity.ok(userService.getGoogleUserByEmail(email));
     }
 
     /**
@@ -99,8 +113,8 @@ public class UserController extends Controller{
      */
     @PutMapping("/{userId}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long userId, @Valid @RequestBody UserDTO userDTO) {
-        User updatedUser = userService.updateUser(userId, mapper.mapToEntity(userDTO, User.class));
-        UserDTO updatedUserDTO = mapper.mapToDTO(updatedUser, UserDTO.class);
+        AppUser updatedAppUser = userService.updateUser(userId, mapper.mapToEntity(userDTO, AppUser.class));
+        UserDTO updatedUserDTO = mapper.mapToDTO(updatedAppUser, UserDTO.class);
         return ResponseEntity.ok(updatedUserDTO);
     }
 

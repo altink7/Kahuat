@@ -23,8 +23,10 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import GoogleLoginComponent from "@/components/GoogleLoginComponent.vue";
+import {useRouter} from 'vue-router';
 import {decodeCredential} from "vue3-google-login";
+import {useAppStore} from "@/services/store/appStore";
 
 const router = useRouter();
 
@@ -33,19 +35,13 @@ const handleGoogleLogin = (response) => {
     console.error('Error during login:', response.error);
   } else {
     const userData = decodeCredential(response.credential);
-    localStorage.setItem('user', JSON.stringify(userData));
-    router.push('home');
-    window.location.reload();
+    useAppStore().setUser(userData);
+
+    router.afterEach(() => {
+      location.reload();
+    });
+
+    router.push('/');
   }
 };
-</script>
-
-<script>
-
-import {defineComponent} from "vue";
-import GoogleLoginComponent from "@/components/GoogleLoginComponent.vue";
-
-export default defineComponent({
-  components: {GoogleLoginComponent}
-})
 </script>

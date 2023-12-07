@@ -62,19 +62,17 @@ public class QuestionController extends Controller {
 
     @PostMapping("/createQuestion")
     public ResponseEntity<QuestionDTO> createQuestion(@RequestBody QuestionDTO question) {
-        //TODO
-        return null;
+        Question questionEntity = questionService.createQuestion(mapper.mapToEntity(question, Question.class));
+        return ResponseEntity.ok(mapper.mapToDTO(questionEntity, QuestionDTO.class));
     }
 
     @PutMapping("/{questionId}")
     public ResponseEntity<QuestionDTO> updateQuestionById(@PathVariable Long questionId) {
-        //TODO
-        return null;
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{questionId}")
-    public ResponseEntity<Void> deleteQuestionById(@PathVariable Long questionId) {
-        //TODO
-        return null;
+    public ResponseEntity<Boolean> deleteQuestionById(@PathVariable Long questionId) {
+        return ResponseEntity.ok(questionService.deleteQuestion(questionId));
     }
 }

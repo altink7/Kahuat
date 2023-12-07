@@ -1,5 +1,6 @@
 package at.technikum.springrestbackend.model;
 
+import at.technikum.springrestbackend.model.user.AppUser;
 import at.technikum.springrestbackend.testutil.ModelTester;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,8 +20,7 @@ class ModelUnitTest {
                 AnswerOption.class,
                 Question.class,
                 Quiz.class,
-                User.class,
-                UserStatistic.class,
+                AppUser.class,
                 Participant.class
         );
     }

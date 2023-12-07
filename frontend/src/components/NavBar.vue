@@ -16,8 +16,11 @@
       <!-- Navbar Links -->
       <div class="collapse navbar-collapse justify-content-evenly text-center" :class="{ 'show': isNavbarOpen }">
         <router-link to="/" class="nav-link">Home</router-link>
-        <div v-if="user">
-          <router-link to="/home" @click="logout">{{ user.name }} (logout)</router-link>
+        <div v-if="appUser">
+          <router-link to="User" class="nav-link" >Profile</router-link>
+        </div>
+        <div v-if="appUser">
+          <router-link to="/" class="nav-link" @click="logout">Logout</router-link>
         </div>
         <div v-else>
           <router-link to="/login" class="nav-link">Login</router-link>
@@ -29,16 +32,53 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue';
-const user = ref(JSON.parse(localStorage.getItem('user')));
+import {watchEffect} from 'vue';
+import EndpointService from "@/services/server/EndpointService";
+import * as MessageHandler from "@/services/MessageHandlerService";
+
+const appUser = useAppStore().getUser();
 
 watchEffect(() => {
-  console.log('User changed:', user);
+  console.log('User changed:', appUser);
+
+  if (appUser == null || appUser.email == null) {
+    return;
+  }
+
+  function createGoogleUser() {
+    const email = appUser.email;
+    console.log('email:' + email);
+
+    EndpointService.post('users/createGoogleUser', {email: email}).then((response) => {
+      console.log(response);
+      useAppStore().setUser(response.data)
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  EndpointService.get('users/googleUsers/' + appUser.email).then((response) => {
+    console.log(response);
+    if (response.data.length !== 0) {
+      console.log('User already exists');
+    } else {
+      createGoogleUser();
+    }
+  }).catch((response) => {
+    if (response.response.status === 404) {
+      createGoogleUser();
+    } else if (response.response.status === 500) {
+      MessageHandler.handleError("Error while checking if appUser exists");
+    }
+  });
+
 });
 </script>
 
 <script>
-import { googleLogout } from "vue3-google-login"
+import {googleLogout} from "vue3-google-login"
+import {useAppStore} from "@/services/store/appStore";
+import router from "@/router";
 
 export default {
     data() {
@@ -53,10 +93,14 @@ export default {
             navbarToggler.classList.toggle('active');
         },
       logout() {
-        localStorage.removeItem('user');
+        useAppStore().setUser(null);
         googleLogout();
+
+        router.afterEach(() => {
+          location.reload();
+        });
+
         this.$router.push('/login');
-        window.location.reload();
       }
     },
 };

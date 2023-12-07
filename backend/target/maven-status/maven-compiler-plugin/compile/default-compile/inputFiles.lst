@@ -1,54 +1,62 @@
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\ParticipantDao.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\AnswerOptionDTO.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuizNotFoundException.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\QuizDTO.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\UserStatisticDTO.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\QuizDao.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\Controller.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\UserController.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\QuizController.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\UserStatisticController.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\QuestionDTO.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\AnswerService.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Role.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Answer.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\Validator.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\annotation\ValidateWith.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\QuestionDao.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\AnswerOption.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\AbstractEntity.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\AnswerServiceImpl.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Category.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\UserStatistic.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\AnswerOptionDao.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\UserStatisticNotFoundException.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Question.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuizException.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\UserNotFoundException.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Participant.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\QuestionController.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\QuestionServiceImpl.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\modelvalidator\UserValidator.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\QuizServiceImpl.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\UserStatisticDao.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\SpringRestBackendApplication.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\UserDTO.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\mapper\ModelMapperConfig.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Gender.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\mapper\CorsConfig.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\QuizService.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\UserStatisticServiceImpl.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\annotation\ValidationAspect.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\UserDao.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuestionNotFoundException.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\User.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\QuestionService.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\UserServiceImpl.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Quiz.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\ParticipantDTO.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\UserService.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\UserStatisticService.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\ExceptionHandlerAdvice.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\mapper\InternalModelMapper.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\AnswerDao.java
-C:\Users\Julian Hoffmann\Downloads\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\AnswerNotFoundException.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuestionNotFoundException.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\user\GoogleUser.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Quiz.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\user\AppUser.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\UtilityController.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\UserStatisticDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\AbstractEntity.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\mapper\InternalModelMapper.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\ExceptionHandlerAdvice.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\AnswerOptionDTO.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\UserDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\Controller.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Answer.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\QuizServiceImpl.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\AnswerServiceImpl.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\UserNotFoundException.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\UserStatisticDTO.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\SpringRestBackendApplication.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\mapper\ModelMapperConfig.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\AnswerNotFoundException.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\UserStatistic.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\UserController.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\AnswerOption.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\QuizController.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\QuizDTO.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\GoogleUserDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\cors\CorsConfig.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\modelvalidator\UserValidator.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\UserServiceImpl.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuizNotFoundException.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\annotation\ValidateWith.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Gender.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\QuestionDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\AnswerDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\AnswerOptionDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\UserDTO.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\QuestionController.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\ParticipantDTO.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuizException.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\QuestionDTO.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\annotation\ValidationAspect.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\AnswerService.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\UserStatisticController.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Question.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\user\User.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\UserStatisticService.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\generator\QuizIdGenerator.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Role.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\UserStatisticServiceImpl.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Participant.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\QuestionService.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\Validator.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\UserStatisticNotFoundException.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Category.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\QuestionServiceImpl.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\UserService.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\ParticipantDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\user\UserAware.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\QuizDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\calculator\UserStatisticsCalculator.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\AppUserDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\QuizService.java
