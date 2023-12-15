@@ -32,3 +32,6 @@ build/
 
 ### MariaDB ###
 /db-data
+
+### surefire- ###
+target/surefire-reports/*.xml

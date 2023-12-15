@@ -128,4 +128,18 @@ public class UserController extends Controller{
     public ResponseEntity<Void> deleteUser(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long userId) {
         return userService.deleteUser(userId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/login/{email}/{password}")
+    public ResponseEntity<Object> loginUser(@PathVariable String email, @PathVariable String password) {
+        log.info("Logging in user with email: {}", email);
+        AppUser user = userService.authenticateUser(email, password);
+
+        log.info("User logged in successfully: {}", user != null);
+        if (user != null) {
+            return ResponseEntity.ok(mapper.mapToDTO(user, UserDTO.class));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+    }
+
 }

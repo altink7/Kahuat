@@ -60,4 +60,5 @@ at\technikum\springrestbackend\repository\QuizDao.class
 at\technikum\springrestbackend\model\user\GoogleUser.class
 at\technikum\springrestbackend\repository\AnswerOptionDao.class
 at\technikum\springrestbackend\model\Answer.class
+at\technikum\springrestbackend\serviceimpl\PasswordUtils.class
 at\technikum\springrestbackend\serviceimpl\QuestionServiceImpl.class
