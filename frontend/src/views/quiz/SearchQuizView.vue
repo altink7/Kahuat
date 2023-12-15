@@ -1,18 +1,17 @@
 <template>
-  <div class="container mt-5">
+  <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search for a quiz" v-model="searchQuery" />
-        </div>
-        <div class="input-group-append">
-          <button class="btn btn-primary" @click="searchQuiz">Search</button>
+          <input type="text" class="form-control form-control-game-pin" placeholder="Game PIN" v-model="searchQuery" />
+          <div class="input-group-append">
+            <button class="btn btn-primary" @click="searchQuiz">Enter</button>
+          </div>
         </div>
       </div>
     </div>
 
     <CategoryMolecule @categoryClicked="handleCategoryClicked" />
-
   </div>
 </template>
 

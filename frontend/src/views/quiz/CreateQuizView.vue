@@ -17,8 +17,7 @@ export default {
 
   methods: {
     handleCategoryClicked(category) {
-      const store = useAppStore();
-      store.setSelectedCategory(category);
+      useAppStore().setSelectedCategory(category);
 
       this.$router.push({
         name: "create-question",

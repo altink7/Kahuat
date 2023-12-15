@@ -83,8 +83,7 @@ export default {
     },
     startQuiz(nickname) {
       this.showQuizEntry = false;
-      const store = useAppStore();
-      store.setNickname(nickname);
+      useAppStore().setNickname(nickname);
       startQuiz(this.$router, this.isQuizExpired, this.selectedQuizId );
     },
 

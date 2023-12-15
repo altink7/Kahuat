@@ -48,7 +48,7 @@ public class QuizController extends Controller {
      * @return A ResponseEntity containing the quiz if found, or a "not found" response.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<QuizDTO> getQuizById(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long id) {
+    public ResponseEntity<QuizDTO> getQuizById(@PathVariable String id) {
         QuizDTO quizDTO = mapper.mapToDTO(quizService.getQuizById(id), QuizDTO.class);
         QuizDTO randomizeQuiz = quizService.randomizeQuiz(quizDTO);
 
@@ -106,7 +106,7 @@ public class QuizController extends Controller {
      * @return A ResponseEntity containing a list of questions if found, or a "not found" response.
      */
     @GetMapping("/{id}/questions")
-    public ResponseEntity<List<QuestionDTO>> getAllQuestionsByQuizId(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long id) {
+    public ResponseEntity<List<QuestionDTO>> getAllQuestionsByQuizId(@PathVariable String id) {
         List<Question> questions = quizService.getAllQuestionsByQuizId(id);
         return ResponseEntity.ok(questions.stream().map(question -> mapper.mapToDTO(question, QuestionDTO.class)).toList());
     }
@@ -118,7 +118,7 @@ public class QuizController extends Controller {
      * @return A ResponseEntity indicating success or a "not found" response.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQuiz(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long id) {
+    public ResponseEntity<Void> deleteQuiz(@PathVariable String id) {
         return quizService.deleteQuiz(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
@@ -126,7 +126,7 @@ public class QuizController extends Controller {
      * Endpoint to add a participant to a quiz by its ID.
      */
     @PostMapping("/{id}/addParticipant")
-    public ResponseEntity<QuizDTO> addParticipantToQuiz(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long id, @RequestBody ParticipantDTO participant) {
+    public ResponseEntity<QuizDTO> addParticipantToQuiz(@PathVariable String id, @RequestBody ParticipantDTO participant) {
         Quiz quiz = quizService.addParticipantToQuiz(id, mapper.mapToEntity(participant, Participant.class));
         return ResponseEntity.ok(mapper.mapToDTO(quiz, QuizDTO.class));
     }
@@ -135,7 +135,7 @@ public class QuizController extends Controller {
      * Endpoint to get all participants for a quiz by its ID.
      */
     @GetMapping("/{id}/participants")
-    public ResponseEntity<List<ParticipantDTO>> getAllParticipantsByQuizId(@PathVariable @Max(Long.MAX_VALUE) @Min(Long.MIN_VALUE) Long id) {
+    public ResponseEntity<List<ParticipantDTO>> getAllParticipantsByQuizId(@PathVariable String id) {
         List<Participant> participants = quizService.getQuizById(id).getParticipants();
         List<ParticipantDTO> dtoList = new java.util.ArrayList<>(participants.stream().map(participant -> mapper.mapToDTO(participant, ParticipantDTO.class)).toList());
 

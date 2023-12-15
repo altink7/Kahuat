@@ -1,0 +1,10 @@
+at\technikum\springrestbackend\config\mapper\InternalModelMapperTest$ClassA.class
+at\technikum\springrestbackend\testutil\tester\base\AbstractClassTester.class
+at\technikum\springrestbackend\testutil\tester\standard\ToStringTester.class
+at\technikum\springrestbackend\config\cors\CorsConfigTest.class
+at\technikum\springrestbackend\testutil\tester\base\Tester.class
+at\technikum\springrestbackend\testutil\tester\standard\GetterSetterTester.class
+at\technikum\springrestbackend\config\mapper\InternalModelMapperTest$ClassB.class
+at\technikum\springrestbackend\model\ModelUnitTest.class
+at\technikum\springrestbackend\config\mapper\InternalModelMapperTest.class
+at\technikum\springrestbackend\testutil\ModelTester.class

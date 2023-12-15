@@ -1,6 +1,6 @@
 package at.technikum.springrestbackend.validator.modelvalidator;
 
-import at.technikum.springrestbackend.model.User;
+import at.technikum.springrestbackend.model.user.AppUser;
 import at.technikum.springrestbackend.validator.Validator;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ValidationException;
@@ -12,20 +12,20 @@ import java.util.List;
 
 @Component
 @Log4j2
-public class UserValidator implements Validator<User> {
+public class UserValidator implements Validator<AppUser> {
 
     /**
      * Validates the user data
      *
-     * @param user the object to validate
+     * @param appUser the object to validate
      */
     @Override
-    public void validate(User user) {
+    public void validate(AppUser appUser) {
 
-        log.info("Validating user: " + user.toString());
+        log.info("Validating user: " + appUser.toString());
         List<ErrorMessage> errors = new ArrayList<>();
 
-        if (user.getEmail() == null) {
+        if (appUser.getEmail() == null) {
             log.error("Email must not be null");
             errors.add(new ErrorMessage("Email must not be null"));
         }

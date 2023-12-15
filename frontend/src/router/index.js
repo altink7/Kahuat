@@ -10,10 +10,11 @@ import RankingsView from '../views/ranking/QuizRankingsView.vue'
 import CreateQuestionView from '../views/quiz/CreateQuestionView.vue'
 import SearchQuizView from '../views/quiz/SearchQuizView.vue'
 import LobbyView from "../views/quiz/LobbyView.vue";
-import PrivacyView from '../views/info/PrivacyView.vue'
 import FaqView from '../views/info/FaqView.vue'
-import ImprintView from '../views/info/ImprintView.vue'
 import ContactView from '../views/info/ContactView.vue'
+import UserStatisticView from "@/views/statistic/UserStatisticView.vue";
+import UserView from "@/views/user/UserView.vue";
+import AdminView from "@/views/user/AdminView.vue";
 
 
 const routes = [
@@ -43,7 +44,7 @@ const routes = [
     component: CategoryView
   },
   {
-    path: '/quiz/:requestId', 
+    path: '/quiz/:requestId',
     name: 'quiz',
     props: true,
     component: QuizView
@@ -65,9 +66,9 @@ const routes = [
     component: CreateQuestionView
   },
   {
-  path: '/search-quiz',
-  name: 'search-quiz',
-  component: SearchQuizView
+    path: '/search-quiz',
+    name: 'search-quiz',
+    component: SearchQuizView
   },
   {
     path: '/lobby/:quizIds',
@@ -76,25 +77,30 @@ const routes = [
     props: true,
   },
   {
-    path: '/privacy',
-    name: 'privacy',
-    component: PrivacyView
-  },
-  {
     path: '/faq',
     name: 'faq',
     component: FaqView
   },
   {
-    path: '/imprint',
-    name: 'imprint',
-    component: ImprintView
-  },
-  {
     path: '/contact',
     name: 'contact',
     component: ContactView
-  }
+  },
+  {
+    path: '/user-statistics',
+    name: 'user-statistics',
+    component: UserStatisticView
+  },
+    {
+        path: '/user',
+        name: 'user',
+        component: UserView
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        component: AdminView
+    }
 ]
 
 const router = createRouter({

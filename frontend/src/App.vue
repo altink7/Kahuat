@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div id="app">
     <NavBar />
-    <div class="container">
-      <router-view></router-view>
+    <div class="main-content">
+      <div class="container">
+        <router-view></router-view>
+      </div>
     </div>
     <FooterComponent />
     <MusicPlayer ref="musicPlayer" />

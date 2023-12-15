@@ -1,5 +1,5 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center">
+  <div class="rankings-container d-flex justify-content-center align-items-center">
     <div class="rankings">
       <ol class="list-group list-group-numbered">
         <li v-for="participant in participants" :key="participant.id" class="list-group-item d-flex justify-content-between align-items-start">

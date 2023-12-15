@@ -1,7 +1,13 @@
 <template>
   <div class="quiz-entry">
-    <h1>Enter Your Nickname</h1>
-    <input v-model="nickname" placeholder="Nickname" @input="clearErrorMessage" />
+      <div class="nickname mt-2">
+        <h3>Enter a name</h3>
+      </div>
+      <textarea class="form-control-nickname"
+                v-model="nickname"
+                placeholder="Name"
+                @input="clearErrorMessage">
+      </textarea>
     <hr>
     <button @click="startQuiz" class="btn btn-primary card-button">Start Quiz</button>
   </div>
@@ -23,7 +29,7 @@ export default {
     },
     startQuiz() {
       if (this.nickname.trim() === '') {
-        handleError('Please enter a nickname')
+        handleError('Please enter a name')
       } else {
         this.$emit('start-quiz', this.nickname);
       }

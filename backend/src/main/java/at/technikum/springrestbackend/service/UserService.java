@@ -1,6 +1,9 @@
 package at.technikum.springrestbackend.service;
 
-import at.technikum.springrestbackend.model.User;
+import at.technikum.springrestbackend.model.user.AppUser;
+import at.technikum.springrestbackend.model.user.GoogleUser;
+import at.technikum.springrestbackend.model.user.User;
+import at.technikum.springrestbackend.model.user.UserAware;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +15,7 @@ public interface UserService {
      *
      * @return the list of users
      */
-    List<User> getAllUsers();
+    List<AppUser> getAllUsers();
 
     /**
      * Get a user by id
@@ -20,7 +23,7 @@ public interface UserService {
      * @param userId the user id
      * @return the user
      */
-    User getUserById(Long userId);
+    AppUser getUserById(Long userId);
 
     /**
      * Get a user by email
@@ -41,18 +44,28 @@ public interface UserService {
     /**
      * Create a new user
      *
-     * @param user the user
+     * @param appUser the user
      * @return the created user
      */
-    User createUser(User user);
+    AppUser createUser(AppUser appUser);
 
     /**
      * Update a user
      *
      * @param userId the user id
-     * @param user   the user
+     * @param appUser   the user
      * @return the updated user
      */
-    User updateUser(Long userId, User user);
+    AppUser updateUser(Long userId, AppUser appUser);
+
+    /**
+     * Create a new user aware
+     */
+    UserAware createGoogleUser(GoogleUser user);
+
+    /**
+     * Get a user aware by email
+     */
+    UserAware getGoogleUserByEmail(String email);
 
 }

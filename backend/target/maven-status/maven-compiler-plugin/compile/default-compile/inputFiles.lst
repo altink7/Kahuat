@@ -1,6 +1,8 @@
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuestionNotFoundException.java
-C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\mapper\CorsConfig.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\user\GoogleUser.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Quiz.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\user\AppUser.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\UtilityController.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\UserStatisticDao.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\AbstractEntity.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\mapper\InternalModelMapper.java
@@ -21,11 +23,12 @@ C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\techn
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\AnswerOption.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\QuizController.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\dto\QuizDTO.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\GoogleUserDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\config\cors\CorsConfig.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\modelvalidator\UserValidator.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\UserServiceImpl.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\exceptions\QuizNotFoundException.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\validator\annotation\ValidateWith.java
-C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\User.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Gender.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\QuestionDao.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\AnswerDao.java
@@ -39,7 +42,9 @@ C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\techn
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\AnswerService.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\controller\UserStatisticController.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Question.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\user\User.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\UserStatisticService.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\generator\QuizIdGenerator.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Role.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\UserStatisticServiceImpl.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\Participant.java
@@ -50,5 +55,8 @@ C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\techn
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\serviceimpl\QuestionServiceImpl.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\UserService.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\ParticipantDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\user\UserAware.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\QuizDao.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\model\calculator\UserStatisticsCalculator.java
+C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\repository\AppUserDao.java
 C:\Users\kelme\Desktop\Projekte\git\SEPJ23Quizzes\backend\src\main\java\at\technikum\springrestbackend\service\QuizService.java
