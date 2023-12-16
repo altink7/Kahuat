@@ -52,7 +52,8 @@ const routes = [
     {
         path: '/create-quiz',
         name: 'create-quiz',
-        component: CreateQuizView
+        component: CreateQuizView,
+        meta: { requiresAuth: true },
     },
     {
         path: '/rankings',
@@ -63,7 +64,8 @@ const routes = [
     {
         path: '/create-question',
         name: 'create-question',
-        component: CreateQuestionView
+        component: CreateQuestionView,
+        meta: { requiresAuth: true },
     },
     {
         path: '/search-quiz',
@@ -89,17 +91,20 @@ const routes = [
     {
         path: '/user-statistics',
         name: 'user-statistics',
-        component: UserStatisticView
+        component: UserStatisticView,
+        meta: { requiresAuth: true },
     },
     {
         path: '/user',
         name: 'user',
-        component: UserView
+        component: UserView,
+        meta: { requiresAuth: true },
     },
     {
         path: '/admin',
         name: 'admin',
-        component: AdminView
+        component: AdminView,
+        meta: { requiresAuth: true, requiresAdmin: true },
     }
 ]
 
