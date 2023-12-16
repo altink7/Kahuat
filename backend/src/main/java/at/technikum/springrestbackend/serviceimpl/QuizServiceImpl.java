@@ -15,6 +15,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -211,6 +212,20 @@ public class QuizServiceImpl implements QuizService {
         quizDTO.setQuestions(questions);
 
         return quizDTO;
+    }
+
+    @Override
+    public List<Quiz> getAllQuizzesByCreator(String email) {
+        long userId = appUserDao.findByEmail(email).orElseThrow().getUserId();
+        return quizDao.findByCreatorId(userId).orElseThrow(QuizNotFoundException::new);
+    }
+
+    @Override
+    public Quiz updateQuizStartDateAndDuration(String id, LocalDate parse, int duration) {
+        Quiz quiz = quizDao.findById(id).orElseThrow(QuizNotFoundException::new);
+        quiz.setStartDate(parse);
+        quiz.setDuration(duration);
+        return quizDao.save(quiz);
     }
 
     /**

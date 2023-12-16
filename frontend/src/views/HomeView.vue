@@ -23,10 +23,17 @@
       </router-link>
     </div>
 
+    <div v-if="admin">
+      <router-link to="/admin" v-slot="{ navigate }">
+        <button @click="navigate" class="action-button">Admin</button>
+      </router-link>
+    </div>
+
   </div>
 </template>
 <script setup>
 import {useAppStore} from "@/services/store/appStore";
 const appStore = useAppStore();
 const user = appStore.getUser() == null ? null : appStore.getUser();
+const admin = user == null ? false : user.role == null ? false : user.role === "ADMIN";
 </script>
