@@ -17,7 +17,7 @@
       <div class="collapse navbar-collapse justify-content-evenly text-center" :class="{ 'show': isNavbarOpen }">
         <router-link to="/" class="nav-link">Home</router-link>
         <div v-if="appUser">
-          <router-link to="User" class="nav-link" >Profile</router-link>
+          <router-link to="/User" class="nav-link" >Profile</router-link>
         </div>
         <div v-if="appUser">
           <router-link to="/" class="nav-link" @click="logout">Logout</router-link>
