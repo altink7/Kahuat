@@ -13,7 +13,7 @@
               <div class="row mb-2">
                 <div class="form-group col-md-3">
                   <label class="form-label" for="salutation">Gender</label>
-                  <select  class="form-control" id="salutation">
+                  <select  v-model="user.salutation" class="form-control" id="salutation">
                     <option value="none">-</option>
                     <option value="MALE">Male</option>
                     <option value="FEMALE">Female</option>
@@ -23,23 +23,23 @@
 
                 <div class="col-md-4">
                   <label class="form-label" for="firstName">First Name</label>
-                  <input type="text"  class="form-control" id="firstName" placeholder="Max" required>
+                  <input type="text" class="form-control" id="firstName" v-model="user.firstName" placeholder="Max" required>
                 </div>
 
                 <div class="col-md-5">
                   <label class="form-label" for="lastName">Last Name</label>
-                  <input type="text"  class="form-control" id="lastName" placeholder="Mustermann" required>
+                  <input type="text"  class="form-control" id="lastName" v-model="user.lastName"  placeholder="Mustermann" required>
                 </div>
               </div>
 
               <div class="mb-2">
                 <label class="form-label" for="email">E-Mail Address</label>
-                <input type="email"  class="form-control" id="email" placeholder="max.mustermann@gmail.com" required>
+                <input type="email"  class="form-control" id="email" v-model="user.email"  placeholder="max.mustermann@gmail.com" required>
               </div>
 
               <div>
                 <label class="form-label" for="country">Country</label>
-                <select class="form-control" id="country">
+                <select v-model="user.country"  class="form-control" id="country">
                   <option value="none">-</option>
                   <option value="AT">Austria</option>
                   <option value="BE">Belgium</option>
@@ -78,11 +78,11 @@
                 <div v-if="showPasswordFields">
                   <div class="mb-2">
                     <label class="form-label" for="password">New Password</label>
-                    <input type="password"  class="form-control" id="password" placeholder="********" minlength="8" required>
+                    <input type="password"  v-model="user.password" class="form-control" id="password" placeholder="********" minlength="8" required>
                   </div>
                   <div class="mb-2">
                     <label class="form-label" for="confirm-password">Confirm New Password</label>
-                    <input type="password" class="form-control" id="confirm-password" placeholder="********" minlength="8" required>
+                    <input type="password" v-model="user.confirmPassword" class="form-control" id="confirm-password" placeholder="********" minlength="8" required>
                   </div>
                 </div>
               </div>
@@ -124,6 +124,7 @@
 <script>
 import { handleError } from "@/services/MessageHandlerService";
 import EndpointService from "@/services/server/EndpointService";
+import {useAppStore} from "@/services/store/appStore";
 
 
 export default {
@@ -133,12 +134,79 @@ export default {
       searchQuery: "",
       quiz: "",
       showPasswordFields: false,
+      user: {
+        id: null,
+        salutation: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        country: "",
+        password: "",
+        confirmPassword: "",
+      },
     };
+  },
+  created() {
+    this.loadUserData();
   },
   methods: {
     togglePasswordDropdown() {
       this.showPasswordFields = !this.showPasswordFields;
     },
+
+    loadUserData() {
+      const appStore = useAppStore();
+      const userData = appStore.getUser();
+
+      if (userData) {
+        this.user.id = userData.id;
+        this.user.salutation = userData.salutation;
+        this.user.firstName = userData.firstName;
+        this.user.lastName = userData.lastName;
+        this.user.email = userData.email;
+        this.user.country = userData.country;
+      } else {
+        console.error('No user data found in appStore');
+      }
+    },
+
+    updateUserProfile() {
+      if (this.showPasswordFields && this.user.password !== this.user.confirmPassword) {
+        handleError('Passwords do not match.');
+        return;
+      }
+
+      let updatedUserData = {
+        salutation: this.user.salutation,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email,
+        country: this.user.country,
+      };
+
+      if (this.showPasswordFields) {
+        updatedUserData.password = this.user.password;
+      }
+
+      EndpointService.put(`users/${this.user.id}`, updatedUserData)
+          .then(response => {
+            if (response.status === 200) {
+              const appStore = useAppStore();
+              appStore.setUser(response.data);
+              this.user = { ...this.user, ...response.data };
+              console.log('Profile updated successfully.');
+            } else {
+              handleError('Failed to update profile.');
+            }
+          })
+          .catch(error => {
+            console.error('Error while updating profile:', error);
+            handleError('An error occurred while updating the profile.');
+          });
+    },
+
+
+
     searchQuiz() {
       EndpointService.get(`quizzes/${this.searchQuery}`)
           .then((response) => {
