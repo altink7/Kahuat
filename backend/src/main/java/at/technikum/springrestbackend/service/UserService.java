@@ -68,4 +68,9 @@ public interface UserService {
      */
     UserAware getGoogleUserByEmail(String email);
 
+    /**
+     * authenticate a user
+     */
+    AppUser authenticateUser(String email, String password);
+
 }

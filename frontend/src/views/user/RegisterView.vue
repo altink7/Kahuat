@@ -109,7 +109,7 @@ export default {
         this.$router.push({
           name: "login",
         });
-      }, 3000);
+      }, 1500);
     },
   },
 };

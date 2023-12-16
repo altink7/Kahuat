@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/info/AboutView.vue'
 import LoginView from '../views/user/LoginView.vue'
@@ -18,79 +18,79 @@ import AdminView from "@/views/user/AdminView.vue";
 
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: AboutView
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginView
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterView
-  },
-  {
-    path: '/category',
-    name: 'category',
-    component: CategoryView
-  },
-  {
-    path: '/quiz/:requestId',
-    name: 'quiz',
-    props: true,
-    component: QuizView
-  },
-  {
-    path: '/create-quiz',
-    name: 'create-quiz',
-    component: CreateQuizView
-  },
-  {
-    path: '/rankings',
-    name: 'rankings',
-    component: RankingsView,
-    props: (route) => ({ requestId: route.query.requestId, points: route.query.points, route: route.query.duration }),
-  },
-  {
-    path: '/create-question',
-    name: 'create-question',
-    component: CreateQuestionView
-  },
-  {
-    path: '/search-quiz',
-    name: 'search-quiz',
-    component: SearchQuizView
-  },
-  {
-    path: '/lobby/:quizIds',
-    name: 'lobby',
-    component: LobbyView,
-    props: true,
-  },
-  {
-    path: '/faq',
-    name: 'faq',
-    component: FaqView
-  },
-  {
-    path: '/contact',
-    name: 'contact',
-    component: ContactView
-  },
-  {
-    path: '/user-statistics',
-    name: 'user-statistics',
-    component: UserStatisticView
-  },
+    {
+        path: '/',
+        name: 'home',
+        component: HomeView
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: AboutView
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: LoginView
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: RegisterView
+    },
+    {
+        path: '/category',
+        name: 'category',
+        component: CategoryView
+    },
+    {
+        path: '/quiz/:requestId',
+        name: 'quiz',
+        props: true,
+        component: QuizView
+    },
+    {
+        path: '/create-quiz',
+        name: 'create-quiz',
+        component: CreateQuizView
+    },
+    {
+        path: '/rankings',
+        name: 'rankings',
+        component: RankingsView,
+        props: (route) => ({requestId: route.query.requestId, points: route.query.points, route: route.query.duration}),
+    },
+    {
+        path: '/create-question',
+        name: 'create-question',
+        component: CreateQuestionView
+    },
+    {
+        path: '/search-quiz',
+        name: 'search-quiz',
+        component: SearchQuizView
+    },
+    {
+        path: '/lobby/:quizIds',
+        name: 'lobby',
+        component: LobbyView,
+        props: true,
+    },
+    {
+        path: '/faq',
+        name: 'faq',
+        component: FaqView
+    },
+    {
+        path: '/contact',
+        name: 'contact',
+        component: ContactView
+    },
+    {
+        path: '/user-statistics',
+        name: 'user-statistics',
+        component: UserStatisticView
+    },
     {
         path: '/user',
         name: 'user',
@@ -104,8 +104,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+    history: createWebHistory(process.env.BASE_URL),
+    routes
 })
 
 export default router
