@@ -12,20 +12,23 @@ function getWebSocketURL(domain) {
 // Function to get allowed hosts
 function getAllowedHosts(domain) {
   if (domain) {
-    return domain.split(',');
+    return [domain];
   } else {
     return ['localhost'];
   }
 }
 
+// Use process.env.VUE_APP_DOMAIN if defined, otherwise use 'localhost'
+const domain = process.env.VUE_APP_DOMAIN || 'localhost';
+
 module.exports = defineConfig({
   devServer: {
-    // Set allowedHosts dynamically based on the VUE_APP_DOMAIN
-    allowedHosts: getAllowedHosts(process.env.VUE_APP_DOMAIN),
+    // Set allowedHosts dynamically based on the VUE_APP_DOMAIN or default to 'localhost'
+    allowedHosts: getAllowedHosts(domain),
 
-    // Set the WebSocket URL dynamically based on the VUE_APP_DOMAIN
+    // Set the WebSocket URL dynamically based on the VUE_APP_DOMAIN or default to 'localhost'
     client: {
-      webSocketURL: getWebSocketURL(process.env.VUE_APP_DOMAIN),
+      webSocketURL: getWebSocketURL(domain),
     },
   },
 
