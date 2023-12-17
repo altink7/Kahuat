@@ -19,6 +19,35 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div v-if="editQuizVisible" class="col-8">
+    <div class="user-container">
+      <div class="user-card">
+        <div class="profile-header d-flex align-items-center">
+          <h1 class="auth-title">Edit Quiz</h1>
+        </div>
+        <form class="auth-form" @submit.prevent="saveQuizChanges">
+          <!-- Date Input -->
+          <div class="mb-3">
+            <label for="editQuizDate" class="form-label">Select Start Date</label>
+            <input type="date" class="form-control" id="editQuizDate" v-model="fetchedQuiz.editQuizDate">
+          </div>
+
+          <!-- Duration Input -->
+          <div class="mb-3">
+            <label for="editQuizDuration" class="form-label">Enter Duration (in days)</label>
+            <input type="number" class="form-control" id="editQuizDuration" v-model="fetchedQuiz.editQuizDuration">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn update-button">Save Changes</button>
+            <button type="button" class="btn cancel-button" @click="cancelEditQuiz">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
     <!-- how the searched user profile should be displayed -->
     <div v-if="fetchedUser">
@@ -116,14 +145,12 @@
         <div class="quiz-card d-flex flex-column justify-content-center align-items-center">
           {{ fetchedQuiz.id}}
           <div>
-            <button class="btn quiz-button">Edit</button>
+            <button class="btn quiz-button" @click="editQuiz()"> Edit</button>
             <button class="btn quiz-button" @click="deleteQuiz(fetchedQuiz.id)">Delete</button>
-
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -140,6 +167,11 @@ export default {
       fetchedQuiz: null,
       fetchedUser: null,
       showPasswordFields: false,
+      editQuizVisible: false,
+      updateQuizData: {
+        startDate: "",
+        duration: 0,
+      },
     };
 },
   methods: {
@@ -165,7 +197,7 @@ export default {
           })
           .catch((error) => {
             console.error("Error while fetching quiz:", error);
-            handleError("An error occurred while fetching the quiz.");
+            handleError("Quiz does not exist.");
           });
     },
     deleteQuiz(quizId) {
@@ -195,7 +227,7 @@ export default {
           })
           .catch(error => {
             console.error("Error while fetching user:", error);
-            handleError("An error occurred while fetching the user.");
+            handleError("User does not exist.");
           });
     },
 
@@ -246,6 +278,62 @@ export default {
             console.error('Error while deleting user:', error);
             handleError('An error occurred while deleting the user.');
           });
+    },
+
+    editQuiz() {
+      console.log("edit quiz");
+      this.editQuizVisible = true;
+      console.log("edit quiz visible: " + this.editQuizVisible);
+    },
+    cancelEditQuiz() {
+      this.editQuizVisible = false;
+    },
+    saveQuizChanges() {
+      // Validate and save quiz changes
+      if (this.validateQuiz()) {
+        const quizId = this.fetchedQuiz.id;
+
+        this.updateQuizData.startDate = this.fetchedQuiz.editQuizDate;
+        this.updateQuizData.duration = this.fetchedQuiz.editQuizDuration;
+
+        // Continue with your save logic...
+        EndpointService.put(`quizzes/${quizId}/startDate/${this.updateQuizData.startDate}/duration/${this.updateQuizData.duration}`)
+
+            .then((response) => {
+              if (response.status === 200) {
+                console.log('Quiz updated successfully');
+                handleSuccess("Quiz updated successfully");
+                this.cancelEditQuiz();
+              } else {
+                handleError('Failed to update quiz.');
+              }
+            })
+            .catch((error) => {
+              console.error('Error while updating quiz:', error);
+              handleError('An error occurred while updating the quiz.');
+            });
+      }
+    },
+
+    validateQuiz() {
+      if (this.fetchedQuiz.editQuizDate === "") {
+        handleError("Please select a date");
+        return false;
+      }
+
+      if (this.fetchedQuiz.editQuizDuration === "") {
+        handleError("Please enter a duration");
+        return false;
+      }
+
+      let today = new Date();
+      let startDate = new Date(this.fetchedQuiz.editQuizDate);
+      if (startDate > today) {
+        handleError("Start date should not be in the future");
+        return false;
+      }
+
+      return true;
     },
 
   }

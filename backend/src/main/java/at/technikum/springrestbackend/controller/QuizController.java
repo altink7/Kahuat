@@ -21,6 +21,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -140,5 +141,39 @@ public class QuizController extends Controller {
         List<ParticipantDTO> dtoList = new java.util.ArrayList<>(participants.stream().map(participant -> mapper.mapToDTO(participant, ParticipantDTO.class)).toList());
 
         return ResponseEntity.ok(quizService.sortParticipantsByScoreAndTime(dtoList));
+    }
+
+    /**
+     * Endpoint to get all quizzes from creator based on email address. Of creator
+     */
+    @GetMapping("/creator/{email}")
+    public ResponseEntity<List<QuizDTO>> getAllQuizzesByCreator(@PathVariable String email) {
+        List<Quiz> quizzes = quizService.getAllQuizzesByCreator(email);
+
+        if (CollectionUtils.isEmpty(quizzes)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(quizzes.stream().map(quiz -> mapper.mapToDTO(quiz, QuizDTO.class)).toList());
+    }
+
+    @GetMapping("/creator/{email}/{id}")
+    public ResponseEntity<QuizDTO> getQuizByIdAndCreator(@PathVariable String email, @PathVariable String id) {
+        log.info("Email: {} , id : {}", email, id);
+        Quiz quiz = quizService.getQuizById(id);
+
+        log.info("Quiz: {}", quiz);
+        if (quiz.getCreator().getEmail().equals(email)) {
+            return ResponseEntity.ok(mapper.mapToDTO(quiz, QuizDTO.class));
+        }
+
+        log.info("Quiz not found");
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}/startDate/{startDate}/duration/{duration}")
+    public ResponseEntity<QuizDTO> updateQuizStartDateAndDuration(@PathVariable String id, @PathVariable String startDate, @PathVariable int duration) {
+        Quiz updatedQuiz = quizService.updateQuizStartDateAndDuration(id, LocalDate.parse(startDate), duration);
+        return ResponseEntity.ok(mapper.mapToDTO(updatedQuiz, QuizDTO.class));
     }
 }
