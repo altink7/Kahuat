@@ -4,25 +4,25 @@
       <div v-if="editQuizVisible" class="col-md-8">
         <div class="user-container">
           <div class="user-card">
-            <div class="profile-header d-flex align-items-center">
+            <div>
               <h1 class="auth-title">Edit Quiz</h1>
             </div>
             <form class="auth-form" @submit.prevent="saveQuizChanges">
               <!-- Date Input -->
-              <div class="mb-3">
+              <div class="mb-2">
                 <label for="editQuizDate" class="form-label">Select Start Date</label>
                 <input type="date" class="form-control" id="editQuizDate" v-model="fetchedQuiz.editQuizDate">
               </div>
 
               <!-- Duration Input -->
-              <div class="mb-3">
+              <div class="mb-2">
                 <label for="editQuizDuration" class="form-label">Enter Duration (in days)</label>
                 <input type="number" class="form-control" id="editQuizDuration" v-model="fetchedQuiz.editQuizDuration">
               </div>
 
               <div class="form-actions">
                 <button type="submit" class="btn update-button">Save Changes</button>
-                <button type="button" class="btn cancel-button" @click="cancelEditQuiz">Cancel</button>
+                <button type="button" class="btn delete-button" @click="cancelEditQuiz">Cancel</button>
               </div>
             </form>
           </div>
