@@ -56,12 +56,7 @@ export default {
           .then((response) => {
             this.quizData = response.data;
             console.log(this.quizData);
-            return this.getPictureFromQuestionId(this.quizData.questions[0].id);
-          })
-          .then((imageSrc) => {
-            this.imageSrc = imageSrc;
-            console.log("Image Src is being set:" + this.imageSrc);
-            this.startTimer();
+            this.getPictureFromQuestionId(this.quizData.questions[0].id);
           })
         .catch((error) => {
           console.log(error);
@@ -72,16 +67,7 @@ export default {
     nextQuestion() {
       if (this.currentQuestionIndex < this.quizData.questions.length - 1) {
         this.currentQuestionIndex++;
-
-
-        this.getPictureFromQuestionId(this.currentQuestion.id)
-            .then((imageSrc) => {
-              this.imageSrc = imageSrc;
-            })
-            .catch((error) => {
-                console.error("Error loading image:", error);
-                this.imageSrc = null;
-              });
+        this.getPictureFromQuestionId(this.currentQuestion.id);
 
         this.resetTimer();
       } else if (this.playing) {
@@ -168,18 +154,9 @@ export default {
       }
     },
     getPictureFromQuestionId(questionId) {
-      console.log("Getting picture for question with id " + questionId);
-      this.loadingImage = true;
-
-      return EndpointService.get(`quizzes/questions/${questionId}/image`, { responseType: 'arraybuffer' })
-          .then((response) => {
-            console.log(response.data);
-            const arrayBufferView = new Uint8Array(response.data);
-            const blob = new Blob([arrayBufferView], { type: 'image/png' });
-
-            return response.data ? URL.createObjectURL(blob) : null;
-          })
+      this.imageSrc = `http://localhost:8081/api/quizzes/questions/${questionId}/image`;
     }
+
   },
   props: {
     requestId: {
