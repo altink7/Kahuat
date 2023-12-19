@@ -28,8 +28,8 @@ public class Question extends AbstractEntity implements Serializable {
     @ToString.Exclude
     private List<AnswerOption> answerOptions;
 
-    @Column(name = "file")
-    private File file;
+    @Transient
+    private byte[] file;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id", nullable = false)

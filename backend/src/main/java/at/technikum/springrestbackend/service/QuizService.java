@@ -91,4 +91,12 @@ public interface QuizService {
      * @return the updated quiz
      */
     Quiz updateQuizStartDateAndDuration(String id, LocalDate parse, int duration);
+
+    /**
+     * Get the image of a question
+     * @param questionId the question id
+     * @return the image
+     */
+    byte[] getQuestionImage(Long questionId);
+
 }

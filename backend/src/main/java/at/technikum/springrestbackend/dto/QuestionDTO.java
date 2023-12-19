@@ -20,5 +20,5 @@ public class QuestionDTO {
     @NotNull(message = "AnswerOption cannot be null!")
     private List<AnswerOptionDTO> answerOptions;
 
-    private File file;
+    private Object file;
 }

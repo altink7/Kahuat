@@ -12,6 +12,8 @@
         :answerB="currentQuestion.answerOptions[1] == null ? {} : currentQuestion.answerOptions[1]"
         :answerC="currentQuestion.answerOptions[2] == null ? {} : currentQuestion.answerOptions[2]"
         :answerD="currentQuestion.answerOptions[3] == null ? {} : currentQuestion.answerOptions[3]"
+        :timerDuration="timer"
+        :image-src="imageSrc"
         @answer-clicked="handleAnswerClicked" />
     </div>
     <br>
@@ -25,7 +27,7 @@
 <script>
 import QuestionComponent from "@/components/QuestionComponent.vue";
 import EndpointService from "@/services/server/EndpointService";
-import { useAppStore } from "@/services/store/appStore";
+import {useAppStore} from "@/services/store/appStore";
 
 export default {
   name: "QuizView",
@@ -38,6 +40,8 @@ export default {
       timerInterval: null,
       quizStartTime: null,
       playing: true,
+      imageSrc: null,
+      loadingImage: false,
     };
   },
   computed: {
@@ -49,18 +53,36 @@ export default {
     searchQuiz(quizId) {
       this.quizStartTime = Date.now();
       EndpointService.get(`quizzes/${quizId}`)
-        .then((response) => {
-          this.quizData = response.data;
-          this.startTimer();
-        })
+          .then((response) => {
+            this.quizData = response.data;
+            console.log(this.quizData);
+            return this.getPictureFromQuestionId(this.quizData.questions[0].id);
+          })
+          .then((imageSrc) => {
+            this.imageSrc = imageSrc;
+            console.log("Image Src is being set:" + this.imageSrc);
+            this.startTimer();
+          })
         .catch((error) => {
           console.log(error);
           this.quizData = { questions: [] };
+          this.imageSrc = null;
         });
     },
     nextQuestion() {
       if (this.currentQuestionIndex < this.quizData.questions.length - 1) {
         this.currentQuestionIndex++;
+
+
+        this.getPictureFromQuestionId(this.currentQuestion.id)
+            .then((imageSrc) => {
+              this.imageSrc = imageSrc;
+            })
+            .catch((error) => {
+                console.error("Error loading image:", error);
+                this.imageSrc = null;
+              });
+
         this.resetTimer();
       } else if (this.playing) {
 
@@ -145,6 +167,19 @@ export default {
         this.nextQuestion();
       }
     },
+    getPictureFromQuestionId(questionId) {
+      console.log("Getting picture for question with id " + questionId);
+      this.loadingImage = true;
+
+      return EndpointService.get(`quizzes/questions/${questionId}/image`, { responseType: 'arraybuffer' })
+          .then((response) => {
+            console.log(response.data);
+            const arrayBufferView = new Uint8Array(response.data);
+            const blob = new Blob([arrayBufferView], { type: 'image/png' });
+
+            return response.data ? URL.createObjectURL(blob) : null;
+          })
+    }
   },
   props: {
     requestId: {
