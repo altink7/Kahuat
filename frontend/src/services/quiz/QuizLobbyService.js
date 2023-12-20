@@ -39,6 +39,22 @@ export async function loadQuizDurations(quizIdsArray) {
 
     return quizDurations;
 }
+
+export async function loadQuizTitles(quizIdsArray) {
+    const quizTitles = {};
+
+    for (const quizId of quizIdsArray) {
+        try {
+            const response = await EndpointService.get(`quizzes/${quizId}`);
+            console.log("Response: ", response.data);
+            quizTitles[quizId] = response.data.title ?? null;
+        } catch (error) {
+            quizTitles[quizId] = "Title could not be loaded.";
+        }
+    }
+
+    return quizTitles;
+}
 /**
  * Check if a quiz is expired based on its start date.
  *

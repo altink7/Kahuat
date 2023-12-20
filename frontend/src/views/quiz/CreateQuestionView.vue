@@ -3,6 +3,8 @@
     <h1>Create Question & Answers</h1>
   </div>
   <div>
+    <input type="text" class="form-control form-control-game-pin" placeholder="Quiz name" v-model="quizTitle" maxlength="25" />
+
     <div v-for="index in questionComponentsCount" :key="index">
       <CreateQuestionMolecule ref="questionComponents" />
     </div>
@@ -28,6 +30,7 @@ export default {
     return {
       questionComponentsCount: 1,
       quizQuestions: [], // To store questions and answers
+      quizTitle: "",
     };
   },
   methods: {
@@ -65,6 +68,7 @@ export default {
       const formQuiz = {
         creatorId: useAppStore().getUser(),
         kategorie: this.getCategory,
+        title: this.quizTitle,
         startDate: new Date().toLocaleDateString('en-CA'),
         duration: 30,
         questions: this.quizQuestions,
