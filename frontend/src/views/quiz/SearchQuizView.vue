@@ -8,17 +8,25 @@
             <button class="btn btn-primary" @click="searchQuiz">Enter</button>
           </div>
         </div>
+        <button class="btn btn-secondary" @click="generateQRCode">Generate QR Code</button>
       </div>
     </div>
 
-    <CategoryMolecule @categoryClicked="handleCategoryClicked" />
+    <div v-if="!showQRCode">
+      <CategoryMolecule @categoryClicked="handleCategoryClicked" />
+    </div>
+
+    <div v-else class="qr-code-container">
+      <img :src="qrCodeImageUrl" alt="QR Code" class="qr-code" />
+    </div>
   </div>
 </template>
 
 <script>
 import CategoryMolecule from "@/components/molecules/CategoryMolecule.vue";
 import { handleError } from "@/services/MessageHandlerService";
-import EndpointService from "@/services/server/EndpointService"; // Import the error handling function
+import EndpointService from "@/services/server/EndpointService";
+import QRCode from "qrcode";
 
 export default {
   name: "SearchQuizView",
@@ -26,6 +34,8 @@ export default {
     return {
       searchQuery: "",
       quiz: "",
+      showQRCode: false,
+      qrCodeImageUrl: "",
     };
   },
   methods: {
@@ -36,10 +46,10 @@ export default {
             this.quiz = response.data;
             console.log(this.quiz);
 
-            this.$router.push({
-              name: "lobby",
-              params: { quizIds: this.quiz.id },
-            });
+              this.$router.push({
+                name: "lobby",
+                params: {quizIds: this.quiz.id},
+              });
           } else {
             handleError("Quiz does not exist.");
           }
@@ -48,6 +58,33 @@ export default {
           console.error("Error while fetching quiz:", error);
           handleError("An error occurred while fetching the quiz.");
         });
+    },
+    generateQRCode() {
+      EndpointService.get(`quizzes/${this.searchQuery}`)
+          .then((response) => {
+            if (response.status === 200) {
+              this.quiz = response.data;
+              const frontendWebURL = process.env.FRONTEND_WEB_URL || "http://localhost:8080";
+              const qrCodeURL = `${frontendWebURL}/lobby/${this.quiz.id}`;
+
+              QRCode.toDataURL(qrCodeURL, (err, url) => {
+                if (err) {
+                  console.error("Error while generating QR code:", err);
+                  handleError("An error occurred while generating QR code.");
+                } else {
+                  this.qrCodeImageUrl = url;
+                  this.showQRCode = true;
+                }
+              });
+
+            } else {
+              handleError("No quiz found. Generate QR Code is only available when a quiz exists.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error while fetching quiz:", error);
+            handleError("An error occurred while fetching the quiz.");
+          });
     },
     handleCategoryClicked(category) {
       EndpointService.get(`quizzes/categories/${category.toUpperCase()}`)
@@ -72,3 +109,22 @@ export default {
   components: { CategoryMolecule },
 };
 </script>
+
+
+<style scoped>
+.container {
+  text-align: center;
+}
+
+.qr-code-container {
+  margin-top: 20px;
+}
+
+.qr-code {
+  max-width: 300px;
+  max-height: 300px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+</style>
