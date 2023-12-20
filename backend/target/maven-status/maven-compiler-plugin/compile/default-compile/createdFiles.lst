@@ -57,6 +57,7 @@ at\technikum\springrestbackend\service\QuizService.class
 at\technikum\springrestbackend\model\generator\QuizIdGenerator.class
 at\technikum\springrestbackend\validator\annotation\ValidateWith.class
 at\technikum\springrestbackend\repository\QuizDao.class
+at\technikum\springrestbackend\config\web\WebConfig.class
 at\technikum\springrestbackend\model\user\GoogleUser.class
 at\technikum\springrestbackend\repository\AnswerOptionDao.class
 at\technikum\springrestbackend\model\Answer.class

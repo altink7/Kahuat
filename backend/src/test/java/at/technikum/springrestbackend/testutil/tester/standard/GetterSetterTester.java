@@ -10,10 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Utility class to test getters and setters of a class.
@@ -157,7 +154,9 @@ public class GetterSetterTester extends AbstractClassTester implements Tester {
             return Map.of();
         } else if (type == Object.class) {
             return new Object();
-        } else if (!type.isPrimitive()) {
+        } else if(type == UUID.class) {
+            return UUID.randomUUID();
+        }else if (!type.isPrimitive()) {
             try {
                 Constructor<?> noArgConstructor = type.getDeclaredConstructor();
                 if (noArgConstructor.getParameterCount() == 0) {

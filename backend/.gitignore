@@ -34,4 +34,4 @@ build/
 /db-data
 
 ### surefire- ###
-target/surefire-reports/*.xml
+/target/surefire-reports/
