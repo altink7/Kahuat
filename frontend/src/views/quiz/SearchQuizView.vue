@@ -109,22 +109,3 @@ export default {
   components: { CategoryMolecule },
 };
 </script>
-
-
-<style scoped>
-.container {
-  text-align: center;
-}
-
-.qr-code-container {
-  margin-top: 20px;
-}
-
-.qr-code {
-  max-width: 300px;
-  max-height: 300px;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-</style>
