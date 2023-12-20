@@ -11,7 +11,9 @@
           <button class="action-button" @click="showQuizEntryView(quizId)" :class="{ 'expired': isQuizExpired(quizId) }"
             :style="getButtonStyle(quizStartDates[quizId], quizDurations[quizId])"
             :disabled="isQuizExpired(quizId) || quizStartDates[quizId] === 'Loading...'">
-            {{ quizId }}
+            <span v-if="quizTitles[quizId]" class="quiz-title">{{ quizTitles[quizId] }}</span>
+            <hr v-if="quizTitles[quizId]">
+            <span class="quiz-id">{{ quizId }}</span>
             <br>
             {{ getFormattedStartDate(quizStartDates[quizId]) }}
           </button>
@@ -29,7 +31,7 @@ import {
   getFormattedStartDate,
   isQuizExpired,
   loadQuizDurations,
-  loadQuizStartDates,
+  loadQuizStartDates, loadQuizTitles,
   startQuiz
 } from "@/services/quiz/QuizLobbyService";
 import QuizEntryMolecule from "@/components/molecules/QuizEntryMolecule.vue";
@@ -46,6 +48,7 @@ export default {
       quizIdsArray: [],
       quizStartDates: {},
       quizDurations: {},
+      quizTitles: {},
       showQuizEntry: false,
       selectedQuizId: null,
     };
@@ -55,6 +58,7 @@ export default {
       this.quizIdsArray = this.quizIds.split(",");
       this.loadQuizStartDates();
       this.loadQuizDurations();
+      this.loadQuizTitles();
     }
   },
   methods: {
@@ -73,7 +77,14 @@ export default {
         console.log(error);
       });
     },
-
+    async loadQuizTitles() {
+      this.quizTitles = loadQuizTitles(this.quizIdsArray).then((result) => {
+        this.quizTitles = result;
+        console.log("Quiz titles: " + this.quizTitles);
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
     isQuizExpired(quizId) {
       return isQuizExpired(this.quizStartDates, quizId);
     },

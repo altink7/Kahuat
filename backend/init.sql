@@ -239,6 +239,7 @@ CREATE TABLE IF NOT EXISTS`quiz` (
     `kategorie` tinyint(4) DEFAULT NULL CHECK (`kategorie` between 0 and 6),
     `start_date` date DEFAULT NULL,
     `updated_at` datetime(6) DEFAULT NULL,
+    `title` varchar(255) DEFAULT NULL,
     `creator_id` bigint(20) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
