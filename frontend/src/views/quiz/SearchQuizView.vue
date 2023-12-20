@@ -17,7 +17,7 @@
     </div>
 
     <div v-else class="qr-code-container">
-      <img :src="qrCodeImageUrl" alt="QR Code" />
+      <img :src="qrCodeImageUrl" alt="QR Code" class="qr-code" />
     </div>
   </div>
 </template>
@@ -121,10 +121,10 @@ export default {
 }
 
 .qr-code {
-  max-width: 300px; /* Set your preferred maximum width */
-  max-height: 300px; /* Set your preferred maximum height */
+  max-width: 300px;
+  max-height: 300px;
   width: 100%;
   height: auto;
-  margin: 0 auto; /* Center the QR code horizontally */
+  margin: 0 auto;
 }
 </style>
