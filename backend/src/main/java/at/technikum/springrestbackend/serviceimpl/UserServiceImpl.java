@@ -59,19 +59,33 @@ public class UserServiceImpl implements UserService {
 
     @ValidateWith(UserValidator.class)
     public AppUser createUser(AppUser appUser) {
+        appUser.setPassword(PasswordUtils.encryptPassword(appUser.getPassword()));
         return appUserDao.save(appUser);
     }
 
     @Override
     public AppUser updateUser(Long userId, AppUser appUser) {
-        return appUserDao.findById(userId).map(u -> {
-            u.setFirstName(appUser.getFirstName());
-            u.setLastName(appUser.getLastName());
-            u.setEmail(appUser.getEmail());
-            u.setPassword(appUser.getPassword());
-            return appUserDao.save(u);
+        return appUserDao.findById(userId).map(existingUser -> {
+            if (appUser.getFirstName() != null) {
+                existingUser.setFirstName(appUser.getFirstName());
+            }
+
+            if (appUser.getLastName() != null) {
+                existingUser.setLastName(appUser.getLastName());
+            }
+
+            if (appUser.getEmail() != null) {
+                existingUser.setEmail(appUser.getEmail());
+            }
+
+            String newPassword = appUser.getPassword();
+            if (newPassword != null && !newPassword.isEmpty()) {
+                existingUser.setPassword(PasswordUtils.encryptPassword(newPassword));
+            }
+            return appUserDao.save(existingUser);
         }).orElseThrow(UserNotFoundException::new);
     }
+
 
     @Override
     public UserAware createGoogleUser(GoogleUser user) {
@@ -81,5 +95,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserAware getGoogleUserByEmail(String email) {
         return this.googleUserDao.findByEmail(email).orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public AppUser authenticateUser(String email, String password) {
+        AppUser user = appUserDao.findByEmail(email).orElseThrow(UserNotFoundException::new);
+
+        if (PasswordUtils.matchPassword(password, user.getPassword())) {
+            return user;
+        }
+        return null;
     }
 }

@@ -32,6 +32,9 @@ public class Quiz implements Serializable {
     @Column(name = "id", nullable = false)
     private String id;
 
+    @Column(name = "title")
+    private String title;
+
     @ManyToOne
     @JoinColumn(name = "creator_id")
     private User creator;

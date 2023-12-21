@@ -29,4 +29,6 @@ public class QuizDTO {
     @Positive
     private int duration;
 
+    private String title;
+
 }

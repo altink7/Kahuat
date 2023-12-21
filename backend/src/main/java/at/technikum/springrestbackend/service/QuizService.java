@@ -8,6 +8,7 @@ import at.technikum.springrestbackend.model.Question;
 import at.technikum.springrestbackend.model.Quiz;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -74,4 +75,28 @@ public interface QuizService {
      * Randomize order of questions and answers
      */
     QuizDTO randomizeQuiz(QuizDTO quizDTO);
+
+    /**
+     * Get all quizzes by creator
+     * @param email the email of the creator
+     * @return the list of quizzes
+     */
+    List<Quiz> getAllQuizzesByCreator(String email);
+
+    /**
+     *  Update the quiz start date and duration
+     * @param id the quiz id
+     * @param parse the start date
+     * @param duration the duration
+     * @return the updated quiz
+     */
+    Quiz updateQuizStartDateAndDuration(String id, LocalDate parse, int duration);
+
+    /**
+     * Get the image of a question
+     * @param questionId the question id
+     * @return the image
+     */
+    byte[] getQuestionImage(Long questionId);
+
 }

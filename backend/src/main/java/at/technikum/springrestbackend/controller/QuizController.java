@@ -10,17 +10,19 @@ import at.technikum.springrestbackend.model.Question;
 import at.technikum.springrestbackend.model.Quiz;
 import at.technikum.springrestbackend.service.QuizService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -78,7 +80,22 @@ public class QuizController extends Controller {
      */
     @PostMapping("/createQuiz")
     public ResponseEntity<QuizDTO> createQuiz(@Valid @RequestBody QuizDTO quiz) {
+        quiz.getQuestions().forEach(question -> {
+            if (question.getFile() != null) {
+                String[] parts = ((String) question.getFile()).split(",");
+                question.setFile(Base64.getDecoder().decode(parts[1]));
+            }
+        });
+
         Quiz quizEntity = mapper.mapToEntity(quiz, Quiz.class);
+        quizEntity.getQuestions().forEach(question -> {
+           quiz.getQuestions().forEach(questionDTO -> {
+               if (question.getQuestion().equals(questionDTO.getQuestion())) {
+                   question.setFile((byte[]) questionDTO.getFile());
+               }
+           });
+        });
+
         Quiz createdQuiz = quizService.createQuiz(quizEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.mapToDTO(createdQuiz, QuizDTO.class));
     }
@@ -140,5 +157,60 @@ public class QuizController extends Controller {
         List<ParticipantDTO> dtoList = new java.util.ArrayList<>(participants.stream().map(participant -> mapper.mapToDTO(participant, ParticipantDTO.class)).toList());
 
         return ResponseEntity.ok(quizService.sortParticipantsByScoreAndTime(dtoList));
+    }
+
+    /**
+     * Endpoint to get all quizzes from creator based on email address. Of creator
+     */
+    @GetMapping("/creator/{email}")
+    public ResponseEntity<List<QuizDTO>> getAllQuizzesByCreator(@PathVariable String email) {
+        List<Quiz> quizzes = quizService.getAllQuizzesByCreator(email);
+
+        if (CollectionUtils.isEmpty(quizzes)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(quizzes.stream().map(quiz -> mapper.mapToDTO(quiz, QuizDTO.class)).toList());
+    }
+
+    @GetMapping("/creator/{email}/{id}")
+    public ResponseEntity<QuizDTO> getQuizByIdAndCreator(@PathVariable String email, @PathVariable String id) {
+        log.info("Email: {} , id : {}", email, id);
+        Quiz quiz = quizService.getQuizById(id);
+
+        log.info("Quiz: {}", quiz);
+        if (quiz.getCreator().getEmail().equals(email)) {
+            return ResponseEntity.ok(mapper.mapToDTO(quiz, QuizDTO.class));
+        }
+
+        log.info("Quiz not found");
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}/startDate/{startDate}/duration/{duration}")
+    public ResponseEntity<QuizDTO> updateQuizStartDateAndDuration(@PathVariable String id, @PathVariable String startDate, @PathVariable int duration) {
+        Quiz updatedQuiz = quizService.updateQuizStartDateAndDuration(id, LocalDate.parse(startDate), duration);
+        return ResponseEntity.ok(mapper.mapToDTO(updatedQuiz, QuizDTO.class));
+    }
+
+    /**
+     * Endpoint to get the image associated with a question in a quiz.
+     *
+     * @param questionId The ID of the question.
+     * @return A ResponseEntity containing the image if found, or a "not found" response.
+     */
+    @GetMapping("questions/{questionId}/image")
+    public ResponseEntity<byte[]> getQuestionImage(@PathVariable long questionId) {
+        byte[] imageBytes = quizService.getQuestionImage(questionId);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+
+        if(imageBytes == null){
+            log.info("Image not found");
+            return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
+        }
+
+        log.info("Image found");
+        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
     }
 }

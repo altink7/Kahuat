@@ -6,9 +6,13 @@ import './assets/style.css';
 import { createPinia } from 'pinia';
 import vue3GoogleLogin from 'vue3-google-login'
 import { useAppStore} from "@/services/store/appStore";
+import {checkAuth} from "@/services/auth/NavGuard";
 
 const app = createApp(App);
 const pinia = createPinia();
+
+// navigation guard for routes
+checkAuth();
 
 app.use(pinia);
 app.use(router);

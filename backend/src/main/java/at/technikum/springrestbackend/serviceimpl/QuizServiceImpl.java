@@ -15,6 +15,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -77,6 +82,9 @@ public class QuizServiceImpl implements QuizService {
         quiz.getQuestions().forEach(question -> {
             question.setQuiz(quiz);
             questionDao.save(question);
+            if(question.getFile() != null) {
+                saveFile(question.getFile(), question.getId().toString());
+            }
 
             question.getAnswerOptions().forEach(answerOption -> {
                 Answer answer = answerOption.getAnswer();
@@ -211,6 +219,57 @@ public class QuizServiceImpl implements QuizService {
         quizDTO.setQuestions(questions);
 
         return quizDTO;
+    }
+
+    @Override
+    public List<Quiz> getAllQuizzesByCreator(String email) {
+        long userId = appUserDao.findByEmail(email).orElseThrow().getUserId();
+        return quizDao.findByCreatorId(userId).orElseThrow(QuizNotFoundException::new);
+    }
+
+    @Override
+    public Quiz updateQuizStartDateAndDuration(String id, LocalDate parse, int duration) {
+        Quiz quiz = quizDao.findById(id).orElseThrow(QuizNotFoundException::new);
+        quiz.setStartDate(parse);
+        quiz.setDuration(duration);
+        return quizDao.save(quiz);
+    }
+
+    @Override
+    public byte[] getQuestionImage(Long questionId) {
+        String fileName = "Question" + questionId + "_background.png";
+        String projectDirectory = System.getProperty("user.dir");
+        String directoryPath = projectDirectory + "/src/main/resources/static/images";
+        Path fileDirectoryPath = Paths.get(directoryPath, fileName);
+
+        log.info("File Path: " + fileDirectoryPath.toAbsolutePath());
+
+        if(!Files.exists(fileDirectoryPath)) {
+            return null;
+        }
+
+        try {
+            return Files.readAllBytes(fileDirectoryPath);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading image file", e);
+        }
+    }
+
+    private void saveFile(byte[] fileBytes, String name) {
+        String fileName = "Question" + name + "_background.png";
+        String projectDirectory = System.getProperty("user.dir");
+        String directoryPath = projectDirectory + "/src/main/resources/static/images";
+        Path fileDirectoryPath = Paths.get(directoryPath, fileName);
+        String filePath = fileDirectoryPath.toString();
+
+        try {
+            Files.createDirectories(Paths.get(directoryPath));
+            Files.write(Paths.get(filePath), fileBytes);
+            log.info("File saved: " + filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        log.info("Absolute File Path: " + fileDirectoryPath.toAbsolutePath());
     }
 
     /**

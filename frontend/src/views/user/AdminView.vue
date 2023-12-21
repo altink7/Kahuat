@@ -19,21 +19,49 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- User Profile Section -->
-    <div v-if="searchFor === 'user'">
+  <div v-if="editQuizVisible" class="col-8">
+    <div class="user-container">
+      <div class="user-card">
+        <div class="profile-header d-flex align-items-center">
+          <h1 class="auth-title">Edit Quiz</h1>
+        </div>
+        <form class="auth-form" @submit.prevent="saveQuizChanges">
+          <!-- Date Input -->
+          <div class="mb-3">
+            <label for="editQuizDate" class="form-label">Select Start Date</label>
+            <input type="date" class="form-control" id="editQuizDate" v-model="fetchedQuiz.editQuizDate">
+          </div>
 
+          <!-- Duration Input -->
+          <div class="mb-3">
+            <label for="editQuizDuration" class="form-label">Enter Duration (in days)</label>
+            <input type="number" class="form-control" id="editQuizDuration" v-model="fetchedQuiz.editQuizDuration">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn update-button">Save Changes</button>
+            <button type="button" class="btn cancel-button" @click="cancelEditQuiz">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- how the searched user profile should be displayed -->
+    <div v-if="fetchedUser">
       <div class="user-container d-flex">
         <div class="user-card">
           <div class="profile-header d-flex align-items-center">
             <img src="../../assets/default-profile-pic.webp" alt="Profile Picture" class="profile-pic" />
             <h1 class="auth-title">Profile</h1>
           </div>
-          <form class="auth-form">
+          <form class="auth-form" @submit.prevent="updateUserProfile">
             <div class="row mb-2">
               <div class="from-group col-md-3">
                 <label class="form-label" for="salutation">Gender</label>
-                <select class="form-control" id="salutation" name="salutation">
+                <select class="form-control" id="salutation" name="salutation" v-model="fetchedUser.salutation">
                   <option value="none">-</option>
                   <option value="MALE">Male</option>
                   <option value="FEMALE">Female</option>
@@ -42,20 +70,20 @@
               </div>
               <div class="col-md-4">
                 <label class="form-label" for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="Max" required>
+                <input type="text" class="form-control" id="firstName" v-model="fetchedUser.firstName" required>
               </div>
               <div class="col-md-5">
                 <label class="form-label" for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="Mustermann" required>
+                <input type="text" class="form-control" id="lastName" v-model="fetchedUser.lastName" required>
               </div>
             </div>
             <div class="mb-2">
               <label class="form-label" for="email">E-Mail-Adress</label>
-              <input type="email" class="form-control" id="email" placeholder="max.muster@gmail.com" required>
+              <input type="email" class="form-control" id="email" v-model="fetchedUser.email" required>
             </div>
             <div>
               <label class="form-label" for="country">Country</label>
-              <select class="form-control" id="country" name="country">
+              <select class="form-control" id="country" name="country" v-model="fetchedUser.country">
                 <option value="none">-</option>
                 <option value="AT">Austria</option>
                 <option value="BE">Belgium</option>
@@ -104,7 +132,7 @@
 
             <div class="form-actions">
               <button type="submit" class="btn update-button">Update Profile</button>
-              <button type="button" class="btn delete-button">Delete Account</button>
+              <button type="button" class="btn delete-button" @click="deleteUser">Delete Account</button>
             </div>
           </form>
         </div>
@@ -112,50 +140,203 @@
     </div>
 
     <!-- Quiz Section -->
-    <div v-if="searchFor === 'quiz'">
+    <div v-if="fetchedQuiz" class="quiz-details">
       <div class="button-container justify-content-evenly">
         <div class="quiz-card d-flex flex-column justify-content-center align-items-center">
-          Quiz id
+          {{ fetchedQuiz.id}}
           <div>
-            <button class="btn quiz-button">Play</button>
-            <button class="btn quiz-button">Edit</button>
+            <button class="btn quiz-button" @click="editQuiz()"> Edit</button>
+            <button class="btn quiz-button" @click="deleteQuiz(fetchedQuiz.id)">Delete</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
+import EndpointService from "@/services/server/EndpointService";
+import {handleError, handleSuccess} from "@/services/MessageHandlerService";
+
 export default {
   data() {
     return {
-      searchFor: 'none', // none, user, or quiz
-      searchQuery: '', // The search query
-      searchResults: [], // The search results
+      searchFor: 'none',
+      searchQuery: "",
+      quiz: "",
+      user: "",
+      fetchedQuiz: null,
+      fetchedUser: null,
       showPasswordFields: false,
+      editQuizVisible: false,
+      updateQuizData: {
+        startDate: "",
+        duration: 0,
+      },
     };
 },
   methods: {
     togglePasswordDropdown() {
       this.showPasswordFields = !this.showPasswordFields;
     },
-    search(){
-      // Perform the search based on the type and query.
-      // You would typically make an API call here.
-      // Below is just a placeholder for demonstration.
-      if (this.searchFor === 'user') {
-        // Replace with actual API call
-        this.searchResults = [{ id: 1, name: 'John Doe', email: 'john@example.com' }];
-      } else if (this.searchFor === 'quiz') {
-        // Replace with actual API call
-        this.searchResults = [{ id: 1, title: 'General Knowledge Quiz' }];
+    search() {
+      if (this.searchFor === 'quiz') {
+        this.searchQuiz();
+      } else if (this.searchFor === 'user') {
+        this.searchUser();
       }
     },
+    searchQuiz() {
+      EndpointService.get(`quizzes/${this.searchQuery}`)
+          .then((response) => {
+            if (response.status === 200) {
+              this.fetchedQuiz = response.data;
+              console.log(this.fetchedQuiz);
+            } else {
+              handleError("Quiz does not exist.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error while fetching quiz:", error);
+            handleError("Quiz does not exist.");
+          });
+    },
+    deleteQuiz(quizId) {
+      EndpointService.delete(`quizzes/${quizId}`)
+          .then(response => {
+            if (response.status === 200 || response.status === 204) {
+              console.log('Quiz deleted successfully');
+              handleSuccess("Quiz deleted successfully");
+            } else {
+              handleError('Failed to delete quiz.');
+            }
+          })
+          .catch(error => {
+            console.error('Error while deleting quiz:', error);
+            handleError('An error occurred while deleting the quiz.');
+          });
+    },
+    searchUser() {
+      EndpointService.get(`users/${(this.searchQuery)}`)
+          .then(response => {
+            if (response.status === 200) {
+              this.fetchedUser = response.data;
+              console.log(this.fetchedUser);
+            } else {
+              handleError("User does not exist.");
+            }
+          })
+          .catch(error => {
+            console.error("Error while fetching user:", error);
+            handleError("User does not exist.");
+          });
+    },
+
+    updateUserProfile() {
+      if (this.fetchedUser.password !== this.fetchedUser.confirmPassword) {
+        handleError('Passwords do not match.');
+        return;
+      }
+
+      let updatedUserData = {
+        salutation: this.fetchedUser.salutation,
+        firstName: this.fetchedUser.firstName,
+        lastName: this.fetchedUser.lastName,
+        email: this.fetchedUser.email,
+        country: this.fetchedUser.country,
+      };
+      if (this.showPasswordFields) {
+        updatedUserData.password = this.user.password;
+      }
+
+      EndpointService.put(`users/${this.fetchedUser.id}`, updatedUserData)
+          .then(response => {
+            if (response.status === 200) {
+              handleSuccess("User has been updated successfully");
+              console.log('User profile updated successfully.');
+              this.fetchedUser = { ...this.fetchedUser, ...response.data };
+            } else {
+              handleError('Failed to update user profile.');
+            }
+          })
+          .catch(error => {
+            console.error('Error while updating user profile:', error);
+            handleError('An error occurred while updating the user profile.');
+          });
+    },
+    deleteUser() {
+      EndpointService.delete(`users/${this.fetchedUser.id}`)
+          .then(response => {
+            if (response.status === 200 || response.status === 204) {
+              handleSuccess("User has been deleted");
+              console.log('User deleted successfully');
+              this.fetchedUser = null;
+            } else {
+              handleError('Failed to delete user.');
+            }
+          })
+          .catch(error => {
+            console.error('Error while deleting user:', error);
+            handleError('An error occurred while deleting the user.');
+          });
+    },
+
+    editQuiz() {
+      console.log("edit quiz");
+      this.editQuizVisible = true;
+      console.log("edit quiz visible: " + this.editQuizVisible);
+    },
+    cancelEditQuiz() {
+      this.editQuizVisible = false;
+    },
+    saveQuizChanges() {
+      // Validate and save quiz changes
+      if (this.validateQuiz()) {
+        const quizId = this.fetchedQuiz.id;
+
+        this.updateQuizData.startDate = this.fetchedQuiz.editQuizDate;
+        this.updateQuizData.duration = this.fetchedQuiz.editQuizDuration;
+
+        // Continue with your save logic...
+        EndpointService.put(`quizzes/${quizId}/startDate/${this.updateQuizData.startDate}/duration/${this.updateQuizData.duration}`)
+
+            .then((response) => {
+              if (response.status === 200) {
+                console.log('Quiz updated successfully');
+                handleSuccess("Quiz updated successfully");
+                this.cancelEditQuiz();
+              } else {
+                handleError('Failed to update quiz.');
+              }
+            })
+            .catch((error) => {
+              console.error('Error while updating quiz:', error);
+              handleError('An error occurred while updating the quiz.');
+            });
+      }
+    },
+
+    validateQuiz() {
+      if (this.fetchedQuiz.editQuizDate === "") {
+        handleError("Please select a date");
+        return false;
+      }
+
+      if (this.fetchedQuiz.editQuizDuration === "") {
+        handleError("Please enter a duration");
+        return false;
+      }
+
+      let today = new Date();
+      let startDate = new Date(this.fetchedQuiz.editQuizDate);
+      if (startDate > today) {
+        handleError("Start date should not be in the future");
+        return false;
+      }
+
+      return true;
+    },
+
   }
 };
 </script>
 
-<style>
-/* Add your CSS styles here */
-</style>

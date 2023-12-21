@@ -1,6 +1,12 @@
 <template>
   <div class="d-flex justify-content-center align-items-center">
-    <div class="card question">
+    <div v-if="imageSrc" class="card question" :style="{ backgroundImage: `url(${imageSrc})` }">
+      <div class="card-body">
+        <div class="timer-bar" :style="{ width: timerWidth }"></div>
+        <h3>{{ question }}</h3>
+      </div>
+    </div>
+    <div v-else class="card question">
       <div class="card-body">
         <div class="timer-bar" :style="{ width: timerWidth }"></div>
         <h3>{{ question }}</h3>
@@ -55,6 +61,10 @@ export default {
     timerDuration: {
       type: Number,
       default: 15, // 15 seconds by default
+    },
+    imageSrc: {
+      type: String,
+      default: null,
     },
   },
   data() {

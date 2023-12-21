@@ -1,8 +1,9 @@
 <template>
   <div class="d-flex justify-content-center align-items-center">
-    <div class="card question">
+    <div class="card question" :style="{ backgroundImage: `url('${backgroundImage}')` }">
       <div class="card-body">
         <h1 class="card-title text-center">Question</h1>
+        <input type="file" @change="handleImageUpload" accept="image/png" />
         <form id="question-form" class="question-form" action="" method="POST">
           <div class="row">
             <div class="form-group">
@@ -58,6 +59,7 @@
 <script>
 
 import {useAppStore} from "@/services/store/appStore";
+import {noop} from "chart.js/helpers";
 
 export default {
   data() {
@@ -69,10 +71,12 @@ export default {
         C: { text: "", isCorrect: false },
         D: { text: "", isCorrect: false },
       },
+      backgroundImage: null,
     };
   },
 
   methods: {
+    noop,
     getQuestionFromForm() {
       return {
         question: this.question,
@@ -81,6 +85,7 @@ export default {
           correct: answer.isCorrect,
         })),
         category: useAppStore().getSelectedCategory()?.toUpperCase() || "",
+        file: this.backgroundImage,
       };
     },
 
@@ -92,6 +97,18 @@ export default {
 
     toggleCorrect(answerKey) {
       this.answers[answerKey].isCorrect = !this.answers[answerKey].isCorrect;
+    },
+
+    handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.backgroundImage = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
     },
   },
 };

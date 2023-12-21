@@ -41,13 +41,18 @@ export async function registerUser(user, confirmPassword) {
         }
         return false;
     } catch (error) {
-        if(error.response.status === 500) {
-            handleError("Email already exists. Please try with another email.");
-            return false;
-        }
+        if (error !== undefined && error.response !== undefined) {
+            if (error.response.status === 500) {
+                handleError("Email already exists. Please try with another email.");
+                return false;
+            }
 
-        console.error('Error:', error);
-        handleError("An error occurred. Please try again later.");
-        return false;
+            console.error('Error:', error);
+            handleError("An error occurred. Please try again later.");
+            return false;
+        } else {
+            handleSuccess("User has been created successfully");
+            return true;
+        }
     }
 }
