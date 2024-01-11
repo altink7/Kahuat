@@ -33,14 +33,3 @@ This includes the use of stimulating music, animations, and an appealing design.
 
 - Java 
 - Spring Framework
-- Log4j
-
-### 6. Documentation
-
-- 
-
-
-## Authors
-
-  - Julian Hoffman (wi21b050@technikum-wien.at)
-  - Altin Kelmendi (wi21b054@technikum-wien.at)
