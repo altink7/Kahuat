@@ -1,0 +1,64 @@
+version: "3.9"
+
+services:
+  backend_db:
+    container_name: backend_db
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./backend/db-data:/var/lib/mysql
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend
+
+  backend_pma:
+    container_name: backend_pma
+    image: phpmyadmin/phpmyadmin
+    links:
+      - backend_db
+    environment:
+      PMA_HOST: backend_db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8082:80
+    networks:
+      - backend
+
+  backend_web:
+    container_name: backend_web
+    depends_on:
+      - backend_db
+    image: altinkelmendi/kahuat:latest
+    volumes:
+      - ./backend/target/spring-rest-backend-0.0.1.war:/usr/local/tomcat/webapps/ROOT.war
+    ports:
+      - '8081:8080'
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DATABASE_URL: ${DATABASE_URL}
+      FRONTEND_WEB_URL: ${FRONTEND_WEB_URL}
+    networks:
+      - backend
+
+  frontend_web:
+    container_name: frontend_web
+    depends_on:
+      - backend_db
+      - backend_web
+    image: altinkelmendi/kahuat-app:latest
+    environment:
+      VUE_APP_BACKEND_WEB_URL: ${VUE_APP_BACKEND_WEB_URL}
+      VUE_APP_DOMAIN: ${VUE_APP_DOMAIN}
+    ports:
+      - '8080:8080'
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: backend
