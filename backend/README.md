@@ -32,3 +32,6 @@ Start Docker container with MariaDB and phpMyAdmin. Change directory to folder w
 ```shell
 docker-compose up -d
 ```
+
+## Docker Hub public image
+* [Docker Hub](https://hub.docker.com/repository/docker/altinkelmendi/kahuat/general)
