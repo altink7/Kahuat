@@ -2,6 +2,10 @@
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### The target directory ###
+target/
+
+
 ### STS ###
 .apt_generated
 .classpath

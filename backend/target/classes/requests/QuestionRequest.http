@@ -1,4 +1,0 @@
-### GET Request: Get all Questions
-GET http://localhost:8081/api/questions
-Accept: application/json
-
