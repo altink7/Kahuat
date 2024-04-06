@@ -13,6 +13,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.Objects;
 
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
@@ -29,7 +30,7 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(QuizException.class)
     public ResponseEntity<Object> handleQuizException(QuizException e) {
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND) //TODO: maybe müssen wir das feiner aufsplitten, weil nicht überall passt NOT_FOUND
+                .status(HttpStatus.NOT_FOUND)
                 .body(e.getMessage());
     }
 
@@ -48,7 +49,7 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<String> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
-        String errorMessage = "Invalid parameter type: " + ex.getName() + ". Value '" + ex.getValue() + "' should be of type " + ex.getRequiredType().getSimpleName();
+        String errorMessage = "Invalid parameter type: %s. Value '%s' should be of type %s".formatted(ex.getName(), ex.getValue(), Objects.requireNonNull(ex.getRequiredType()).getSimpleName());
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 

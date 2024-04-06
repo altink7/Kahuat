@@ -88,13 +88,11 @@ public class QuizController extends Controller {
         });
 
         Quiz quizEntity = mapper.mapToEntity(quiz, Quiz.class);
-        quizEntity.getQuestions().forEach(question -> {
-           quiz.getQuestions().forEach(questionDTO -> {
-               if (question.getQuestion().equals(questionDTO.getQuestion())) {
-                   question.setFile((byte[]) questionDTO.getFile());
-               }
-           });
-        });
+        quizEntity.getQuestions().forEach(question -> quiz.getQuestions().forEach(questionDTO -> {
+            if (question.getQuestion().equals(questionDTO.getQuestion())) {
+                question.setFile((byte[]) questionDTO.getFile());
+            }
+        }));
 
         Quiz createdQuiz = quizService.createQuiz(quizEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.mapToDTO(createdQuiz, QuizDTO.class));
